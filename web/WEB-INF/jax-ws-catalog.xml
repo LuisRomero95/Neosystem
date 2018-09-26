@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="https://vpic.nhtsa.dot.gov/api/vehicles/getallmakes?format=XML" uri="wsdl/vpic.nhtsa.dot.gov/api/vehicles/getallmakes.format.xml"/>
+    <system systemId="https://vpic.nhtsa.dot.gov/api/vehicles/getallmakes?format=wsdl" uri="wsdl/vpic.nhtsa.dot.gov/api/vehicles/getallmakes.format_wsdl.xml"/>
+    <system systemId="https://vpic.nhtsa.dot.gov/api/vehicles/getallmakes?wsdl" uri="wsdl/vpic.nhtsa.dot.gov/api/vehicles/getallmakes.wsdl.xml"/>
+    <system systemId="https://vpic.nhtsa.dot.gov/api/vehicles/getallmakes?format=json" uri="wsdl/vpic.nhtsa.dot.gov/api/vehicles/getallmakes.format_json"/>
+    <system systemId="https://vpic.nhtsa.dot.gov/api/vehicles/getallmakes?WSDL" uri="wsdl/vpic.nhtsa.dot.gov/api/vehicles/getallmakes.wsdl.xml"/>
+    <system systemId="https://vpic.nhtsa.dot.gov/api/vehicles/getallmakes.WSDL" uri="wsdl/vpic.nhtsa.dot.gov/api/error404.html.xml"/>
+    <system systemId="https://www.libroazul.com/ws/wslibroazul.asmx?op=ObtenerModelosPorAnioMarca" uri="wsdl/www.libroazul.com/ws/wslibroazul.asmx.op_obtenermodelosporaniomarca"/>
+    <system systemId="https://www.fueleconomy.gov/ws/rest/vehicle/menu/year" uri="wsdl/www.fueleconomy.gov/ws/rest/vehicle/menu/year.xml"/>
+</catalog>

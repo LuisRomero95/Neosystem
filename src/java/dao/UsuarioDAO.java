@@ -1,0 +1,173 @@
+
+package dao;
+
+import java.util.List;
+import java.sql.*;
+import java.util.*;
+import modelado.Usuario;
+
+public class UsuarioDAO extends Conexion implements DAO{
+    
+    @Override
+    public void insertar(Object obj) throws Exception{
+        //Como obj trae datos no podemos colocar new, sino traducirlo a Cliente
+        //todo lo que contenga obj lo tendrá u
+        Usuario u = (Usuario) obj;
+        PreparedStatement pst;
+        //Consultar preparadas
+        String sql="INSERT INTO usuarios (nom, pass, email, id_nivel) VALUES(?,?,?,?)";
+        //conectarse a la bd
+        try {
+            this.conectar();
+            pst = conexion.prepareStatement(sql);
+            pst.setString(1, u.getNom());
+            pst.setString(2, u.getPassword());
+            pst.setString(3, u.getEmail());
+            pst.setString(4, u.getNivel());
+            //ejecutar la consulta sql antes definida
+            // asi la bd sabe la consulta que voy a ejecutar
+            pst.executeUpdate();            
+            //cerrar conexion para no tener conexiones abiertas
+            
+        }
+        catch ( SQLException e) {
+            throw e;
+        }
+        finally{
+            this.cerrar();
+        }
+    }
+
+    @Override
+    public void eliminar(Object obj) throws Exception {
+        Usuario u = (Usuario) obj;
+        PreparedStatement pst;
+        String sql="UPDATE usuarios set estado = 0 WHERE id = ?";
+        try {
+            this.conectar();
+            pst = conexion.prepareStatement(sql);
+            pst.setInt(1, u.getId());
+            pst.executeUpdate();            
+                 
+        } catch (SQLException e) {
+            throw e;            
+        }
+        finally{
+            this.cerrar();
+        }
+    }
+
+    @Override
+    public void modificar(Object obj) throws Exception  {
+        Usuario u = (Usuario) obj;
+        PreparedStatement pst;
+        String sql="UPDATE usuarios SET nom=?, pass=?, email=?, id_nivel=? WHERE id=?";
+        try {
+            this.conectar();
+            pst = conexion.prepareStatement(sql);
+            pst.setString(1, u.getNom());
+            pst.setString(2, u.getPassword());            
+            pst.setString(3, u.getEmail());
+            pst.setString(4, u.getNivel());            
+            pst.setInt(5, u.getId()); 
+            pst.executeUpdate();            
+        } catch ( SQLException e) {
+            throw e;            
+        }
+        finally{
+            this.cerrar();            
+        }
+    }
+    
+    @Override
+    public List<Usuario> consultar() throws Exception  {
+        List<Usuario> datos = new ArrayList<>();
+        PreparedStatement pst;
+        //se necesita recuperar datos
+        ResultSet rs;
+//        SELECT u.id, u.nom, u.pass, tp.id FROM usuarios u, tiposusuarios tp WHERE u.id_nivel = tp.id AND u.estado = 1
+        String sql = "SELECT u.id, u.nom, u.pass, u.email, tp.nom FROM usuarios u, tiposusuarios tp WHERE u.id_nivel = tp.id AND u.estado = 1";
+//        String sql = "SELECT * FROM usuarios WHERE estado = 1";
+        try {
+            this.conectar();
+            pst = conexion.prepareStatement(sql);
+            rs = pst.executeQuery();       
+            while(rs.next()){
+                datos.add(new Usuario(
+                        rs.getInt("u.id"),
+                        rs.getString("u.nom"),
+                        rs.getString("u.pass"),
+                        rs.getString("u.email"),
+                        rs.getString("tp.nom"))
+//                        rs.getInt("id"),
+//                        rs.getString("nom"),
+//                        rs.getString("pass"),
+//                        rs.getString("email"),
+//                        rs.getInt("id_nivel"))                        
+                );
+            }
+        } catch (SQLException e ) {
+            throw e;
+        }
+        finally{
+            this.cerrar();
+        }
+        return datos;
+    }
+    
+    @Override
+    public Usuario BuscarPorId(int id) throws Exception  {        
+           Usuario usuario = new Usuario();
+           PreparedStatement pst;
+           ResultSet res;
+           String sql = "SELECT * FROM usuarios WHERE estado = 1 AND id = ?";
+           try {
+               this.conectar();
+               pst = conexion.prepareStatement(sql);
+               pst.setInt(1,id);  
+               
+               res = pst.executeQuery();                                    
+                if (res.next()) {
+                    usuario.setNom(res.getString("nom"));
+                    usuario.setPassword(res.getString("pass"));
+                    usuario.setEmail(res.getString("email"));
+                    usuario.setNivel(res.getString("nom"));
+                    usuario.setId(res.getInt("id"));
+                }                       
+
+           } catch ( SQLException e ) {
+           }
+           finally{
+               this.cerrar();
+           }
+           return usuario;
+    }    
+
+    @Override
+    public List<Usuario> filtrar(String campo, String criterio) throws Exception  {
+        List<Usuario> datos = new ArrayList<>();
+        PreparedStatement pst;
+        ResultSet rs;
+        String sql = "SELECT * FROM usuarios WHERE "+campo+" LIKE "+"'%"+criterio+"%'";
+        try {
+            this.conectar();
+            pst = conexion.prepareStatement(sql);
+            rs = pst.executeQuery();
+            while(rs.next()){
+                datos.add(new Usuario(
+                        rs.getInt("id"),
+                        rs.getString("nom"),
+                        rs.getString("pass"),
+                        rs.getString("email"),
+                        rs.getString("nom")));
+            }
+
+        } catch (SQLException e ) {            
+        }
+        finally{
+            this.cerrar();
+        }
+        return datos;
+    }
+    
+}
