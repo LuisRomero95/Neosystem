@@ -38,7 +38,7 @@ HttpSession sesion = request.getSession();
                     
                    <div class="form-group"> <!-- Nombre -->
                        <label for="nom_id" class="control-label">TIPO</label>
-                       <input type="text" class="form-control" id="nom_id" name="txtNom" placeholder="A1">
+                       <input type="text" class="form-control" id="nom_id" name="txtNombre" placeholder="A1">
                    </div>                    
                 </div>
                 

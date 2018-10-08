@@ -5,6 +5,7 @@ import dao.VehiculoDAO;
 import dao.ConductorDAO;
 import dao.AyudanteDAO;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -55,6 +56,10 @@ public class SERVVehiculo extends HttpServlet {
                     forward = edit;
                     int id = Integer.parseInt(request.getParameter("id"));
                     Vehiculo vehiculo = vehiculodao.BuscarPorId(id);             
+                    List conductor = conductordao.consultar();
+                    List ayudante = ayudantedao.consultar();
+                    request.setAttribute("conductor", conductor);
+                    request.setAttribute("ayudante", ayudante);                    
                     request.setAttribute("vehiculo", vehiculo);
                 } catch (Exception ex) {
                 }
@@ -89,34 +94,52 @@ public class SERVVehiculo extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {      
-                   
-            Vehiculo veh = new Vehiculo();
+            throws ServletException, IOException {                                     
             request.setCharacterEncoding("UTF-8");
             
-            veh.setPlaca(request.getParameter("txtPlaca"));
-            veh.setConductor(request.getParameter("txtCon"));
-            veh.setAyudante(request.getParameter("txtAyu"));
-            veh.setMarca(request.getParameter("txtMarca"));
-            veh.setAño(request.getParameter("txtAño"));
-            veh.setModelo(request.getParameter("txtModelo"));            
-            veh.setCapmax(Integer.parseInt(request.getParameter("txtCapmax")));
-            veh.setPasmax(Integer.parseInt(request.getParameter("txtPasmax")));
+            String placa = request.getParameter("txtPlaca");
+            String conductor = request.getParameter("txtCon");
+            String ayudante = request.getParameter("txtAyu");
+            String marca = request.getParameter("txtMarca");
+            String año = request.getParameter("txtAño");
+            String modelo = request.getParameter("txtModelo");
+            int Capmax = Integer.parseInt(request.getParameter("txtCapmax"));
+            int Pasmax = Integer.parseInt(request.getParameter("txtPasmax"));            
             String id =request.getParameter("txtId");
             
-            if (id == null || id.isEmpty()) {
-                try {
-                    vehiculodao.insertar(veh);
-                } catch (Exception ex) {
-                    Logger.getLogger(SERVUsuario.class.getName()).log(Level.SEVERE, null, ex);                    
-                }
-             } else {
-                try {
-                    veh.setId(Integer.parseInt(id));
-                    vehiculodao.modificar(veh);
-                } catch (Exception ex) {
-                }
-            }
+       try {      
+            Vehiculo veh = new Vehiculo();
+            veh.setPlaca(placa);
+            veh.setConductor(conductor);
+            veh.setAyudante(ayudante);
+            veh.setMarca(marca);
+            veh.setAño(año);
+            veh.setModelo(modelo);            
+            veh.setCapmax(Capmax);
+            veh.setPasmax(Pasmax);  
+                
+                if (id == null || id.isEmpty()) {
+                     if(vehiculodao.ConsultarNombre(placa)){    
+
+                    }else {
+                         try {
+                             vehiculodao.insertar(veh);
+                         } catch (Exception ex) {
+                             Logger.getLogger(SERVVehiculo.class.getName()).log(Level.SEVERE, null, ex);
+                         }
+                     }
+                } else {                    
+                    try {
+                        veh.setId(Integer.parseInt(id));
+                        vehiculodao.modificar(veh);
+                    } catch (Exception ex) {
+                        Logger.getLogger(SERVVehiculo.class.getName()).log(Level.SEVERE, null, ex);                        
+                    }
+                }             
+                   
+        } catch (Exception ex) {             
+            Logger.getLogger(SERVVehiculo.class.getName()).log(Level.SEVERE, null, ex);
+        }
                         
         response.sendRedirect(request.getContextPath() + "/SERVVehiculo?action=refresh");          
         

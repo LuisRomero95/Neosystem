@@ -98,12 +98,7 @@ public class UsuarioDAO extends Conexion implements DAO{
                         rs.getString("u.nom"),
                         rs.getString("u.pass"),
                         rs.getString("u.email"),
-                        rs.getString("tp.nom"))
-//                        rs.getInt("id"),
-//                        rs.getString("nom"),
-//                        rs.getString("pass"),
-//                        rs.getString("email"),
-//                        rs.getInt("id_nivel"))                        
+                        rs.getString("tp.nom"))                    
                 );
             }
         } catch (SQLException e ) {

@@ -140,5 +140,33 @@ public class ClienteDAO extends Conexion implements DAO{
     public boolean ConsultarNombre(String nom) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    public boolean ConsultarRUCDNI(String nombre) throws SQLException{
+        PreparedStatement pst;
+        ResultSet res = null;
+        String sql = "SELECT * FROM clientes WHERE nom='"+nombre+"'";
+
+        try {
+            this.conectar();
+            pst = conexion.prepareStatement(sql);
+            res = pst.executeQuery();
+        } catch (Exception e) {
+        }
+         return res.next();
+    }     
+    
+    public boolean ConsultarEmail(String email) throws SQLException{
+        PreparedStatement pst;
+        ResultSet res = null;
+        String sql = "SELECT * FROM clientes WHERE email='"+email+"'";
+
+        try {
+            this.conectar();
+            pst = conexion.prepareStatement(sql);
+            res = pst.executeQuery();
+        } catch (Exception e) {
+        }
+         return res.next();
+    }      
     
 }

@@ -34,8 +34,7 @@ HttpSession sesion = request.getSession();
             <h1>Insertar Vehiculo</h1>
             <hr>            
             <form name="frmInsertarVehiculo" method="POST" action="SERVVehiculo" onsubmit="return validacion()" >
-                <div class="container">
-                    
+                <div class="container">                    
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group"> 
@@ -49,7 +48,7 @@ HttpSession sesion = request.getSession();
                                     <option value="">--Seleccionar--</option>
                                     <c:forEach var="con" items="${conductor}" >
                                         <option value="${con.id}">
-                                            ${con.dni}
+                                            ${con.nom}
                                         </option>
                                     </c:forEach>
                                 </select>                                                
@@ -61,7 +60,7 @@ HttpSession sesion = request.getSession();
                                     <option value="">--Seleccionar--</option>
                                     <c:forEach var="ayu" items="${ayudante}" >
                                         <option value="${ayu.id}">
-                                            ${ayu.dni}
+                                            ${ayu.nom}
                                         </option>
                                     </c:forEach>
                                 </select>                                                

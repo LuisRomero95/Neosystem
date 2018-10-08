@@ -99,21 +99,23 @@ public class SERVUsuario extends HttpServlet {
         String nivel = request.getParameter("txtNivel");
         String id =request.getParameter("txtId"); 
 
-        try {
-            if(usuariodao.ConsultarEmail(email) || usuariodao.ConsultarNombre(nombre)){    
-
-            } else {                
+        try {                              
                 Usuario u = new Usuario();    
                 u.setNom(nombre);
                 u.setPassword(contra);                       
                 u.setEmail(email);
-                u.setNivel(nivel);                
+                u.setNivel(nivel);   
+                
                 if (id == null || id.isEmpty()) {
-                    try {
-                        usuariodao.insertar(u);
-                    } catch (Exception ex) {
-                        Logger.getLogger(SERVUsuario.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+                     if(usuariodao.ConsultarEmail(email) || usuariodao.ConsultarNombre(nombre)){    
+
+                    }else {
+                         try {
+                             usuariodao.insertar(u);
+                         } catch (Exception ex) {
+                             Logger.getLogger(SERVUsuario.class.getName()).log(Level.SEVERE, null, ex);
+                         }
+                     }
                 } else {                    
                     try {
                         u.setId(Integer.parseInt(id));
@@ -122,7 +124,7 @@ public class SERVUsuario extends HttpServlet {
                         Logger.getLogger(SERVUsuario.class.getName()).log(Level.SEVERE, null, ex);                        
                     }
                 }             
-            }            
+                   
         }catch (SQLException ex) {
             Logger.getLogger(SERVUsuario.class.getName()).log(Level.SEVERE, null, ex);             
         }                           

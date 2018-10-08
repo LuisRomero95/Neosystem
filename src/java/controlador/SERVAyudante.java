@@ -3,6 +3,9 @@ package controlador;
 
 import dao.AyudanteDAO;
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -69,30 +72,47 @@ public class SERVAyudante extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
+        request.setCharacterEncoding("UTF-8");                
+        
+        String dni = request.getParameter("txtDni");
+        String nombre = request.getParameter("txtNombre");
+        String ape = request.getParameter("txtApe");
+        String direc = request.getParameter("txtDirec");
+        String tel = request.getParameter("txtTel");
+        String email = request.getParameter("txtEmail");
+        String id =request.getParameter("txtId");                                                         
+        
+        try {                              
             Ayudante ayudante = new Ayudante();
-            request.setCharacterEncoding("UTF-8");
-            
-            ayudante.setDni(request.getParameter("txtDni"));
-            ayudante.setNom(request.getParameter("txtNombre"));
-            ayudante.setApe(request.getParameter("txtApe"));
-            ayudante.setDirec(request.getParameter("txtDirec"));             
-            ayudante.setTel(request.getParameter("txtTel"));
-            ayudante.setEmail(request.getParameter("txtEmail"));                                
-            String id =request.getParameter("txtId");
-            
-            if (id == null || id.isEmpty()) {
-                try {
-                    ayudantedao.insertar(ayudante);
-                } catch (Exception ex) {
-                }
-             } else {
-                try {
-                    ayudante.setId(Integer.parseInt(id));
-                    ayudantedao.modificar(ayudante);
-                } catch (Exception ex) {
-                }
-            }
-                        
+            ayudante.setDni(dni);
+            ayudante.setNom(nombre);
+            ayudante.setApe(ape);
+            ayudante.setDirec(direc);             
+            ayudante.setTel(tel);
+            ayudante.setEmail(email);   
+                
+                if (id == null || id.isEmpty()) {
+                     if(ayudantedao.ConsultarRUCDNI(dni) || ayudantedao.ConsultarEmail(email)){    
+
+                    }else {
+                         try {
+                             ayudantedao.insertar(ayudante);
+                         } catch (Exception ex) {
+                             Logger.getLogger(SERVAyudante.class.getName()).log(Level.SEVERE, null, ex);
+                         }
+                     }
+                } else {                    
+                    try {
+                        ayudante.setId(Integer.parseInt(id));
+                        ayudantedao.modificar(ayudante);
+                    } catch (Exception ex) {
+                        Logger.getLogger(SERVAyudante.class.getName()).log(Level.SEVERE, null, ex);                        
+                    }
+                }             
+                   
+        }catch (SQLException ex) {
+            Logger.getLogger(SERVAyudante.class.getName()).log(Level.SEVERE, null, ex);             
+        }                           
         response.sendRedirect(request.getContextPath() + "/SERVAyudante?action=refresh");         
     }
 

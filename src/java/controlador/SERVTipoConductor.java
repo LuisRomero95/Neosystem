@@ -3,7 +3,10 @@ package controlador;
 
 import dao.TipoConductorDAO;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -72,25 +75,39 @@ public class SERVTipoConductor extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-            TipoConductor tp = new TipoConductor(); 
-            request.setCharacterEncoding("UTF-8");
-            
-            tp.setNom(request.getParameter("txtNom"));
-            String id =request.getParameter("txtId");
-            
-            if (id == null || id.isEmpty()) {
-                try {
-                    tpdao.insertar(tp);
-                } catch (Exception ex) {
-                }
-             } else {
-                try {
-                    tp.setId(Integer.parseInt(id));
-                    tpdao.modificar(tp);
-                } catch (Exception ex) {
-                }
-            }
-                        
+        request.setCharacterEncoding("UTF-8");
+
+        String nombre = request.getParameter("txtNombre");          
+        String id =request.getParameter("txtId");
+        tp.setNom(nombre);
+
+        try {                              
+                TipoConductor u = new TipoConductor();    
+                u.setNom(nombre); 
+                
+                if (id == null || id.isEmpty()) {
+                     if(tpdao.ConsultarNombre(nombre)){    
+
+                    }else {
+                         try {
+                             tpdao.insertar(u);
+                         } catch (Exception ex) {
+                             Logger.getLogger(SERVTipoConductor.class.getName()).log(Level.SEVERE, null, ex);
+                         }
+                     }
+                } else {                    
+                    try {
+                        u.setId(Integer.parseInt(id));
+                        tpdao.modificar(u);
+                    } catch (Exception ex) {
+                        Logger.getLogger(SERVTipoConductor.class.getName()).log(Level.SEVERE, null, ex);                        
+                    }
+                }             
+                   
+        }catch (SQLException ex) {
+            Logger.getLogger(SERVTipoConductor.class.getName()).log(Level.SEVERE, null, ex);             
+        }             
+                                   
         response.sendRedirect(request.getContextPath() + "/SERVTipoConductor?action=refresh");          
     }
 

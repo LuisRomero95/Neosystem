@@ -113,10 +113,10 @@ public class AyudanteDAO extends Conexion implements DAO{
             rs = pst.executeQuery();
             while(rs.next()){
                 datos.add(new Ayudante(
-                        rs.getInt("id"),
-                        rs.getString("dni"),
+                        rs.getInt("id"),                       
                         rs.getString("nom"),
                         rs.getString("ape"),
+                        rs.getString("dni"),
                         rs.getString("direc"),
                         rs.getString("tel"),
                         rs.getString("email"))
@@ -132,9 +132,12 @@ public class AyudanteDAO extends Conexion implements DAO{
 
     @Override
     public boolean ConsultarNombre(String nom) throws SQLException{
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }    
+    public boolean ConsultarRUCDNI(String nombre) throws SQLException{
         PreparedStatement pst;
         ResultSet res = null;
-        String sql = "SELECT * FROM usuarios WHERE nom='"+nom+"'";
+        String sql = "SELECT * FROM ayudantes WHERE dni='"+nombre+"'";
 
         try {
             this.conectar();
@@ -143,5 +146,19 @@ public class AyudanteDAO extends Conexion implements DAO{
         } catch (Exception e) {
         }
          return res.next();
-    }    
+    }       
+
+    public boolean ConsultarEmail(String email) throws SQLException{
+        PreparedStatement pst;
+        ResultSet res = null;
+        String sql = "SELECT * FROM ayudantes WHERE email='"+email+"'";
+
+        try {
+            this.conectar();
+            pst = conexion.prepareStatement(sql);
+            res = pst.executeQuery();
+        } catch (Exception e) {
+        }
+         return res.next();
+    }     
 }

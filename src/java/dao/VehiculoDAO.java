@@ -14,7 +14,7 @@ public class VehiculoDAO extends Conexion implements DAO{
     public void insertar(Object obj) throws Exception{
         Vehiculo veh = (Vehiculo) obj;
         PreparedStatement pst;
-        String sql="INSERT INTO vehiculos (placa, id_con, id_ayu, marca, año, modelo, capmax, pasmax) VALUES(?,?,?,?,?,?,?,?)";
+        String sql="INSERT INTO vehiculos (placa, id_con, id_ayu, marca, año, modelo, cap_max, pas_max) VALUES(?,?,?,?,?,?,?,?)";
         try {
             this.conectar();           
             pst = conexion.prepareStatement(sql);
@@ -58,7 +58,7 @@ public class VehiculoDAO extends Conexion implements DAO{
     public void modificar(Object obj) throws Exception{
         Vehiculo veh = (Vehiculo) obj;
         PreparedStatement pst;
-        String sql="UPDATE vehiculos SET placa=?, id_con=?, id_ayu=?, marca=?, año=?, modelo=?, capmax=?, pasmax=? WHERE id=?";
+        String sql="UPDATE vehiculos SET placa=?, id_con=?, id_ayu=?, marca=?, año=?, modelo=?, cap_max=?, pas_max=? WHERE id=?";
         try {
             this.conectar();
             pst = conexion.prepareStatement(sql);
@@ -99,8 +99,8 @@ public class VehiculoDAO extends Conexion implements DAO{
                     c.setMarca(res.getString("marca"));
                     c.setAño(res.getString("año"));
                     c.setModelo(res.getString("modelo"));                    
-                    c.setCapmax(res.getInt("capmax"));
-                    c.setPasmax(res.getInt("pasmax"));
+                    c.setCapmax(res.getInt("cap_max"));
+                    c.setPasmax(res.getInt("pas_max"));
                     c.setId(res.getInt("id"));
                 }                   
      
@@ -117,7 +117,7 @@ public class VehiculoDAO extends Conexion implements DAO{
         List<Vehiculo> datos = new ArrayList<>();
         PreparedStatement pst;
         ResultSet rs;
-        String sql = "SELECT v.id, v.placa, c.nom, a.nom, v.marca, v.año, v.modelo, v.capmax, v.pasmax FROM vehiculos v, conductores c, ayudantes a WHERE v.id_con = c.id && v.id_ayu =a.id AND v.estado = 1";
+        String sql = "SELECT v.id, v.placa, c.nom, a.nom, v.marca, v.año, v.modelo, v.cap_max, v.pas_max FROM vehiculos v, conductores c, ayudantes a WHERE v.id_con = c.id && v.id_ayu =a.id AND v.estado = 1";
         //String sql = "SELECT * FROM vehiculos WHERE estado = 1";
         try {
             this.conectar();
@@ -132,8 +132,8 @@ public class VehiculoDAO extends Conexion implements DAO{
                         rs.getString("v.marca"),
                         rs.getString("v.año"),
                         rs.getString("v.modelo"),
-                        rs.getInt("v.capmax"),
-                        rs.getInt("v.pasmax"))
+                        rs.getInt("v.cap_max"),
+                        rs.getInt("v.pas_max"))
                 );
             }
             } catch ( SQLException e) {
@@ -146,7 +146,17 @@ public class VehiculoDAO extends Conexion implements DAO{
 
     @Override
     public boolean ConsultarNombre(String nom) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        PreparedStatement pst;
+        ResultSet res = null;
+        String sql = "SELECT * FROM vehiculos WHERE placa='"+nom+"'";
+
+        try {
+            this.conectar();
+            pst = conexion.prepareStatement(sql);
+            res = pst.executeQuery();
+        } catch (Exception e) {
+        }
+         return res.next();       
     }
     
 }

@@ -75,34 +75,38 @@ private static String insert= "/InsertarTipoUsuario.jsp";
             throws ServletException, IOException {
 
        
-        request.setCharacterEncoding("UTF-8");
-                
-        TipoUsuario tu = new TipoUsuario();
+        request.setCharacterEncoding("UTF-8");                       
         
-        String nombre = request.getParameter("txtNombre");
-        tu.setNom(nombre);                                                        
+        String nombre = request.getParameter("txtNombre");                                                            
         String id =request.getParameter("txtId");
 
-        try {
-            if(tudao.ConsultarNombre(nombre)){    
-
-            }else                 
+        try {                              
+                TipoUsuario u = new TipoUsuario();    
+                u.setNom(nombre);
+  
+                
                 if (id == null || id.isEmpty()) {
+                     if(tudao.ConsultarNombre(nombre)){    
+
+                    }else {
+                         try {
+                             tudao.insertar(u);
+                         } catch (Exception ex) {
+                             Logger.getLogger(SERVTipoUsuario.class.getName()).log(Level.SEVERE, null, ex);
+                         }
+                     }
+                } else {                    
                     try {
-                        tudao.insertar(tu);
+                        u.setId(Integer.parseInt(id));
+                        tudao.modificar(u);
                     } catch (Exception ex) {
+                        Logger.getLogger(SERVTipoUsuario.class.getName()).log(Level.SEVERE, null, ex);                        
                     }
-                }else {
-                    try {
-                        tu.setId(Integer.parseInt(id));
-                        tudao.modificar(tu);
-                    } catch (Exception ex){ 
-                    }
-                }  
-        }                   
-        catch (SQLException ex) {
-            Logger.getLogger(SERVUsuario.class.getName()).log(Level.SEVERE, null, ex);             
-        }            
+                }             
+                   
+        }catch (SQLException ex) {
+            Logger.getLogger(SERVTipoUsuario.class.getName()).log(Level.SEVERE, null, ex);             
+        }        
                 
         response.sendRedirect(request.getContextPath() + "/SERVTipoUsuario?action=refresh");           
     }

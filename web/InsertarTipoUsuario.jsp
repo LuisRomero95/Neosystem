@@ -36,7 +36,7 @@ HttpSession sesion = request.getSession();
                 <div class="col-md-6">
                     <div class="form-group"> <!-- Nombre -->
                         <label for="nom_id" class="control-label">TIPO</label>
-                        <input type="text" class="form-control" id="nom_id" name="txtNom" placeholder="Administrador" onkeypress="return soloLetras(event)" onblur="limpia()">
+                        <input type="text" class="form-control" id="nom_id" name="txtNombre" placeholder="Administrador" onkeypress="return soloLetras(event)" onblur="limpia()">
                     </div>                     
                 </div>
                 <div class="col-md-12">

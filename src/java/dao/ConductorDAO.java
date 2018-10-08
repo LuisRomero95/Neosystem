@@ -143,9 +143,13 @@ public class ConductorDAO extends Conexion implements DAO{
 
     @Override
     public boolean ConsultarNombre(String nom) throws SQLException{
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    public boolean ConsultarRUCDNI(String nombre) throws SQLException{
         PreparedStatement pst;
         ResultSet res = null;
-        String sql = "SELECT * FROM usuarios WHERE nom='"+nom+"'";
+        String sql = "SELECT * FROM conductores WHERE dni='"+nombre+"'";
 
         try {
             this.conectar();
@@ -154,7 +158,19 @@ public class ConductorDAO extends Conexion implements DAO{
         } catch (Exception e) {
         }
          return res.next();
-    }
+    }       
 
-    
+    public boolean ConsultarEmail(String email) throws SQLException{
+        PreparedStatement pst;
+        ResultSet res = null;
+        String sql = "SELECT * FROM conductores WHERE email='"+email+"'";
+
+        try {
+            this.conectar();
+            pst = conexion.prepareStatement(sql);
+            res = pst.executeQuery();
+        } catch (Exception e) {
+        }
+         return res.next();
+    }      
 }

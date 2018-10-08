@@ -4,6 +4,7 @@ package controlador;
 import dao.ConductorDAO;
 import dao.TipoConductorDAO;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -83,33 +84,52 @@ public class SERVConductor extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Conductor a = new Conductor();
-        request.setCharacterEncoding("UTF-8");
         
-        a.setNom(request.getParameter("txtNombre"));
-        a.setApe(request.getParameter("txtApe"));
-        a.setDni(request.getParameter("txtDni"));
-        a.setLic(request.getParameter("txtLic"));        
-        a.setEmail(request.getParameter("txtEmail"));     
-        a.setTel(request.getParameter("txtTel"));        
-        a.setDirec(request.getParameter("txtDirec"));                      
-        a.setTipo((request.getParameter("txtTipo")));
+        request.setCharacterEncoding("UTF-8");                
+        
+        String nombre = request.getParameter("txtNombre");
+        String ape = request.getParameter("txtApe");                
+        String dni = request.getParameter("txtDni");
+        String lic = request.getParameter("txtLic");
+        String email = request.getParameter("txtEmail");
+        String tel = request.getParameter("txtTel");
+        String direc = request.getParameter("txtDirec");
+        String tipo = request.getParameter("txtTipo");        
+        String id =request.getParameter("txtId");                                                           
+        
+        try {                              
+                Conductor con = new Conductor();
+                con.setNom(nombre);
+                con.setApe(ape);
+                con.setDni(dni);
+                con.setLic(lic);        
+                con.setEmail(email);     
+                con.setTel(tel);        
+                con.setDirec(direc);                      
+                con.setTipo(tipo);  
+                
+                if (id == null || id.isEmpty()) {
+                     if(conductordao.ConsultarRUCDNI(dni) || conductordao.ConsultarEmail(email)){    
 
-        String id =request.getParameter("txtId");
-
-        if (id == null || id.isEmpty()) {
-            try {
-                conductordao.insertar(a);
-            } catch (Exception ex) {
-            }
-         } else {
-            try {
-                a.setId(Integer.parseInt(id));
-                conductordao.modificar(a);
-            } catch (Exception ex) {
-            }
-            }
-                        
+                    }else {
+                         try {
+                             conductordao.insertar(con);
+                         } catch (Exception ex) {
+                             Logger.getLogger(SERVConductor.class.getName()).log(Level.SEVERE, null, ex);
+                         }
+                     }
+                } else {                    
+                    try {
+                        con.setId(Integer.parseInt(id));
+                        conductordao.modificar(con);
+                    } catch (Exception ex) {
+                        Logger.getLogger(SERVConductor.class.getName()).log(Level.SEVERE, null, ex);                        
+                    }
+                }             
+                   
+        }catch (SQLException ex) {
+            Logger.getLogger(SERVConductor.class.getName()).log(Level.SEVERE, null, ex);             
+        }                         
         response.sendRedirect(request.getContextPath() + "/SERVConductor?action=refresh");                                       
     }
 

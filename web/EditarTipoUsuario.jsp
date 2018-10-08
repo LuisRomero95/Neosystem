@@ -45,7 +45,7 @@ HttpSession sesion = request.getSession();
 
                     <div class="form-group"> <!-- Tipo de nivel del usuario -->
                         <label for="nom_id" class="control-label">TIPO</label>
-                        <input type="text" class="form-control" id="nom_id" name="txtNom" value="<c:out value="${tu.nom}" />" onkeypress="return soloLetras(event)" onblur="limpia()" >
+                        <input type="text" class="form-control" id="nom_id" name="txtNombre" value="<c:out value="${tu.nom}" />" onkeypress="return soloLetras(event)" onblur="limpia()" >
                     </div>                      
                 </div> 
                 <div class="col-md-12">

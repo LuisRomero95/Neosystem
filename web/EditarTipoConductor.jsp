@@ -46,7 +46,7 @@ HttpSession sesion = request.getSession();
 
                     <div class="form-group"> <!-- Tipo de brevete del conductor -->
                         <label for="nom_id" class="control-label">TIPO</label>
-                        <input type="text" class="form-control" id="nom_id" name="txtNom" value="<c:out value="${tp.nom}" />" >
+                        <input type="text" class="form-control" id="nom_id" name="txtNombre" value="<c:out value="${tp.nom}" />" >
                     </div>                          
                 </div> 
 
