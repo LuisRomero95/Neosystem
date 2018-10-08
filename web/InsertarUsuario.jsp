@@ -22,7 +22,17 @@ HttpSession sesion = request.getSession();
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <script src="js/jquery-3.3.1.min.js" type="text/javascript"></script>
         <script src="js/validarUsuario.js" type="text/javascript"></script>
-        <title>JSP Page</title>  
+        <script src="js/prototype.js" type="text/javascript"></script>
+        <title>JSP Page</title> 
+        <script type="text/javascript">
+        function comprobar()   
+        {  
+          var url = 'ajax_comprobar_nick.php';  
+          var pars= ('txtNombre=' + document.getElementById('nom_id').value);
+          var target = 'comprobar_mensaje';
+          var myAjax = new Ajax.Updater( target, url, { method: 'get', parameters: pars});  
+        }  
+        </script>         
     </head>        
     <body>
         <div class="container">
@@ -39,7 +49,8 @@ HttpSession sesion = request.getSession();
                 <div class="col-md-6">
                     <div class="form-group"> <!-- Nombre -->
                         <label for="nom_id" class="control-label">NOMBRE</label>
-                        <input type="text" class="form-control" id="nom_id" name="txtNombre" placeholder="luis" onkeypress="return soloLetras(event)" onblur="limpia()" >
+                        <input type="text" class="form-control" id="nom_id" name="txtNombre" style="text-transform:lowercase;" placeholder="luis" onkeypress="return soloLetras(event)" onblur="limpia()" onKeyUp="comprobar(this.value)">
+                        <span id="comprobar_mensaje"></span>
                     </div> 
 
                     <div class="form-group"> <!-- Contraseña -->
@@ -51,7 +62,7 @@ HttpSession sesion = request.getSession();
                 <div class="col-md-6">
                     <div class="form-group"> <!-- Email -->
                         <label for="email_id" class="control-label">EMAIL</label>
-                        <input type="text" class="form-control" id="email_id" name="txtEmail" placeholder="1510647@utp.edu.pe">
+                        <input type="text" class="form-control" id="email_id" name="txtEmail" style="text-transform:lowercase;" placeholder="1510647@utp.edu.pe">
                     </div>
                     
                     <div>
@@ -79,5 +90,7 @@ HttpSession sesion = request.getSession();
             </div>                 
             </form>          
         </div>
+
+
     </body>
 </html>

@@ -16,6 +16,6 @@ public interface DAO<T, K> {
 
     public T BuscarPorId(int id) throws Exception;    
     
-    public List<T> filtrar(String campo, String criterio)  throws Exception;
+     public boolean ConsultarNombre(String nom)throws Exception;
         
 }

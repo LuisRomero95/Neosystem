@@ -73,6 +73,7 @@ public class SERVTipoConductor extends HttpServlet {
             throws ServletException, IOException {
 
             TipoConductor tp = new TipoConductor(); 
+            request.setCharacterEncoding("UTF-8");
             
             tp.setNom(request.getParameter("txtNom"));
             String id =request.getParameter("txtId");

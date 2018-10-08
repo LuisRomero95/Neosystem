@@ -14,14 +14,14 @@ public class ConductorDAO extends Conexion implements DAO{
     public void insertar(Object obj) throws Exception{
         Conductor c = (Conductor) obj;
         PreparedStatement pst;
-        String sql="INSERT INTO conductores (dni, lic, nom, ape, direc, tel, email, id_tipo) VALUES(?,?,?,?,?,?,?,?)";
+        String sql="INSERT INTO conductores ( nom, ape, dni, lic, direc, tel, email, id_tipo) VALUES(?,?,?,?,?,?,?,?)";
         try {
             this.conectar();
             pst = conexion.prepareStatement(sql);
-            pst.setString(1, c.getDni());
-            pst.setString(2, c.getLic());
-            pst.setString(3, c.getNom());
-            pst.setString(4, c.getApe());
+            pst.setString(1, c.getNom());
+            pst.setString(2, c.getApe());
+            pst.setString(3, c.getDni());
+            pst.setString(4, c.getLic());
             pst.setString(5, c.getDirec());
             pst.setString(6, c.getTel());
             pst.setString(7, c.getEmail());
@@ -57,14 +57,14 @@ public class ConductorDAO extends Conexion implements DAO{
     public void modificar(Object obj) throws Exception{
         Conductor c = (Conductor) obj;
         PreparedStatement pst;
-        String sql="UPDATE conductores SET dni=?, lic=?, nom=?, ape=?, direc=?, tel=?, email=?, id_tipo=? WHERE id=?";
+        String sql="UPDATE conductores SET nom=?, ape=?, dni=?, lic=?, direc=?, tel=?, email=?, id_tipo=? WHERE id=?";
         try {
             this.conectar();
             pst = conexion.prepareStatement(sql);
-            pst.setString(1, c.getDni());
-            pst.setString(2, c.getLic());
-            pst.setString(3, c.getNom());
-            pst.setString(4, c.getApe());
+            pst.setString(1, c.getNom());
+            pst.setString(2, c.getApe());
+            pst.setString(3, c.getDni());
+            pst.setString(4, c.getLic());
             pst.setString(5, c.getDirec());
             pst.setString(6, c.getTel());
             pst.setString(7, c.getEmail());            
@@ -90,11 +90,11 @@ public class ConductorDAO extends Conexion implements DAO{
                pst = conexion.prepareStatement(sql);
                pst.setInt(1,id);                 
                res = pst.executeQuery();                                    
-                if (res.next()) {
-                    c.setDni(res.getString("dni"));
-                    c.setLic(res.getString("lic"));                    
+                if (res.next()) {                                     
                     c.setNom(res.getString("nom"));            
                     c.setApe(res.getString("ape"));      
+                    c.setDni(res.getString("dni"));
+                    c.setLic(res.getString("lic"));                       
                     c.setDirec(res.getString("direc"));
                     c.setTel(res.getString("tel"));                    
                     c.setEmail(res.getString("email"));                   
@@ -123,10 +123,10 @@ public class ConductorDAO extends Conexion implements DAO{
             while(rs.next()){
                 datos.add(new Conductor(
                         rs.getInt("c.id"),
-                        rs.getString("c.dni"),
-                        rs.getString("c.lic"),
                         rs.getString("c.nom"),
                         rs.getString("c.ape"),
+                        rs.getString("c.dni"),
+                        rs.getString("c.lic"),                        
                         rs.getString("c.direc"),
                         rs.getString("c.tel"),
                         rs.getString("c.email"),
@@ -142,34 +142,19 @@ public class ConductorDAO extends Conexion implements DAO{
     }
 
     @Override
-    public List<Conductor> filtrar(String campo, String criterio) throws Exception{      
-        List<Conductor> datos = new ArrayList<>();
+    public boolean ConsultarNombre(String nom) throws SQLException{
         PreparedStatement pst;
-        ResultSet rs;
-        String sql = "SELECT * FROM ayudantes WHERE "+campo+" like '%"+criterio+"%'";
+        ResultSet res = null;
+        String sql = "SELECT * FROM usuarios WHERE nom='"+nom+"'";
+
         try {
             this.conectar();
             pst = conexion.prepareStatement(sql);
-            rs = pst.executeQuery();
-            while(rs.next()){
-                datos.add(new Conductor(
-                        rs.getInt("id"),
-                        rs.getString("dni"),
-                        rs.getString("lic"),
-                        rs.getString("nom"),
-                        rs.getString("ape"),
-                        rs.getString("direc"),
-                        rs.getString("tel"),
-                        rs.getString("email"),
-                        rs.getString("id_tipo"))
-                );
-            }
-        } catch (SQLException e) {
+            res = pst.executeQuery();
+        } catch (Exception e) {
         }
-        finally{
-            this.cerrar();
-        }   
-        return datos;
+         return res.next();
     }
+
     
 }

@@ -57,7 +57,7 @@
         alert('[ERROR] El nombre no puede tener números');
         return false;
         }
-        else if(!(nombre.length <=25) || /^\s+$/.test(nombre)){
+        else if(!(nombre.length <=50) || /^\s+$/.test(nombre)){
             alert('[ERROR] El nombre no puede exceder los 50 caracteres');
             return false;
         }        

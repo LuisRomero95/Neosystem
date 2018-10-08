@@ -70,6 +70,8 @@ public class SERVAyudante extends HttpServlet {
             throws ServletException, IOException {
         
             Ayudante ayudante = new Ayudante();
+            request.setCharacterEncoding("UTF-8");
+            
             ayudante.setDni(request.getParameter("txtDni"));
             ayudante.setNom(request.getParameter("txtNombre"));
             ayudante.setApe(request.getParameter("txtApe"));

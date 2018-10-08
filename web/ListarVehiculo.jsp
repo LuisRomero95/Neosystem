@@ -46,8 +46,8 @@ HttpSession sesion = request.getSession();
                     <th class="text-center">CONDUCTOR</th>      
                     <th class="text-center">AYUDANTE</th>      
                     <th class="text-center">MARCA</th>      
+                    <th class="text-center">AÑO</th>
                     <th class="text-center">MODELO</th>
-                    <th class="text-center">COLOR</th>
                     <th class="text-center">CAPACIDAD MAX</th>
                     <th class="text-center">PASAJEROS MAX</th>
                     <th class="text-center">ACCIONES</th>
@@ -61,19 +61,19 @@ HttpSession sesion = request.getSession();
                             <c:out value="${vehiculo.placa}"/>
                         </td>
                         <td>
-                            <c:out value="${vehiculo.id_con}"/>
+                            <c:out value="${vehiculo.conductor}"/>
                         </td>
                         <td>
-                            <c:out value="${vehiculo.id_ayu}"/>
+                            <c:out value="${vehiculo.ayudante}"/>
                         </td>
                         <td>
                             <c:out value="${vehiculo.marca}"/>
                         </td>
                         <td>
-                            <c:out value="${vehiculo.modelo}"/>
+                            <c:out value="${vehiculo.año}"/>
                         </td>
                         <td>
-                            <c:out value="${vehiculo.color}"/>
+                            <c:out value="${vehiculo.modelo}"/>
                         </td>
                         <td>
                             <c:out value="${vehiculo.capmax}"/>

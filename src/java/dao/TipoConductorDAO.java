@@ -115,29 +115,19 @@ public class TipoConductorDAO extends Conexion implements DAO{
         return datos;
     }
 
-    @Override
-    public List filtrar(String campo, String criterio) throws Exception{
-        List<TipoConductor> datos = new ArrayList<>();
+    @Override   
+    public boolean ConsultarNombre(String nom) throws SQLException{
         PreparedStatement pst;
-        ResultSet rs;
-        String sql = "SELECT * FROM tiposconductores WHERE "+campo+" like '%"+criterio+"%'";
+        ResultSet res = null;
+        String sql = "SELECT * FROM tiposconductores WHERE nom='"+nom+"'";
+
         try {
             this.conectar();
             pst = conexion.prepareStatement(sql);
-            rs = pst.executeQuery();
-            while(rs.next()){
-                datos.add(new TipoConductor(
-                        rs.getInt("id"),
-                        rs.getString("nom")
-                    )
-                );
-            }
-        } catch (SQLException e) {
+            res = pst.executeQuery();
+        } catch (Exception e) {
         }
-        finally{
-            this.cerrar();
-        }   
-        return datos;
-    }
+         return res.next();
+    }       
     
 }

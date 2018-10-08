@@ -1,7 +1,6 @@
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page session="true"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <%
 HttpSession sesion = request.getSession();
@@ -19,7 +18,8 @@ HttpSession sesion = request.getSession();
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">        
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <script src="js/validarUsuario.js" type="text/javascript"></script>
         <script src="js/jquery-3.3.1.min.js" type="text/javascript"></script>
@@ -56,7 +56,7 @@ HttpSession sesion = request.getSession();
                 <div class="col-md-6">
                     <div class="form-group"> <!-- Email -->
                         <label for="email_id" class="control-label">EMAIL</label>
-                        <input type="text" class="form-control" id="email_id" name="txtEmail" value="<c:out value="${usuario.email}" />">
+                        <input type="text" class="form-control" id="email_id" name="txtEmail" style="text-transform:lowercase;" value="<c:out value="${usuario.email}" />">
                     </div>
                     <div>
                         <label for="select_id" class="control-label">NIVEL</label>

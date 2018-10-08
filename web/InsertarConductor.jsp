@@ -43,7 +43,7 @@ HttpSession sesion = request.getSession();
 
                     <div class="form-group"> <!-- Licencia -->
                         <label for="lic_id" class="control-label">LICENCIA</label>
-                        <input type="text" class="form-control" id="lic_id" name="txtLic" placeholder="X41527500" onkeypress="return soloLetras(event)">
+                        <input type="text" class="form-control" id="lic_id" name="txtLic" placeholder="X41527500" >
                     </div>      
 
                     <div class="form-group"> <!-- Nombre -->
@@ -60,7 +60,7 @@ HttpSession sesion = request.getSession();
                 <div class="col-md-6">
                     <div class="form-group"> <!-- Email-->
                         <label for="email_id" class="control-label">EMAIL</label>
-                        <input type="text" class="form-control" id="email_id" name="txtEmail" placeholder="larcroco@gmail.com">
+                        <input type="text" class="form-control" id="email_id" name="txtEmail" style="text-transform:lowercase;" placeholder="larcroco@gmail.com">
                     </div>   
 
                     <div class="form-group"> <!-- Telefono Corporativo-->

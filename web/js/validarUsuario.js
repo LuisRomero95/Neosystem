@@ -31,7 +31,7 @@
           alert('[ERROR] El email debe tener un valor máximo de 50 dígitos');
           return false;
         }        
-        else if (!(/^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i.test(email))) {
+        else if (!(/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test(email))) {
           alert('[ERROR] Ingrese un email con formato adecuado');
           return false;
         }

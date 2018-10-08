@@ -12,7 +12,7 @@ public class ClienteDAO extends Conexion implements DAO{
     @Override
     public void insertar(Object obj) throws Exception {
         Cliente c = (Cliente) obj;
-        PreparedStatement pst;
+        PreparedStatement pst = null;
         String sql="INSERT INTO clientes (ruc_dni, nom, email, tel_fij, tel_cel, direc) VALUES(?,?,?,?,?,?)";
         try {
             this.conectar();
@@ -28,6 +28,7 @@ public class ClienteDAO extends Conexion implements DAO{
         } catch ( SQLException e) {           
         }
         finally{
+                pst.close();
                 this.cerrar();
         }
     }
@@ -107,35 +108,6 @@ public class ClienteDAO extends Conexion implements DAO{
     }
 
     @Override
-    public List<Cliente> filtrar(String campo, String criterio) throws Exception{
-        List<Cliente> datos = new ArrayList<>();
-        PreparedStatement pst;
-        ResultSet rs;
-        String sql = "SELECT * FROM clientes WHERE "+campo+" like '%"+criterio+"%'";
-        try {
-            this.conectar();
-            pst = conexion.prepareStatement(sql);
-            rs = pst.executeQuery();
-            while(rs.next()){
-                datos.add(new Cliente(
-                        rs.getInt("id"),
-                        rs.getString("ruc_dni"),
-                        rs.getString("nom"),
-                        rs.getString("email"),
-                        rs.getString("tel_fij"),
-                        rs.getString("tel_cel"),
-                        rs.getString("direc"))
-                );
-            }
-        } catch (SQLException e ) {            
-        }
-        finally{
-            this.cerrar();
-        }
-        return datos;
-    }
-
-    @Override
     public Cliente BuscarPorId(int id) throws Exception{        
            Cliente c = new Cliente();
            PreparedStatement pst;
@@ -162,6 +134,11 @@ public class ClienteDAO extends Conexion implements DAO{
                this.cerrar();
            }
            return c;
+    }
+
+    @Override
+    public boolean ConsultarNombre(String nom) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

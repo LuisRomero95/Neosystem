@@ -84,9 +84,9 @@ public class AyudanteDAO extends Conexion implements DAO{
                pst.setInt(1,id);  
                res = pst.executeQuery();                                    
                 if (res.next()) {
-                    ayudante.setDni(res.getString("dni"));
                     ayudante.setNom(res.getString("nom"));            
                     ayudante.setApe(res.getString("ape"));      
+                    ayudante.setDni(res.getString("dni"));                    
                     ayudante.setDirec(res.getString("direc"));
                     ayudante.setTel(res.getString("tel"));                    
                     ayudante.setEmail(res.getString("email"));                   
@@ -131,32 +131,17 @@ public class AyudanteDAO extends Conexion implements DAO{
     }
 
     @Override
-    public List filtrar(String campo, String criterio) throws Exception{
-        List<Ayudante> datos = new ArrayList<>();
+    public boolean ConsultarNombre(String nom) throws SQLException{
         PreparedStatement pst;
-        ResultSet rs;
-        String sql = "SELECT * FROM ayudantes WHERE "+campo+" like '%"+criterio+"%'";
+        ResultSet res = null;
+        String sql = "SELECT * FROM usuarios WHERE nom='"+nom+"'";
+
         try {
             this.conectar();
             pst = conexion.prepareStatement(sql);
-            rs = pst.executeQuery();
-            while(rs.next()){
-                datos.add(new Ayudante(
-                        rs.getInt("id"),
-                        rs.getString("dni"),
-                        rs.getString("nom"),
-                        rs.getString("ape"),
-                        rs.getString("direc"),
-                        rs.getString("tel"),
-                        rs.getString("email"))
-                );
-            }
-        } catch (SQLException e) {
+            res = pst.executeQuery();
+        } catch (Exception e) {
         }
-        finally{
-            this.cerrar();
-        }   
-        return datos;
-    }
-    
+         return res.next();
+    }    
 }

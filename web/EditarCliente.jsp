@@ -55,7 +55,7 @@ HttpSession sesion = request.getSession();
                     </div>
                     <div class="form-group"> <!-- Email-->
                         <label for="email_id" class="control-label">EMAIL</label>
-                        <input type="text" class="form-control" id="email_id" name="txtEmail" value="<c:out value="${cliente.email}" />">
+                        <input type="text" class="form-control" id="email_id" name="txtEmail" style="text-transform:lowercase;" value="<c:out value="${cliente.email}" />">
                     </div>                    
                 </div>
                     

@@ -73,6 +73,8 @@ public class SERVCliente extends HttpServlet {
             throws ServletException, IOException {
                    
             Cliente c = new Cliente();
+            request.setCharacterEncoding("UTF-8");
+            
             c.setRuc_dni(request.getParameter("txtRuc_Dni"));
             c.setNom(request.getParameter("txtNombre"));
             c.setEmail(request.getParameter("txtEmail"));

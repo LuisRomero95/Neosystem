@@ -13,13 +13,17 @@ HttpSession sesion = request.getSession();
             response.sendRedirect("../index.jsp");
         }
     }
-
 %>
+
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <script src="js/jquery-3.3.1.min.js" type="text/javascript"></script>
+        <link href="css/jquery.dataTables.min.css" rel="stylesheet" type="text/css"/>
+        <script src="js/jquery.dataTables.min.js" type="text/javascript"></script>
+        <script src="js/dataTable.js" type="text/javascript"></script>
         <title>JSP Page</title>
     </head>
         <body>
@@ -38,28 +42,31 @@ HttpSession sesion = request.getSession();
                 <br>
                 <br>
             <form method="POST">
-            <table class="table table-bordered" >
-                <tr>
-                    <th class="text-center">ID</th>                
-                    <th class="text-center">TIPO</th>
-                    <th class="text-center">ACCIONES</th>
-                </tr>
-                <c:forEach items="${tu}" var="tu">
-                    <tr>
-                        <td>
-                            <c:out value="${tu.id}"/>
-                        </td>
-                        <td>
-                            <c:out value="${tu.nom}"/>
-                        </td>                        
-                        <td>
-                            <a href="SERVTipoUsuario?action=edit&id=<c:out value="${tu.id}" />" class="btn btn-warning btn-sm">Editar</a>                         
-                            <a href="SERVTipoUsuario?action=delete&id=<c:out value="${tu.id}"/>" onclick="return confirm('¿Estás seguro que deseas eliminar el registro?')"  class="btn btn-danger btn-sm">Eliminar</a>                            
-                        </td>
-                    </tr>
-                </c:forEach>                               
-            </table>                 
-            </form>
-     
+                <table class="table table-bordered" id="tableUser" class="display">
+                    <thead>
+                        <tr>
+                            <th class="text-center">ID</th>                
+                            <th class="text-center">TIPO</th>
+                            <th class="text-center">ACCIONES</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <c:forEach items="${tu}" var="tu">
+                            <tr>
+                                <td>
+                                    <c:out value="${tu.id}"/>
+                                </td>
+                                <td>
+                                    <c:out value="${tu.nom}"/>
+                                </td>                        
+                                <td class="text-center">
+                                    <a href="SERVTipoUsuario?action=edit&id=<c:out value="${tu.id}" />" class="btn btn-warning btn-sm">Editar</a>                         
+                                    <a href="SERVTipoUsuario?action=delete&id=<c:out value="${tu.id}"/>" onclick="return confirm('¿Estás seguro que deseas eliminar el registro?')"  class="btn btn-danger btn-sm">Eliminar</a>                            
+                                </td>
+                            </tr>
+                        </c:forEach>                      
+                    </tbody>                                             
+                </table>                 
+            </form>     
     </body>
 </html>

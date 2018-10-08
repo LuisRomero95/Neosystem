@@ -3,6 +3,9 @@ package controlador;
 
 import dao.TipoUsuarioDAO;
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -71,24 +74,36 @@ private static String insert= "/InsertarTipoUsuario.jsp";
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+       
+        request.setCharacterEncoding("UTF-8");
+                
         TipoUsuario tu = new TipoUsuario();
-
-        tu.setNom(request.getParameter("txtNom"));                                                        
+        
+        String nombre = request.getParameter("txtNombre");
+        tu.setNom(nombre);                                                        
         String id =request.getParameter("txtId");
 
-        if (id == null || id.isEmpty()) {
-            try {
-                tudao.insertar(tu);
-            } catch (Exception ex) {
-            }
-         } else {
-            try {
-                tu.setId(Integer.parseInt(id));
-                tudao.modificar(tu);
-            } catch (Exception ex){ 
-            }
-        }        
-          
+        try {
+            if(tudao.ConsultarNombre(nombre)){    
+
+            }else                 
+                if (id == null || id.isEmpty()) {
+                    try {
+                        tudao.insertar(tu);
+                    } catch (Exception ex) {
+                    }
+                }else {
+                    try {
+                        tu.setId(Integer.parseInt(id));
+                        tudao.modificar(tu);
+                    } catch (Exception ex){ 
+                    }
+                }  
+        }                   
+        catch (SQLException ex) {
+            Logger.getLogger(SERVUsuario.class.getName()).log(Level.SEVERE, null, ex);             
+        }            
+                
         response.sendRedirect(request.getContextPath() + "/SERVTipoUsuario?action=refresh");           
     }
 

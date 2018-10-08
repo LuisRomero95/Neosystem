@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.UsuarioDAO;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -71,28 +72,15 @@ public class SERVUsuario extends HttpServlet {
                     Logger.getLogger(SERVUsuario.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }            
-            //LISTAR o ACTUALIZAR LISTA
+            //LISTAR O ACTUALIZAR USUARIO
             else if(action.equalsIgnoreCase("refresh")){
                 try {
-                forward = list_usuario;
-                List  usuario = usuariodao.consultar();
-                request.setAttribute("usuario", usuario);                  
-                } catch (Exception ex) {
-                }
-            }
-            else if(request.getParameter("btnFiltrar")!= null){
-                try {
                     forward = list_usuario;
-                    String campo = request.getParameter("txtCampo");
-                    // el campo es igual al nombre del atributo
-                    String criterio = request.getParameter("txtCriterio");                    
-
-                    request.setAttribute("usuario", usuariodao.filtrar(campo, criterio));
-                    
+                    List  usuario = usuariodao.consultar();
+                    request.setAttribute("usuario", usuario);                  
                 } catch (Exception ex) {
-                    Logger.getLogger(SERVUsuario.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            }            
+            }           
             
             RequestDispatcher view = request.getRequestDispatcher(forward);
             view.forward(request, response);
@@ -102,29 +90,42 @@ public class SERVUsuario extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {          
-            
-        Usuario u = new Usuario();    
-        u.setNom(request.getParameter("txtNombre"));
-        u.setPassword(request.getParameter("txtContra"));                       
-        u.setEmail(request.getParameter("txtEmail"));
-        u.setNivel(request.getParameter("txtNivel"));
-        String id =request.getParameter("txtId");
+                    
+        request.setCharacterEncoding("UTF-8");
 
-            if (id == null || id.isEmpty()) {
-                try {
-                    usuariodao.insertar(u);
-                } catch (Exception ex) {
-                    Logger.getLogger(SERVUsuario.class.getName()).log(Level.SEVERE, null, ex);
-                }
-             } else {                    
-                try {
-                    u.setId(Integer.parseInt(id));
-                    usuariodao.modificar(u);
-                } catch (Exception ex) {
-                }
+        String nombre = request.getParameter("txtNombre");
+        String contra = request.getParameter("txtContra");
+        String email = request.getParameter("txtEmail");
+        String nivel = request.getParameter("txtNivel");
+        String id =request.getParameter("txtId"); 
 
-            }        
-          
+        try {
+            if(usuariodao.ConsultarEmail(email) || usuariodao.ConsultarNombre(nombre)){    
+
+            } else {                
+                Usuario u = new Usuario();    
+                u.setNom(nombre);
+                u.setPassword(contra);                       
+                u.setEmail(email);
+                u.setNivel(nivel);                
+                if (id == null || id.isEmpty()) {
+                    try {
+                        usuariodao.insertar(u);
+                    } catch (Exception ex) {
+                        Logger.getLogger(SERVUsuario.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                } else {                    
+                    try {
+                        u.setId(Integer.parseInt(id));
+                        usuariodao.modificar(u);
+                    } catch (Exception ex) {
+                        Logger.getLogger(SERVUsuario.class.getName()).log(Level.SEVERE, null, ex);                        
+                    }
+                }             
+            }            
+        }catch (SQLException ex) {
+            Logger.getLogger(SERVUsuario.class.getName()).log(Level.SEVERE, null, ex);             
+        }                           
         response.sendRedirect(request.getContextPath() + "/SERVUsuario?action=refresh");        
         
     }

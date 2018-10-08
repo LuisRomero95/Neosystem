@@ -52,7 +52,7 @@ HttpSession sesion = request.getSession();
                     <div class="col-md-6">
                         <div class="form-group"> <!-- Email-->
                             <label for="email_id" class="control-label" >EMAIL</label>
-                            <input type="text" class="form-control" id="email_id" name="txtEmail" placeholder="larcroco@gmail.com">
+                            <input type="text" class="form-control" id="email_id" name="txtEmail" style="text-transform:lowercase;" placeholder="larcroco@gmail.com">
                         </div>                     
                         <div class="form-group"> <!-- Telefono Corporativo-->
                             <label for="tel_id" class="control-label">TELÉFONO CELULAR</label>

@@ -141,33 +141,35 @@ public class UsuarioDAO extends Conexion implements DAO{
                this.cerrar();
            }
            return usuario;
-    }    
-
-    @Override
-    public List<Usuario> filtrar(String campo, String criterio) throws Exception  {
-        List<Usuario> datos = new ArrayList<>();
+    }     
+    
+    public boolean ConsultarEmail(String email) throws SQLException{
         PreparedStatement pst;
-        ResultSet rs;
-        String sql = "SELECT * FROM usuarios WHERE "+campo+" LIKE "+"'%"+criterio+"%'";
+        ResultSet res = null;
+        String sql = "SELECT * FROM usuarios WHERE email='"+email+"'";
+
         try {
             this.conectar();
             pst = conexion.prepareStatement(sql);
-            rs = pst.executeQuery();
-            while(rs.next()){
-                datos.add(new Usuario(
-                        rs.getInt("id"),
-                        rs.getString("nom"),
-                        rs.getString("pass"),
-                        rs.getString("email"),
-                        rs.getString("nom")));
-            }
+            res = pst.executeQuery();
+        } catch (Exception e) {
+        }
+         return res.next();
+    }  
+    
+    @Override
+    public boolean ConsultarNombre(String nom) throws SQLException{
+        PreparedStatement pst;
+        ResultSet res = null;
+        String sql = "SELECT * FROM usuarios WHERE nom='"+nom+"'";
 
-        } catch (SQLException e ) {            
+        try {
+            this.conectar();
+            pst = conexion.prepareStatement(sql);
+            res = pst.executeQuery();
+        } catch (Exception e) {
         }
-        finally{
-            this.cerrar();
-        }
-        return datos;
-    }
+         return res.next();
+    }      
     
 }

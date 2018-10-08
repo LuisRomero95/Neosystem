@@ -43,10 +43,11 @@ HttpSession sesion = request.getSession();
         <ul class="nav navbar-nav">
           <li><a href="../SERVUsuario?action=refresh">Gestionar Usuario</a></li>        
           <li><a href="../SERVCliente?action=refresh">Gestionar Cliente</a></li>       
-          <li><a href="../SERVAyudante?action=refresh">Gestionar Ayudate</a></li>       
+          <li><a href="../SERVAyudante?action=refresh">Gestionar Ayudante</a></li>       
           <li><a href="../SERVConductor?action=refresh">Gestionar Conductor</a></li>
           <li><a href="../SERVVehiculo?action=refresh">Gestionar Vehiculo</a></li>
           <li><a href="../Prueba2.jsp">Pag Prueba</a></li>
+          <li><a href="../DataTable.jsp">Data Table</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <li><a href="#">Bienvenido : <%= sesion.getAttribute("nombre") %></a></li>

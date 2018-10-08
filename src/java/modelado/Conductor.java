@@ -1,11 +1,11 @@
 package modelado;
 
 public class Conductor {
-    private int id;
-    private String dni;
-    private String lic;    
+    private int id;  
     private String nom;
     private String ape;
+    private String dni;
+    private String lic;      
     private String direc;
     private String tel;
     private String email;
@@ -14,16 +14,16 @@ public class Conductor {
     public Conductor() {
     }
 
-    public Conductor(int id, String dni, String lic, String nom, String ape, String direc, String tel, String email, String id_tipo) {
+    public Conductor(int id, String nom, String ape, String dni, String lic, String direc, String tel, String email, String tipo) {
         this.id = id;
-        this.dni = dni;
-        this.lic = lic;
         this.nom = nom;
         this.ape = ape;
+        this.dni = dni;
+        this.lic = lic;
         this.direc = direc;
         this.tel = tel;
         this.email = email;
-        this.tipo = id_tipo;
+        this.tipo = tipo;
     }
 
     public int getId() {
@@ -32,22 +32,6 @@ public class Conductor {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getDni() {
-        return dni;
-    }
-
-    public void setDni(String dni) {
-        this.dni = dni;
-    }
-
-    public String getLic() {
-        return lic;
-    }
-
-    public void setLic(String lic) {
-        this.lic = lic;
     }
 
     public String getNom() {
@@ -64,6 +48,22 @@ public class Conductor {
 
     public void setApe(String ape) {
         this.ape = ape;
+    }
+
+    public String getDni() {
+        return dni;
+    }
+
+    public void setDni(String dni) {
+        this.dni = dni;
+    }
+
+    public String getLic() {
+        return lic;
+    }
+
+    public void setLic(String lic) {
+        this.lic = lic;
     }
 
     public String getDirec() {
@@ -97,6 +97,5 @@ public class Conductor {
     public void setTipo(String tipo) {
         this.tipo = tipo;
     }
-
-    
+     
 }

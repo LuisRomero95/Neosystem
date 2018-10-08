@@ -28,6 +28,7 @@ public class SERVLogin extends HttpServlet {
             
             
             if(request.getParameter("btnIniciar")!=null){
+                
                 nombre = request.getParameter("txtUsuario");
                 contra = request.getParameter("txtContra");
                 nivel = acc.validar(nombre, contra);

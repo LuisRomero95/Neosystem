@@ -2,7 +2,12 @@
 package controlador;
 
 import dao.VehiculoDAO;
+import dao.ConductorDAO;
+import dao.AyudanteDAO;
 import java.io.IOException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -14,12 +19,16 @@ public class SERVVehiculo extends HttpServlet {
 
     private static String insert= "/InsertarVehiculo.jsp";
     private static String edit = "/EditarVehiculo.jsp";
-    private static String list_cliente = "/ListarVehiculo.jsp";
-    private VehiculoDAO vehiculodao;
+    private static String list_vehiculo = "/ListarVehiculo.jsp";
+    private final VehiculoDAO vehiculodao;
+    private final ConductorDAO conductordao;
+    private final AyudanteDAO ayudantedao;
     Vehiculo c = new Vehiculo();
             
      public SERVVehiculo() {
     	vehiculodao = new VehiculoDAO(){};
+        conductordao = new ConductorDAO(){};
+        ayudantedao = new AyudanteDAO(){};
     }         
                 
     @Override
@@ -29,18 +38,18 @@ public class SERVVehiculo extends HttpServlet {
             String forward = "";   
             String action = request.getParameter("action");
             
-            //ELIMINAR CLIENTE
+            //ELIMINAR VEHICULO
             if (action.equalsIgnoreCase("delete")) {
                  
                 try {
                     c.setId(Integer.parseInt(request.getParameter("id")));
                     vehiculodao.eliminar(c);                    
-                    forward = list_cliente;                 
+                    forward = list_vehiculo;                 
                     request.setAttribute("vehiculo", vehiculodao.consultar());
                 } catch (Exception ex) {
                 }
             }
-            //EDITAR CLIENTE
+            //EDITAR VEHICULO
             else if (action.equalsIgnoreCase("edit")) {
                 try {
                     forward = edit;
@@ -50,16 +59,26 @@ public class SERVVehiculo extends HttpServlet {
                 } catch (Exception ex) {
                 }
             }            
-            //INSERTAR CLIENTE    
+            //INSERTAR VEHICULO    
             else if(action.equalsIgnoreCase("insert")) {        
-                    forward = insert;            
+                try {
+                    forward = insert;
+                    List conductor = conductordao.consultar();
+                    List ayudante = ayudantedao.consultar();
+                    request.setAttribute("conductor", conductor);
+                    request.setAttribute("ayudante", ayudante);                    
+                } catch (Exception ex) {
+                    Logger.getLogger(SERVVehiculo.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
-            //ACTUALIZAR CLIENTE
+            //LISTAR O ACTUALIZAR VEHICULO
             else if(action.equalsIgnoreCase("refresh")){
                 try {
-                    forward = list_cliente;                  
-                    request.setAttribute("vehiculo", vehiculodao.consultar());
+                    forward = list_vehiculo;      
+                    List vehiculo = vehiculodao.consultar();
+                    request.setAttribute("vehiculo", vehiculo);
                 } catch (Exception ex) {
+                    Logger.getLogger(SERVVehiculo.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
             RequestDispatcher view = request.getRequestDispatcher(forward);
@@ -72,26 +91,29 @@ public class SERVVehiculo extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {      
                    
-            Vehiculo v = new Vehiculo();
-            v.setPlaca(request.getParameter("txtPlaca"));
-            v.setId_con(Integer.parseInt(request.getParameter("txtId_con")));
-            v.setId_ayu(Integer.parseInt(request.getParameter("txtId_ayu")));
-            v.setMarca(request.getParameter("txtMarca"));
-            v.setModelo(request.getParameter("txtModelo"));
-            v.setColor(request.getParameter("txtColor"));
-            v.setCapmax(Integer.parseInt(request.getParameter("txtCapmax")));
-            v.setPasmax(Integer.parseInt(request.getParameter("txtPasmax")));
+            Vehiculo veh = new Vehiculo();
+            request.setCharacterEncoding("UTF-8");
+            
+            veh.setPlaca(request.getParameter("txtPlaca"));
+            veh.setConductor(request.getParameter("txtCon"));
+            veh.setAyudante(request.getParameter("txtAyu"));
+            veh.setMarca(request.getParameter("txtMarca"));
+            veh.setAño(request.getParameter("txtAño"));
+            veh.setModelo(request.getParameter("txtModelo"));            
+            veh.setCapmax(Integer.parseInt(request.getParameter("txtCapmax")));
+            veh.setPasmax(Integer.parseInt(request.getParameter("txtPasmax")));
             String id =request.getParameter("txtId");
             
             if (id == null || id.isEmpty()) {
                 try {
-                    vehiculodao.insertar(v);
+                    vehiculodao.insertar(veh);
                 } catch (Exception ex) {
+                    Logger.getLogger(SERVUsuario.class.getName()).log(Level.SEVERE, null, ex);                    
                 }
              } else {
                 try {
-                    v.setId(Integer.parseInt(id));
-                    vehiculodao.modificar(v);
+                    veh.setId(Integer.parseInt(id));
+                    vehiculodao.modificar(veh);
                 } catch (Exception ex) {
                 }
             }

@@ -84,10 +84,12 @@ public class SERVConductor extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Conductor a = new Conductor();
-        a.setDni(request.getParameter("txtDni"));
-        a.setLic(request.getParameter("txtLic"));
+        request.setCharacterEncoding("UTF-8");
+        
         a.setNom(request.getParameter("txtNombre"));
         a.setApe(request.getParameter("txtApe"));
+        a.setDni(request.getParameter("txtDni"));
+        a.setLic(request.getParameter("txtLic"));        
         a.setEmail(request.getParameter("txtEmail"));     
         a.setTel(request.getParameter("txtTel"));        
         a.setDirec(request.getParameter("txtDirec"));                      

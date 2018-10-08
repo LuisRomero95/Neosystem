@@ -3,9 +3,9 @@ package modelado;
 
 public class Cliente {
     
-    private int id;
-    private String ruc_dni;
+    private int id;    
     private String nom;
+    private String ruc_dni;
     private String email;
     private String tel_fij;
     private String tel_cel;
@@ -17,15 +17,16 @@ public class Cliente {
 
     //Constructor para inicializar todos los atributos de la clase
 
-    public Cliente(int id, String ruc_dni, String nom, String email, String tel_fij, String tel_cel, String direc) {
+    public Cliente(int id, String nom, String ruc_dni, String email, String tel_fij, String tel_cel, String direc) {
         this.id = id;
-        this.ruc_dni = ruc_dni;
         this.nom = nom;
+        this.ruc_dni = ruc_dni;
         this.email = email;
         this.tel_fij = tel_fij;
         this.tel_cel = tel_cel;
         this.direc = direc;
     }
+    
 
     //Para obtener o establecer los valores de los campos
 
@@ -37,20 +38,20 @@ public class Cliente {
         this.id = id;
     }
 
-    public String getRuc_dni() {
-        return ruc_dni;
-    }
-
-    public void setRuc_dni(String ruc_dni) {
-        this.ruc_dni = ruc_dni;
-    }
-
     public String getNom() {
         return nom;
     }
 
     public void setNom(String nom) {
         this.nom = nom;
+    }
+
+    public String getRuc_dni() {
+        return ruc_dni;
+    }
+
+    public void setRuc_dni(String ruc_dni) {
+        this.ruc_dni = ruc_dni;
     }
 
     public String getEmail() {
@@ -84,7 +85,6 @@ public class Cliente {
     public void setDirec(String direc) {
         this.direc = direc;
     }
-
 
     
 }

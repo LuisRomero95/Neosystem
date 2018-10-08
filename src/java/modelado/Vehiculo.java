@@ -5,34 +5,26 @@ public class Vehiculo {
     
     private int id;
     private String placa;
-    private int id_con;
-    private int id_ayu;
+    private String conductor;
+    private String ayudante;
     private String marca;
+    private String año;
     private String modelo;
-    private String color;
     private int capmax;
     private int pasmax;
 
     public Vehiculo() {
     }
 
-    public Vehiculo(int id, String placa, int id_con, int id_ayu, String marca, String modelo, String color, int capmax, int pasmax) {
+    public Vehiculo(int id, String placa, String conductor, String ayudante, String marca, String año, String modelo, int capmax, int pasmax) {
         this.id = id;
         this.placa = placa;
-        this.id_con = id_con;
-        this.id_ayu = id_ayu;
+        this.conductor = conductor;
+        this.ayudante = ayudante;
         this.marca = marca;
+        this.año = año;
         this.modelo = modelo;
-        this.color = color;
         this.capmax = capmax;
-        this.pasmax = pasmax;
-    }
-
-    public int getPasmax() {
-        return pasmax;
-    }
-
-    public void setPasmax(int pasmax) {
         this.pasmax = pasmax;
     }
 
@@ -52,20 +44,20 @@ public class Vehiculo {
         this.placa = placa;
     }
 
-    public int getId_con() {
-        return id_con;
+    public String getConductor() {
+        return conductor;
     }
 
-    public void setId_con(int id_con) {
-        this.id_con = id_con;
+    public void setConductor(String conductor) {
+        this.conductor = conductor;
     }
 
-    public int getId_ayu() {
-        return id_ayu;
+    public String getAyudante() {
+        return ayudante;
     }
 
-    public void setId_ayu(int id_ayu) {
-        this.id_ayu = id_ayu;
+    public void setAyudante(String ayudante) {
+        this.ayudante = ayudante;
     }
 
     public String getMarca() {
@@ -76,20 +68,20 @@ public class Vehiculo {
         this.marca = marca;
     }
 
+    public String getAño() {
+        return año;
+    }
+
+    public void setAño(String año) {
+        this.año = año;
+    }
+
     public String getModelo() {
         return modelo;
     }
 
     public void setModelo(String modelo) {
         this.modelo = modelo;
-    }
-
-    public String getColor() {
-        return color;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
     }
 
     public int getCapmax() {
@@ -99,8 +91,14 @@ public class Vehiculo {
     public void setCapmax(int capmax) {
         this.capmax = capmax;
     }
-    
-    
+
+    public int getPasmax() {
+        return pasmax;
+    }
+
+    public void setPasmax(int pasmax) {
+        this.pasmax = pasmax;
+    }
     
 }
 
