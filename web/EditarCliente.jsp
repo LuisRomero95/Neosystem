@@ -55,7 +55,7 @@ HttpSession sesion = request.getSession();
                     </div>
                     <div class="form-group"> <!-- Email-->
                         <label for="email_id" class="control-label">EMAIL</label>
-                        <input type="text" class="form-control" id="email_id" name="txtEmail" style="text-transform:lowercase;" value="<c:out value="${cliente.email}" />">
+                        <input type="text" class="form-control" id="email_id" name="txtEmail" onkeyup="minus(this);" value="<c:out value="${cliente.email}" />">
                     </div>                    
                 </div>
                     
@@ -77,8 +77,7 @@ HttpSession sesion = request.getSession();
                 <div class="col-md-12">
                     <div class="form-group"> <!-- Submit Insertar -->
                         <input type="submit" name="btnInsertar" value="Actualizar" class="btn btn-success btn-lg">
-                        <a href="SERVCliente?action=refresh"  class="btn btn-danger btn-lg">Atrás</a>
-                        <input type="reset" name="btnLimpiar" value="Limpiar" class="btn btn-warning btn-lg">
+                        <a href="SERVCliente?action=refresh"  class="btn btn-danger btn-lg" onclick="return confirm('¿Desea salir de la edición?')">Regresar</a>
                     </div>   
                 </div>                    
             </div>               

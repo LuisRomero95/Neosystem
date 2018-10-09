@@ -14,7 +14,6 @@ HttpSession sesion = request.getSession();
         }
     }
 %>
-
 <!DOCTYPE html>
 <html>
     <head>        
@@ -73,7 +72,7 @@ HttpSession sesion = request.getSession();
                                 </td>                                                     
                                 <td class="text-center">
                                     <a href="SERVUsuario?action=edit&id=<c:out value="${usuario.id}"/>"  class="btn btn-warning btn-sm">Editar</a>   
-                                    <a href="SERVUsuario?action=delete&id=<c:out value="${usuario.id}"/>" onclick="return confirm('¿Estás seguro que deseas eliminar el registro?')" class="btn btn-danger btn-sm">Eliminar</a>
+                                    <a href="SERVUsuario?action=delete&id=<c:out value="${usuario.id}"/>" onclick="return confirm('¿Está seguro que desea eliminar el registro?')" class="btn btn-danger btn-sm">Eliminar</a>
                                 </td>
                             </tr>
                         </c:forEach>                         

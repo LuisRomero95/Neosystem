@@ -4,7 +4,7 @@
         var nombre = document.getElementById("nom_id").value;                
         var contra = document.getElementById("contra_id").value;
         var email = document.getElementById("email_id").value;
-        var indice = document.getElementById("select_id").selectedIndex;
+        var indice = document.getElementById("listarNivel").selectedIndex;        
 
         if( nombre == null || nombre.length == 0 || /^\s+$/.test(nombre) ) {
               alert('[ERROR] El campo nombre no puede quedar vacío');
@@ -38,10 +38,10 @@
         else if ( indice == null || indice == 0 ){
           alert('[ERROR] Seleccione una opción');
           return false;
-        }          
+        }
       
           return true;
-        } 
+        }                
                 
     function soloLetras(e){
        key = e.keyCode || e.which;
@@ -69,4 +69,14 @@
             if(!isNaN(val[i]))
                 document.getElementById("nom_id").value = '';
         }
+    }
+    
+    function nivelSeleccionado(){
+        var e = document.getElementById("listarNivel");
+        var nivel = e.options[e.selectedIndex].text;
+        document.getElementById("nivel_id").value = nivel;
+    }      
+    
+    function minus(e) {
+        e.value = e.value.toLowerCase();
     }

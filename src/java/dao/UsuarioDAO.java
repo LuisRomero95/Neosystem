@@ -60,8 +60,8 @@ public class UsuarioDAO extends Conexion implements DAO{
     @Override
     public void modificar(Object obj) throws Exception  {
         Usuario u = (Usuario) obj;
-        PreparedStatement pst;
-        String sql="UPDATE usuarios SET nom=?, pass=?, email=?, id_nivel=? WHERE id=?";
+        PreparedStatement pst;        
+        String sql = "UPDATE usuarios SET nom=?, pass=?, email=?, id_nivel=? WHERE id=? AND estado = 1";
         try {
             this.conectar();
             pst = conexion.prepareStatement(sql);
@@ -71,8 +71,7 @@ public class UsuarioDAO extends Conexion implements DAO{
             pst.setString(4, u.getNivel());            
             pst.setInt(5, u.getId()); 
             pst.executeUpdate();            
-        } catch ( SQLException e) {
-            throw e;            
+        } catch ( SQLException e) {                     
         }
         finally{
             this.cerrar();            
@@ -83,11 +82,8 @@ public class UsuarioDAO extends Conexion implements DAO{
     public List<Usuario> consultar() throws Exception  {
         List<Usuario> datos = new ArrayList<>();
         PreparedStatement pst;
-        //se necesita recuperar datos
         ResultSet rs;
-//        SELECT u.id, u.nom, u.pass, tp.id FROM usuarios u, tiposusuarios tp WHERE u.id_nivel = tp.id AND u.estado = 1
         String sql = "SELECT u.id, u.nom, u.pass, u.email, tp.nom FROM usuarios u, tiposusuarios tp WHERE u.id_nivel = tp.id AND u.estado = 1";
-//        String sql = "SELECT * FROM usuarios WHERE estado = 1";
         try {
             this.conectar();
             pst = conexion.prepareStatement(sql);
@@ -115,7 +111,7 @@ public class UsuarioDAO extends Conexion implements DAO{
            Usuario usuario = new Usuario();
            PreparedStatement pst;
            ResultSet res;
-           String sql = "SELECT * FROM usuarios WHERE estado = 1 AND id = ?";
+           String sql = "SELECT u.id, u.nom, u.pass, u.email, tp.nom FROM usuarios u, tiposusuarios tp WHERE u.id_nivel = tp.id AND u.id=? AND u.estado = 1";
            try {
                this.conectar();
                pst = conexion.prepareStatement(sql);
@@ -123,11 +119,11 @@ public class UsuarioDAO extends Conexion implements DAO{
                
                res = pst.executeQuery();                                    
                 if (res.next()) {
-                    usuario.setNom(res.getString("nom"));
-                    usuario.setPassword(res.getString("pass"));
-                    usuario.setEmail(res.getString("email"));
-                    usuario.setNivel(res.getString("nom"));
-                    usuario.setId(res.getInt("id"));
+                    usuario.setNom(res.getString("u.nom"));
+                    usuario.setPassword(res.getString("u.pass"));
+                    usuario.setEmail(res.getString("u.email"));
+                    usuario.setNivel(res.getString("tp.nom"));
+                    usuario.setId(res.getInt("u.id"));
                 }                       
 
            } catch ( SQLException e ) {

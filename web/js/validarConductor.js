@@ -8,7 +8,7 @@
         var email = document.getElementById("email_id").value; 
         var telefono = document.getElementById("tel_id").value; 
         var direcion = document.getElementById("direc_id").value;
-        var indice = document.getElementById("select_id").selectedIndex;
+        var indice = document.getElementById("listarNivel").selectedIndex;
         
 
         if( dni == null || dni.length == 0 || /^\s+$/.test(dni) ) {
@@ -130,3 +130,13 @@
                 document.getElementById("tel_id").value = '';
         }
     }      
+    
+    function nivelSeleccionado(){
+        var e = document.getElementById("listarNivel");
+        var nivel = e.options[e.selectedIndex].text;
+        document.getElementById("nivel_id").value = nivel;
+    }      
+    
+    function minus(e) {
+        e.value = e.value.toLowerCase();
+    }    

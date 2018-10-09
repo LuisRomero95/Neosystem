@@ -89,7 +89,7 @@ HttpSession sesion = request.getSession();
                                 </td>
                                 <td class="text-center">
                                     <a href="SERVConductor?action=edit&id=<c:out value="${conductor.id}"/>" class="btn btn-warning btn-sm">Editar</a>
-                                    <a href="SERVConductor?action=delete&id=<c:out value="${conductor.id}"/>" onclick="return confirm('¿Estás seguro que deseas eliminar el registro?')"  class="btn btn-danger btn-sm">Eliminar</a>
+                                    <a href="SERVConductor?action=delete&id=<c:out value="${conductor.id}"/>" onclick="return confirm('¿Está seguro que desea eliminar el registro?')"  class="btn btn-danger btn-sm">Eliminar</a>
                                 </td>                        
                             </tr>
                         </c:forEach>                  

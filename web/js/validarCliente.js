@@ -181,3 +181,7 @@
                 document.getElementById("tel_cel_id").value = '';
         }
     }  
+    
+    function minus(e) {
+        e.value = e.value.toLowerCase();
+    }    

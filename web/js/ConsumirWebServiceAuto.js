@@ -1,56 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="x" uri="http://java.sun.com/jsp/jstl/xml" %>
-<!DOCTYPE html>
-<html>
-    <head>
-
-        <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-        
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-
-    </head>
-    <body>      
-        <!--https://www.youtube.com/watch?v=FDcNhR0Pzm8&app=desktop-->        
-        
-        <a href="Admin/admin.jsp">Volver</a><br>
-        
-        <label for="listarMarca" class="control-label">MARCA</label>       
-        <select id="listarMarca" onchange="seleccionarMarca()" class="form-control">
-            <option>  Cargando marca...</option>
-        </select><br>
-       
-        <label for="text1" class="control-label">Marca Seleccionada:</label>
-        <input type="text" name="txtMarca" id="text1" value="--Elija Marca--" readonly="" class="form-control"><br>
-    
-        <label for="listarAño" class="control-label">AÑO</label>       
-        <select id="listarAño" onchange="seleccionarAño()" class="form-control">
-            <option>--Seleccione un año--</option>
-            <option>2010</option>
-            <option>2011</option>
-            <option>2012</option>
-            <option>2013</option>
-            <option>2014</option>
-            <option>2015</option>
-            <option>2016</option>
-            <option>2017</option>
-            <option>2018</option>
-        </select><br>
-        
-        <label for="text2" class="control-label">Año Seleccionado:</label>       
-        <input type="text" name="txtAño" id="text2" value="--Elija Año--" readonly="" class="form-control"><br>         
-
-        <label for="listarModelo" class="control-label">MODELO</label> 
-        <select id="listarModelo" onchange="modeloSeleccionada()"  class="form-control">
-        </select><br> 
-        <label>Modelo Seleccionado:</label>        
-        <input type="text" name="txtModelo" id="text3" value="--Elija Modelo--"><br>  
-        
-        
-        <script type="text/javascript">            
             function llamarMarca() {
                 if(window.XMLHttpRequest){
                     xmlhttp = new XMLHttpRequest();
@@ -137,8 +84,3 @@
                 document.getElementById("text3").value = marca;
             }            
             
-        </script>
-
-     
-    </body>   
-</html>

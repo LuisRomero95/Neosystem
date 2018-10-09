@@ -13,7 +13,6 @@ HttpSession sesion = request.getSession();
             response.sendRedirect("../index.jsp");
         }
     }
-
 %>
 <!DOCTYPE html>
 <html>
@@ -22,17 +21,7 @@ HttpSession sesion = request.getSession();
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <script src="js/jquery-3.3.1.min.js" type="text/javascript"></script>
         <script src="js/validarUsuario.js" type="text/javascript"></script>
-        <script src="js/prototype.js" type="text/javascript"></script>
-        <title>JSP Page</title> 
-        <script type="text/javascript">
-        function comprobar()   
-        {  
-          var url = 'ajax_comprobar_nick.php';  
-          var pars= ('txtNombre=' + document.getElementById('nom_id').value);
-          var target = 'comprobar_mensaje';
-          var myAjax = new Ajax.Updater( target, url, { method: 'get', parameters: pars});  
-        }  
-        </script>         
+        <title>JSP Page</title>       
     </head>        
     <body>
         <div class="container">
@@ -47,50 +36,53 @@ HttpSession sesion = request.getSession();
             <div class="container">
                 
                 <div class="col-md-6">
+                    
                     <div class="form-group"> <!-- Nombre -->
                         <label for="nom_id" class="control-label">NOMBRE</label>
-                        <input type="text" class="form-control" id="nom_id" name="txtNombre" style="text-transform:lowercase;" placeholder="luis" onkeypress="return soloLetras(event)" onblur="limpia()" onKeyUp="comprobar(this.value)">
+                        <input type="text" class="form-control" id="nom_id" name="txtNombre" placeholder="luis" onkeypress="return soloLetras(event)" onblur="limpia()" onKeyUp="minus(this)">
                         <span id="comprobar_mensaje"></span>
                     </div> 
 
                     <div class="form-group"> <!-- Contraseña -->
                         <label for="contra_id" class="control-label">CONTRASEÑA</label>
                         <input type="text" class="form-control" id="contra_id" name="txtContra" placeholder="***" >
-                    </div>                       
-                </div>                                              
-                
-                <div class="col-md-6">
+                    </div>         
+                    
                     <div class="form-group"> <!-- Email -->
                         <label for="email_id" class="control-label">EMAIL</label>
-                        <input type="text" class="form-control" id="email_id" name="txtEmail" style="text-transform:lowercase;" placeholder="1510647@utp.edu.pe">
-                    </div>
-                    
+                        <input type="text" class="form-control" id="email_id" name="txtEmail" onkeyup="minus(this);" placeholder="1510647@utp.edu.pe">
+                    </div>                      
+                </div>                                              
+                
+                <div class="col-md-6">                  
                     <div>
-                        <label for="select_id" class="control-label">NIVEL</label>
+                        <label for="listarNivel" class="control-label">NIVEL</label>
                         <br>
-                        <select name="txtNivel" id="select_id">
+                        <select name="txtNivel" id="listarNivel" class="form-control" onchange="nivelSeleccionado()">
                             <option value="">--Seleccionar--</option>
                             <c:forEach var="tu" items="${usuario}" >
                                 <option value="${tu.id}">
                                     ${tu.nom}
                                 </option>
                             </c:forEach>
-                        </select>                                                
+                        </select>
+                        <br>                        
+                        <div class="form-group">
+                            <label for="nivel_id" class="control-label">NIVEL SELECCIONADO</label>
+                            <input type="text"  class="form-control" id="nivel_id"  readonly="">                                                      
+                        </div>                           
                     </div>                   
                 </div>
                 <br>
                 <div class="col-md-12">
                     <div class="form-group"> <!-- Submit Insertar -->
                         <input type="submit" name="btnInsertar" value="Insertar" class="btn btn-success btn-lg" >
-                        <a href="SERVUsuario?action=refresh"  class="btn btn-danger btn-lg">Atrás</a>
-                        <input type="reset" name="btnLimpiar" value="Limpiar" class="btn btn-warning btn-lg">
+                        <a href="SERVUsuario?action=refresh"  class="btn btn-danger btn-lg" onclick="return confirm('¿Desea salir del registro?')">Regresar</a>
+                        <input type="reset" name="btnLimpiar" value="Limpiar" class="btn btn-warning btn-lg" onclick="return confirm('¿Desea limpiar los datos a registrar?')">
                     </div>                    
                 </div>
-
             </div>                 
             </form>          
         </div>
-
-
     </body>
 </html>

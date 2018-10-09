@@ -84,22 +84,22 @@ public class ConductorDAO extends Conexion implements DAO{
            Conductor c = new Conductor();
            PreparedStatement pst;
            ResultSet res;
-           String sql = "SELECT * FROM conductores WHERE id = ?";
+           String sql = "SELECT c.id, c.dni, c.lic, c.nom, c.ape, c.direc, c.tel, c.email, tc.nom FROM conductores c, tiposconductores tc WHERE c.id_tipo = tc.id AND c.id=? AND c.estado = 1";
            try {
             this.conectar();
                pst = conexion.prepareStatement(sql);
                pst.setInt(1,id);                 
                res = pst.executeQuery();                                    
                 if (res.next()) {                                     
-                    c.setNom(res.getString("nom"));            
-                    c.setApe(res.getString("ape"));      
-                    c.setDni(res.getString("dni"));
-                    c.setLic(res.getString("lic"));                       
-                    c.setDirec(res.getString("direc"));
-                    c.setTel(res.getString("tel"));                    
-                    c.setEmail(res.getString("email"));                   
-                    c.setTipo(res.getString("id_tipo"));
-                    c.setId(res.getInt("id"));
+                    c.setNom(res.getString("c.nom"));            
+                    c.setApe(res.getString("c.ape"));      
+                    c.setDni(res.getString("c.dni"));
+                    c.setLic(res.getString("c.lic"));                       
+                    c.setDirec(res.getString("c.direc"));
+                    c.setTel(res.getString("c.tel"));                    
+                    c.setEmail(res.getString("c.email"));                   
+                    c.setTipo(res.getString("tc.nom"));
+                    c.setId(res.getInt("c.id"));
                 }                   
      
         } catch (SQLException e) {

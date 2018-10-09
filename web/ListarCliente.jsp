@@ -48,8 +48,8 @@ HttpSession sesion = request.getSession();
                            <th class="text-center">RUC_DNI</th>                                    
                            <th class="text-center">NOMBRES</th>      
                            <th class="text-center">EMAIL</th>      
-                           <th class="text-center">TEL. FIJO</th>      
-                           <th class="text-center">TEL. CELULAR</th>      
+                           <th class="text-center">FIJO</th>      
+                           <th class="text-center">CELULAR</th>      
                            <th class="text-center">DIRECCIÓN</th>
                            <th class="text-center">ACCIONES</th>
                        </tr>                       
@@ -80,7 +80,7 @@ HttpSession sesion = request.getSession();
                                 </td>                                                            
                                 <td class="text-center">
                                     <a href="SERVCliente?action=edit&id=<c:out value="${item.id}"/>"  class="btn btn-warning btn-sm" >Editar</a>   
-                                    <a href="SERVCliente?action=delete&id=<c:out value="${item.id}"/>" onclick="return confirm('¿Estás seguro que deseas eliminar el registro?')"  class="btn btn-danger btn-sm">Eliminar</a>
+                                    <a href="SERVCliente?action=delete&id=<c:out value="${item.id}"/>" onclick="return confirm('¿Está seguro que desea eliminar el registro?')"  class="btn btn-danger btn-sm">Eliminar</a>
                                 </td>
                             </tr>
                         </c:forEach>                         

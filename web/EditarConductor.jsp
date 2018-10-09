@@ -41,6 +41,15 @@ HttpSession sesion = request.getSession();
                         <input type="text" class="form-control" id="ayudante_id" readonly  name="txtId"  value="<c:out value="${conductor.id}" />" >
                     </div>
                     
+                    <div class="form-group"> <!-- Nombres -->
+                        <label for="nom_id" class="control-label">NOMBRE</label>
+                        <input type="text" class="form-control" id="nom_id" name="txtNombre" value="<c:out value="${conductor.nom}" />" onkeypress="return soloLetras(event)" >
+                    </div>
+                    <div class="form-group"> <!-- Apellidos -->
+                        <label for="ape_id" class="control-label">APELLIDOS</label>
+                        <input type="text" class="form-control" id="ape_id" name="txtApe" value="<c:out value="${conductor.ape}" />" onkeypress="return soloLetras(event)">
+                    </div>                      
+                    
                     <div class="form-group"> <!-- Dni -->
                         <label for="dni_id" class="control-label">DNI</label>
                         <input type="text" class="form-control" id="dni_id" name="txtDni" value="<c:out value="${conductor.dni}" />" onkeypress="return soloNumeros(event)" onblur="limpiaDni()">
@@ -50,21 +59,13 @@ HttpSession sesion = request.getSession();
                         <label for="lic_id" class="control-label">LICENCIA</label>
                         <input type="text" class="form-control" id="lic_id" name="txtLic" value="<c:out value="${conductor.lic}" />" >
                     </div> 
-
-                    <div class="form-group"> <!-- Nombres -->
-                        <label for="nom_id" class="control-label">NOMBRE</label>
-                        <input type="text" class="form-control" id="nom_id" name="txtNombre" value="<c:out value="${conductor.nom}" />" onkeypress="return soloLetras(event)" >
-                    </div>
-                    <div class="form-group"> <!-- Apellidos -->
-                        <label for="ape_id" class="control-label">APELLIDOS</label>
-                        <input type="text" class="form-control" id="ape_id" name="txtApe" value="<c:out value="${conductor.ape}" />" onkeypress="return soloLetras(event)">
-                    </div>                         
+                       
                 </div>  
                 
                 <div class="col-md-6">
                     <div class="form-group"> <!-- Correo Electrónico-->
                         <label for="email_id" class="control-label">Email</label>
-                        <input type="text" class="form-control" id="email_id" name="txtEmail" style="text-transform:lowercase;" value="<c:out value="${conductor.email}" />" >
+                        <input type="text" class="form-control" id="email_id" name="txtEmail" value="<c:out value="${conductor.email}" />" onkeyup="minus(this);">
                     </div> 
                     
                     <div class="form-group"> <!-- Teléfono corporativo-->
@@ -76,10 +77,11 @@ HttpSession sesion = request.getSession();
                         <label for="direc_id" class="control-label">DIRECCIÓN</label>
                         <input type="text" class="form-control" id="direc_id" name="txtDirec" value="<c:out value="${conductor.direc}" />" >
                     </div>   
+                    
                     <div>
-                        <label for="select_id" class="control-label">NIVEL</label>
+                        <label for="listarNivel" class="control-label">TIPO</label>
                         <br>
-                        <select name="txtTipo" id="select_id">
+                        <select name="txtTipo" id="listarNivel" class="form-control" onchange="nivelSeleccionado()">
                             <option value="">--Seleccionar--</option>
                             <c:forEach var="tc" items="${tipoconductor}" >
                                 <option value="${tc.id}">
@@ -87,17 +89,20 @@ HttpSession sesion = request.getSession();
                                 </option>
                             </c:forEach>
                         </select>                                                
+                        <br>
+                        <div class="form-group">
+                            <label for="nivel_id" class="control-label">TIPO SELECCIONADO</label>
+                            <input type="text"  class="form-control" id="nivel_id"  readonly="" value="<c:out value="${conductor.tipo}" />" >
+                        </div>                           
                     </div>                     
                 </div>                  
                 
                 <div class="col-md-12">
                     <div class="form-group"> <!-- Submit Insertar -->
                         <input type="submit" name="btnInsertar" value="Actualizar" class="btn btn-success btn-lg">
-                        <a href="SERVConductor?action=refresh"  class="btn btn-danger btn-lg">Atrás</a>
-                        <input type="reset" name="btnLimpiar" value="Limpiar" class="btn btn-warning btn-lg">
+                        <a href="SERVConductor?action=refresh"  class="btn btn-danger btn-lg" onclick="return confirm('¿Desea salir de la edición?')">Regresar</a>
                     </div>                      
-                </div>                  
-     
+                </div>                       
             </form>
         </div>
     </body>

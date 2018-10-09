@@ -51,8 +51,7 @@ HttpSession sesion = request.getSession();
                 <div class="col-md-12">
                     <div class="form-group"> <!-- Submit Insertar -->
                         <input type="submit" name="btnInsertar" value="Actualizar" class="btn btn-success btn-lg">
-                        <a href="SERVTipoUsuario?action=refresh"  class="btn btn-danger btn-lg">Atrás</a>
-                        <input type="reset" name="btnLimpiar" value="Limpiar" class="btn btn-warning btn-lg">
+                        <a href="SERVTipoUsuario?action=refresh"  class="btn btn-danger btn-lg" onclick="return confirm('¿Desea salir de la edición?')">Regresar</a>                        
                     </div>                      
                 </div>                    
             </div>                             

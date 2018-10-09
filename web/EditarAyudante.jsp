@@ -24,9 +24,7 @@ HttpSession sesion = request.getSession();
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <script src="js/validarAyudante.js" type="text/javascript"></script>
         <title>JSP Page</title>
-
-    </head>
-  
+    </head>  
     <body>
         <div class="container">
             <div align="right">
@@ -63,7 +61,7 @@ HttpSession sesion = request.getSession();
                     <div class="col-md-6">
                         <div class="form-group"> <!-- Correo Electrónico-->
                             <label for="email_id" class="control-label">Email</label>
-                            <input type="text" class="form-control" id="email_id" name="txtEmail" style="text-transform:lowercase;" value="<c:out value="${ayudante.email}" />" >
+                            <input type="text" class="form-control" id="email_id" name="txtEmail" value="<c:out value="${ayudante.email}" />" onkeyup="minus(this);" >
                         </div> 
                         <div class="form-group"> <!-- Teléfono corporativo-->
                             <label for="tel_id" class="control-label">TELÉFONO CELULAR</label>
@@ -78,8 +76,7 @@ HttpSession sesion = request.getSession();
                     <div class="col-md-12">
                         <div class="form-group"> <!-- Submit Insertar -->
                             <input type="submit" name="btnInsertar" value="Actualizar" class="btn btn-success btn-lg">
-                            <a href="SERVAyudante?action=refresh" class="btn btn-danger btn-lg">Atrás</a>
-                            <input type="reset" name="btnLimpiar" value="Limpiar" class="btn btn-warning btn-lg">
+                            <a href="SERVAyudante?action=refresh" class="btn btn-danger btn-lg" onclick="return confirm('¿Desea salir de la edición?')">Regresar</a>
                         </div>   
                     </div>                        
             </form>
