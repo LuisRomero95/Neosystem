@@ -10,7 +10,7 @@ HttpSession sesion = request.getSession();
     else{
         String nivel = sesion.getAttribute("nivel").toString();
         if(!nivel.equals("1")){
-            response.sendRedirect("../index.jsp");
+            response.sendRedirect("index.jsp");
         }
     }
 
@@ -34,17 +34,20 @@ HttpSession sesion = request.getSession();
             <h1>Editar Vehiculo</h1>
             <hr>            
             <form name="frmInsertarVehiculo" method="POST" action="SERVVehiculo" onsubmit="return validacion()" >
-                <div class="container">                    
+                <div class="container">                     
                     <div class="row">
+                        
                         <div class="col-md-6">
                             <div class="form-group"> <!-- Identificación-->
                                 <label for="vehiculo_id" class="control-label">ID</label>
                                 <input type="text" class="form-control" id="vehiculo_id" readonly  name="txtId"  value=<c:out value="${vehiculo.id}" /> >
-                            </div>                             
+                            </div>      
+                            
                             <div class="form-group"> 
                                 <label for="placa_id" class="control-label">PLACA</label>
                                 <input type="text" class="form-control" id="placa_id" name="txtPlaca" placeholder="PE1324"  value=<c:out value="${vehiculo.placa}" /> >
-                            </div>      
+                            </div>    
+                            
                             <div>
                                 <label for="con_id" class="control-label">CONDUCTOR</label>
                                 <br>
@@ -58,6 +61,7 @@ HttpSession sesion = request.getSession();
                                 </select>
                                 <br>
                             </div>
+                            
                             <div>
                                 <label for="ayu_id" class="control-label">AYUDANTE</label>
                                 <br>
@@ -70,7 +74,8 @@ HttpSession sesion = request.getSession();
                                     </c:forEach>
                                 </select>
                                 <br>
-                            </div>                              
+                            </div>   
+                            
                             <div class="form-group">                                
                                 <label for="listarMarca" class="control-label">MARCA</label>       
                                 <select id="listarMarca" onchange="seleccionarMarca()" class="form-control">
@@ -81,7 +86,10 @@ HttpSession sesion = request.getSession();
                                         <label for="marca_id" class="control-label">MARCA SELECCIONADA</label>
                                         <input type="text"  class="form-control" id="marca_id" readonly="" name="txtMarca" value=<c:out value="${vehiculo.marca}" /> >                        
                                     </div>                                                                                            
-                            </div>
+                            </div>                            
+                        </div>
+                                    
+                        <div class="col-md-6">     
                             <div class="form-group"> 
                                    <label for="listarAño" class="control-label">AÑO</label>       
                                    <select id="listarAño" onchange="seleccionarAño()" class="form-control">
@@ -111,9 +119,8 @@ HttpSession sesion = request.getSession();
                                     <label for="año_id" class="control-label">AÑO SELECCIONADO</label>       
                                     <input type="text" class="form-control" id="año_id" readonly="" name="txtAño" value=<c:out value="${vehiculo.año}" /> >
                                 </div>                                                                
-                            </div>                             
-                        </div>
-                        <div class="col-md-6">                            
+                            </div> 
+                                
                             <div class="form-group">                                                                
                                 <label for="listarModelo" class="control-label">MODELO</label> 
                                 <select id="listarModelo" onchange="modeloSeleccionada()"  class="form-control">
@@ -123,17 +130,21 @@ HttpSession sesion = request.getSession();
                                     <label for="modelo_año" class="control-label">MODELO SELECCIONADO</label>        
                                     <input type="text" class="form-control" id="modelo_año" readonly="" name="txtModelo" value=<c:out value="${vehiculo.modelo}" /> >                                    
                                 </div>                                                                                                
-                            </div>                            
+                            </div>       
+                                
                             <div class="form-group"> 
                                 <label for="cap_id" class="control-label">CAPACIDAD MAX</label>
                                 <input type="text" class="form-control" id="cap_id" name="txtCapmax" placeholder="5"  value=<c:out value="${vehiculo.capmax}" /> >
-                            </div>          
+                            </div> 
+                            
                             <div class="form-group">
                                 <label for="pas_id" class="control-label">PASAJEROS MAX</label>
                                 <input type="text" class="form-control" id="pas_id" name="txtPasmax" placeholder="2"  value=<c:out value="${vehiculo.pasmax}" /> >
                             </div>  
+                            
                         </div>                        
                     </div>
+                            
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group"> <!-- Submit Insertar -->

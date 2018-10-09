@@ -10,7 +10,7 @@ HttpSession sesion = request.getSession();
     else{
         String nivel = sesion.getAttribute("nivel").toString();
         if(!nivel.equals("1")){
-            response.sendRedirect("../index.jsp");
+            response.sendRedirect("index.jsp");
         }
     }
 %>

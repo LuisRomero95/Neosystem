@@ -46,7 +46,7 @@ HttpSession sesion = request.getSession();
           <li><a href="../SERVAyudante?action=refresh">Gestionar Ayudante</a></li>       
           <li><a href="../SERVConductor?action=refresh">Gestionar Conductor</a></li>
           <li><a href="../SERVVehiculo?action=refresh">Gestionar Vehiculo</a></li>
-          <li><a href="../Prueba7.jsp">Pag Prueba</a></li>
+          <li><a href="../PruebaGeo3.jsp">Pag Prueba</a></li>
           <li><a href="../DataTable.jsp">Data Table</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">

@@ -54,7 +54,7 @@
             if(nivel == 1){
                 sesion.setAttribute("nombre", request.getAttribute("nombre"));
                 sesion.setAttribute("nivel", nivel);
-                response.sendRedirect("Admin/admin.jsp");
+                response.sendRedirect("navbar.jsp");
             }
         }
         if(request.getParameter("cerrar")!=null){

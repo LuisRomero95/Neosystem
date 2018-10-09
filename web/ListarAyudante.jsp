@@ -23,21 +23,17 @@ HttpSession sesion = request.getSession();
         <script src="js/jquery-3.3.1.min.js" type="text/javascript"></script>
         <link href="css/jquery.dataTables.min.css" rel="stylesheet" type="text/css"/>
         <script src="js/jquery.dataTables.min.js" type="text/javascript"></script>
-        <script src="js/dataTable.js" type="text/javascript"></script>        
+        <script src="js/dataTable.js" type="text/javascript"></script>
+        <jsp:include page="navbar.jsp"/>        
         <title>JSP Page</title>
     </head>
         <body> 
         <div class="container">
-            <div align="right">
-                <br>
-                Bienvenido : <%= sesion.getAttribute("nombre") %>
-                <a href="index.jsp?cerrar=true">Cerrar Sesion</a>
-            </div>
                 <h1>Lista de Ayudantes</h1>
                 <hr>
                 <a class="btn btn-success btn-lg" href="SERVAyudante?action=insert">Nuevo Registro</a>
                 <a class="btn btn-primary btn-lg" href="SERVAyudante?action=refresh">Actualizar Lista</a>
-                <a class="btn btn-warning btn-lg" href="Admin/admin.jsp">Regresar al menú</a>
+                <a class="btn btn-warning btn-lg" href="navbar.jsp">Regresar al menú</a>
                 <br>
                 <br>
             <form method="POST">
@@ -86,6 +82,7 @@ HttpSession sesion = request.getSession();
                         </c:forEach>                          
                     </tbody>
                 </table>                 
-            </form>     
+            </form>
+        </div>        
     </body>
 </html>

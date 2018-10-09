@@ -10,7 +10,7 @@ HttpSession sesion = request.getSession();
     else{
         String nivel = sesion.getAttribute("nivel").toString();
         if(!nivel.equals("1")){
-            response.sendRedirect("../index.jsp");
+            response.sendRedirect("index.jsp");
         }
     }
 %>
@@ -21,23 +21,19 @@ HttpSession sesion = request.getSession();
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <script src="js/jquery-3.3.1.min.js" type="text/javascript"></script>
         <link href="css/jquery.dataTables.min.css" rel="stylesheet" type="text/css"/>
-        <script src="js/jquery.dataTables.min.js" type="text/javascript"></script>
+        <script src="js/jquery.dataTables.min.js" type="text/javascript"></script>        
         <script src="js/dataTable.js" type="text/javascript"></script>
-        <title>JSP Page</title>
+        <jsp:include page="navbar.jsp"/>
+        <title>JSP Page</title>        
     </head>    
     <body>
         <div class="container">
-            <div align="right">
-                <br>
-                Bienvenido : <%= sesion.getAttribute("nombre") %>
-                <a href="index.jsp?cerrar=true">Cerrar Sesion</a>
-            </div>
                 <h1>Lista de Usuarios</h1>
                 <hr>
                     <a class="btn btn-success btn-lg" href="SERVUsuario?action=insert">Nuevo Registro</a>
                     <a class="btn btn-info btn-lg" href="SERVUsuario?action=refresh">Actualizar Lista</a>
                     <a class="btn btn-primary btn-lg" href="SERVTipoUsuario?action=refresh">Tipo de Usuario</a>
-                    <a class="btn btn-primary btn-lg" href="Admin/admin.jsp">Regresar al menú</a>
+                    <a class="btn btn-primary btn-lg" href="navbar.jsp">Regresar al menú</a>
                 <br>
                 <br>                
             <form method="POST">
@@ -78,6 +74,7 @@ HttpSession sesion = request.getSession();
                         </c:forEach>                         
                     </tbody>                                               
                 </table>                 
-            </form>     
+            </form>
+        </div>        
     </body>
 </html>

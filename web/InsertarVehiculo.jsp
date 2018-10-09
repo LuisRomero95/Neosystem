@@ -21,7 +21,6 @@ HttpSession sesion = request.getSession();
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <script src="js/validarVehiculo.js" type="text/javascript"></script>
         <link href="css/bootstrap.css" rel="stylesheet" type="text/css"/>
-
         <title>JSP Page</title>        
     </head>
     <body>       
