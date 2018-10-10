@@ -10,8 +10,8 @@ HttpSession sesion = request.getSession();
     }
     else{
         String nivel = sesion.getAttribute("nivel").toString();
-        if(!nivel.equals("1")){
-            response.sendRedirect("index.jsp");
+        if(!(nivel.equals("1") || nivel.equals("2"))){
+            response.sendRedirect("navbar.jsp");
         }
     }
 
@@ -35,7 +35,7 @@ HttpSession sesion = request.getSession();
             </div>                
             <h1>Editar Tipo de Conductor</h1>
             <hr>     
-            <form  method="POST" action="SERVTipoUsuario" name="frmEditarTipoUsuario">
+            <form  method="POST" action="SERVTipoUsuario" name="frmEditarTipoUsuario" onsubmit="return validacion()">
             <div class="container">
                 <div class="col-md-6">
                     <div class="form-group"> <!-- Identificación-->

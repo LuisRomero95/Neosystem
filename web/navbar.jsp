@@ -11,14 +11,17 @@ HttpSession sesion = request.getSession();
             response.sendRedirect("index.jsp");
         }
     }
-
 %>
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link href="css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">        
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <script src="js/jquery-3.3.1.min.js" type="text/javascript"></script>
+        <script src="js/bootstrap.min.js" type="text/javascript"></script>
+        <link href="css/jquery.dataTables.min.css" rel="stylesheet" type="text/css"/>
+        <script src="js/jquery.dataTables.min.js" type="text/javascript"></script>        
+        <script src="js/dataTable.js" type="text/javascript"></script>        
     </head>
     <body>
         <nav class="navbar navbar-default" role="navigation">
@@ -45,6 +48,7 @@ HttpSession sesion = request.getSession();
               <li><a href="SERVConductor?action=refresh">Gestionar Conductor</a></li>
               <li><a href="SERVVehiculo?action=refresh">Gestionar Vehiculo</a></li>
               <li><a href="Geolocalizacion.jsp">Gestionar Ubicación</a></li>              
+              <li><a href="PruebaJS.jsp">Prueba</a></li>              
             </ul>
             <ul class="nav navbar-nav navbar-right">
               <li><a href="#">Bienvenido : <%= sesion.getAttribute("nombre") %></a></li>

@@ -1,17 +1,25 @@
-<%-- 
-    Document   : PruebaGeo2
-    Created on : 09/10/2018, 02:28:13 AM
-    Author     : usuario
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page session="true"%>
+
+<%
+HttpSession sesion = request.getSession();
+    if(sesion.getAttribute("nivel")==null){
+        response.sendRedirect("index.jsp");
+    }
+    else{
+        String nivel = sesion.getAttribute("nivel").toString();
+        if(!(nivel.equals("1") || nivel.equals("2"))){
+            response.sendRedirect("navbar.jsp");
+        }
+    }    
+%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyC4Pta07pYlzbICVniGLYta4MLCrUrXrHE&sensor=false&libraries=geometry&v=3.4"></script>
-        
+    <jsp:include page="navbar.jsp"/>             
    <style type="text/css">
       html { height: 100% }
       body { height: 100%; margin:0; padding:0; font-size:10px; }
@@ -23,7 +31,7 @@
   </head>
   
   <body onload="initialize()">
-    <div id="map_canvas" style="width:100%;height:100%"></div>
+    <div id="map_canvas" style="width:300px; height: 500px"></div>
     <button id="location_button_map" type="button">Iniciar geolocalizacion</button>
     <div id="log"></div>
     <script type="text/javascript">    
@@ -117,7 +125,7 @@
         mapa = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
  
         marker = new google.maps.Marker({
-          title: 'Hello mundo :D',
+          title: 'conductor 1',
           map: mapa
         });
  

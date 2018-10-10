@@ -1,4 +1,4 @@
-<%@page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page session="true"%>
 
@@ -10,19 +10,14 @@ HttpSession sesion = request.getSession();
     else{
         String nivel = sesion.getAttribute("nivel").toString();
         if(!nivel.equals("1")){
-            response.sendRedirect("index.jsp");
-        }
+            response.sendRedirect("navbar.jsp");
+        }  
     }
 %>
 <!DOCTYPE html>
 <html>
     <head>        
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">   
-        <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-        <script src="js/jquery-3.3.1.min.js" type="text/javascript"></script>
-        <link href="css/jquery.dataTables.min.css" rel="stylesheet" type="text/css"/>
-        <script src="js/jquery.dataTables.min.js" type="text/javascript"></script>        
-        <script src="js/dataTable.js" type="text/javascript"></script>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">            
         <jsp:include page="navbar.jsp"/>
         <title>JSP Page</title>        
     </head>    
@@ -32,8 +27,7 @@ HttpSession sesion = request.getSession();
                 <hr>
                     <a class="btn btn-success btn-lg" href="SERVUsuario?action=insert">Nuevo Registro</a>
                     <a class="btn btn-info btn-lg" href="SERVUsuario?action=refresh">Actualizar Lista</a>
-                    <a class="btn btn-primary btn-lg" href="SERVTipoUsuario?action=refresh">Tipo de Usuario</a>
-                    <a class="btn btn-primary btn-lg" href="navbar.jsp">Regresar al menú</a>
+                    <a class="btn btn-primary btn-lg" href="SERVTipoUsuario?action=refresh">Tipo de Usuario</a>                    
                 <br>
                 <br>                
             <form method="POST">

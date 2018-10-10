@@ -60,6 +60,6 @@
         if(request.getParameter("cerrar")!=null){
             session.invalidate();
         }
-    %>
+    %>      
     </body>
 </html>

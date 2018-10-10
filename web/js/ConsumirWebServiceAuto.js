@@ -1,86 +1,39 @@
-            function llamarMarca() {
-                if(window.XMLHttpRequest){
-                    xmlhttp = new XMLHttpRequest();
-                }else{
-                    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-                }
-                
-                xmlhttp.onreadystatechange = function (){
-                    if(xmlhttp.readyState === 4 && xmlhttp.status === 200){
-                        if(xmlhttp.responseXML !== null){
-                            ejecutarMarca(this);
-                        }
-                    }
-                };
-                xmlhttp.open("GET","https://vpic.nhtsa.dot.gov/api/vehicles/getallmakes?format=XML", true);
-                xmlhttp.send();
-            }
-            function ejecutarMarca(xmlhttp){
-                var resultado = document.getElementById("listarMarca");
-                var xmlDoc = xmlhttp.responseXML;
-                var marcas = "";
-                var vehiculo = xmlDoc.getElementsByTagName("AllVehicleMakes");
+$(document).ready(
+function()
+{
+     //Create a variable for the CarQuery object.  You can call it whatever you like.
+     var carquery = new CarQuery();
 
-                for(var i = 0; i < vehiculo.length; i++){                   
-                    marcas += "<option>" +
-                            vehiculo[i].getElementsByTagName("Make_Name")[0].childNodes[0].nodeValue +
-                            "</option>";                    
-                }
-                resultado.innerHTML = marcas;
-            }
-            
-            llamarMarca();
-            function seleccionarMarca(){
-                var e = document.getElementById("listarMarca");
-                var marca = e.options[e.selectedIndex].text;                               
-                document.getElementById("text1").value = marca;                
-            } 
-            
-            document.getElementById("listarMarca").addEventListener("click", seleccionarAño);
-            function seleccionarAño(){
-                var e = document.getElementById("listarAño");
-                var year = e.options[e.selectedIndex].text;                               
-                document.getElementById("text2").value = year;                 
-            }           
-                
-            document.getElementById("listarAño").addEventListener("click", llamarModelo);
-            function llamarModelo() {
-                var marca = document.getElementById("text1").value;
-                var año = document.getElementById("text2").value;
-                if(window.XMLHttpRequest){
-                    xmlhttp = new XMLHttpRequest();
-                }else{
-                    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-                }
-                
-                xmlhttp.onreadystatechange = function (){
-                    if(xmlhttp.readyState === 4 && xmlhttp.status === 200){
-                        if(xmlhttp.responseXML !== null){
-                            ejecutarModelo(this);
-                        }
-                    }
-                };
-                xmlhttp.open("GET","https://vpic.nhtsa.dot.gov/api/vehicles/getmodelsformakeyear/make/"+marca+"/modelyear/"+año+"?format=xml", true);
-                xmlhttp.send();
-            }
-            function ejecutarModelo(xmlhttp){
-                var resultado = document.getElementById("listarModelo");
-                var xmlDoc = xmlhttp.responseXML;
-                var marcas = "<option>--Seleccione Modelo</option>";
-                var vehiculo = xmlDoc.getElementsByTagName("MakeModels");
+     //Run the carquery init function to get things started:
+     carquery.init();
 
-                for(var i = 0; i < vehiculo.length; i++){                   
-                    marcas += "<option>" +
-                            vehiculo[i].getElementsByTagName("Model_Name")[0].childNodes[0].nodeValue +
-                            "</option>";                    
-                }
-                resultado.innerHTML = marcas;
-            }
-            
-            llamarModelo();
-            function modeloSeleccionada(){
-                var e = document.getElementById("listarModelo");
-                var marca = e.options[e.selectedIndex].text;
-                document.getElementById("text3").value = marca;
-            }            
-            
+     //Optional: Pass sold_in_us:true to the setFilters method to show only US models. 
+     carquery.setFilters( {sold_in_us:true} );
+
+     //Optional: initialize the year, make, model, and trim drop downs by providing their element IDs
+     carquery.initYearMakeModelTrim('car-years', 'car-makes', 'car-models', 'car-model-trims');
+
+     //Optional: initialize the make, model, trim lists by providing their element IDs.
+     carquery.initMakeModelTrimList('make-list', 'model-list', 'trim-list', 'trim-data-list');
+
+     //Optional: set minimum and/or maximum year options.
+     carquery.year_select_min=1990;
+     carquery.year_select_max=2019;
+     
+    //obtengo el valor que escogo en el select de años y lo coloco en un input 
+    $('#car-years').change(function (){
+        $('#añoSelecionado').val($('#car-years').val());
+    });
+    
+    $('#car-makes').change(function (){
+        $('#marcaSelecionado').val($('#car-makes').val());
+    });    
+    
+    $('#car-models').change(function (){
+        $('#modeloSelecionado').val($('#car-models').val());
+    }); 
+
+    $('#car-model-trims').change(function (){
+        $('#serieSelecionada').val($('#car-model-trims').val());
+    }); 
+});

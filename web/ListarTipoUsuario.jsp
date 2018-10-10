@@ -10,31 +10,24 @@ HttpSession sesion = request.getSession();
     else{
         String nivel = sesion.getAttribute("nivel").toString();
         if(!nivel.equals("1")){
-            response.sendRedirect("../index.jsp");
+            response.sendRedirect("navbar.jsp");
         }
     }
 %>
-
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-        <script src="js/jquery-3.3.1.min.js" type="text/javascript"></script>
-        <link href="css/jquery.dataTables.min.css" rel="stylesheet" type="text/css"/>
-        <script src="js/jquery.dataTables.min.js" type="text/javascript"></script>
-        <script src="js/dataTable.js" type="text/javascript"></script>
         <jsp:include page="navbar.jsp"/>
         <title>JSP Page</title>
     </head>
-        <body>
+    <body>
         <div class="container">
                 <h1>Lista de Tipos de Usuario</h1>
                 <hr>
                 <a class="btn btn-success btn-lg" href="SERVTipoUsuario?action=insert">Nuevo Registro</a>
                 <a class="btn btn-info btn-lg" href="SERVTipoUsuario?action=refresh">Actualizar Lista</a>
                 <a class="btn btn-primary btn-lg" href="SERVUsuario?action=refresh">Regresar a Lista de Usuarios</a>
-                <a class="btn btn-primary btn-lg" href="navbar.jsp">Regresar al Menú</a>
                 <br>
                 <br>
             <form method="POST">
