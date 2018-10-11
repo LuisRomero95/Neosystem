@@ -5,12 +5,6 @@ HttpSession sesion = request.getSession();
     if(sesion.getAttribute("nivel")==null){
         response.sendRedirect("index.jsp");
     }
-    else{
-        String nivel = sesion.getAttribute("nivel").toString();
-        if(!nivel.equals("1") ){
-            response.sendRedirect("index.jsp");
-        }
-    }
 %>
 <!DOCTYPE html>
 <html>

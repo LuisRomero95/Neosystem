@@ -12,7 +12,6 @@ HttpSession sesion = request.getSession();
             response.sendRedirect("navbar.jsp");
         }
     }
-
 %>
 <!DOCTYPE html>
 <html>
@@ -35,18 +34,21 @@ HttpSession sesion = request.getSession();
             <form name="frmInsertarAyudante" method="POST" action="SERVAyudante" onsubmit="return validacion()">
                 <div class="container">
                     <div class="col-md-6">
-                        <div class="form-group"> <!-- DNI -->
-                            <label for="dni_id" class="control-label">DNI</label>
-                            <input type="text" class="form-control" id="dni_id" name="txtDni" placeholder="73095001" onkeypress="return soloNumeros(event)" onblur="limpiaDni()" >
-                        </div>      
+     
                         <div class="form-group"> <!-- Nombre -->
                             <label for="nom_id" class="control-label">NOMBRES</label>
                             <input type="text" class="form-control" id="nom_id" name="txtNombre" placeholder="Luis Alonso" onkeypress="return soloLetras(event)">
                         </div>
+                        
                         <div class="form-group"> <!-- Apellidos -->
                             <label for="ape_id" class="control-label">APELLIDOS</label>
                             <input type="text" class="form-control" id="ape_id" name="txtApe" placeholder="Romero Costilla" onkeypress="return soloLetras(event)">
                         </div>                          
+                        
+                        <div class="form-group"> <!-- DNI -->
+                            <label for="dni_id" class="control-label">DNI</label>
+                            <input type="text" class="form-control" id="dni_id" name="txtDni" placeholder="73095001" onkeypress="return soloNumeros(event)" onblur="limpiaDni()" >
+                        </div>                         
                     </div>
                     
                     <div class="col-md-6">

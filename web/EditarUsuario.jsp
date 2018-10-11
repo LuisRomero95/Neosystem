@@ -19,8 +19,8 @@ HttpSession sesion = request.getSession();
     <head>        
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">        
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/> 
-        <script src="js/jquery-3.3.1.min.js" type="text/javascript"></script>
-        <script src="js/validarUsuario.js" type="text/javascript"></script>        
+        <script src="js/jquery-3.3.1.min.js" type="text/javascript"></script>        
+        <script src="js/validarUsuario2.js" type="text/javascript"></script>
         <title>JSP Page</title>
     </head>  
     <body>
@@ -32,7 +32,7 @@ HttpSession sesion = request.getSession();
             </div>                
             <h1>Editar Usuario</h1>
             <hr>     
-            <form  method="POST" action="SERVUsuario" name="frmEditarUsuario" onsubmit="return validacion()">
+            <form  method="POST" action="SERVUsuario" name="frmEditarUsuario" >
             <div class="container">
                 <div class="col-md-6">
                     <div class="form-group"> <!-- Identificación-->
@@ -42,7 +42,7 @@ HttpSession sesion = request.getSession();
 
                     <div class="form-group"> <!-- Nombre -->
                         <label for="nom_id" class="control-label">NOMBRE</label>
-                        <input type="text" class="form-control" id="nom_id" name="txtNombre" value="<c:out value="${usuario.nom}" />" onkeypress="return soloLetras(event)" onblur="limpia()" onkeyup="minus(this);" >
+                        <input type="text" class="form-control" id="nom_id" name="txtNombre" value="<c:out value="${usuario.nom}" />"  >
                     </div>
 
                     <div class="form-group"> <!-- Contraseña-->
@@ -53,13 +53,13 @@ HttpSession sesion = request.getSession();
                 <div class="col-md-6">
                     <div class="form-group"> <!-- Email -->
                         <label for="email_id" class="control-label">EMAIL</label>
-                        <input type="text" class="form-control" id="email_id" name="txtEmail" onkeyup="minus(this);" value="<c:out value="${usuario.email}" />">
+                        <input type="text" class="form-control" id="email_id" name="txtEmail" value="<c:out value="${usuario.email}" />">
                     </div>
                     <div>
                         <label for="listarNivel" class="control-label">NIVEL</label>
                         <br>
-                        <select name="txtNivel" id="listarNivel" class="form-control" onchange="nivelSeleccionado()">
-                            <option value="">--Seleccionar--</option>
+                        <select name="txtNivel" id="listarNivel" class="form-control" >
+                            <option value="" selected="">--Seleccionar--</option>
                             <c:forEach var="tu" items="${tipousuario}" >
                                 <option value="${tu.id}">
                                     <c:out value="${tu.nom}" />
@@ -77,7 +77,7 @@ HttpSession sesion = request.getSession();
                 <br>
                 <div class="col-md-12">
                     <div class="form-group"> <!-- Submit Insertar -->
-                        <input type="submit" name="btnInsertar" value="Actualizar" class="btn btn-success btn-lg" style="margin-right: 10px">
+                        <input type="submit" name="btnInsertar" value="Actualizar" id="insertar" class="btn btn-success btn-lg" style="margin-right: 10px">                        	
                         <a href="SERVUsuario?action=refresh"  class="btn btn-danger btn-lg" onclick="return confirm('¿Desea salir de la edición?')">Regresar</a>
                     </div>                       
                 </div>

@@ -100,9 +100,10 @@ public class SERVVehiculo extends HttpServlet {
             String placa = request.getParameter("txtPlaca");
             String conductor = request.getParameter("txtCon");
             String ayudante = request.getParameter("txtAyu");
-            String marca = request.getParameter("txtMarca");
             String año = request.getParameter("txtAño");
+            String marca = request.getParameter("txtMarca");            
             String modelo = request.getParameter("txtModelo");
+            String serie = request.getParameter("txtSerie");
             int Capmax = Integer.parseInt(request.getParameter("txtCapmax"));
             int Pasmax = Integer.parseInt(request.getParameter("txtPasmax"));            
             String id =request.getParameter("txtId");
@@ -112,9 +113,10 @@ public class SERVVehiculo extends HttpServlet {
             veh.setPlaca(placa);
             veh.setConductor(conductor);
             veh.setAyudante(ayudante);
+            veh.setAño(año);            
             veh.setMarca(marca);
-            veh.setAño(año);
             veh.setModelo(modelo);            
+            veh.setSerie(serie);            
             veh.setCapmax(Capmax);
             veh.setPasmax(Pasmax);  
                 

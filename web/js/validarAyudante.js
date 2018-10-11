@@ -37,7 +37,7 @@
           alert('[ERROR] El email no puede quedar vacío');
           return false;
         }               
-        else if (!(/^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i.test(email))) {
+        else if (!(/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test(email))) {
         // Si no se cumple la condicion...
         alert('[ERROR] Ingrese un email con formato adecuado');
         return false;

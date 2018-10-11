@@ -20,7 +20,7 @@ HttpSession sesion = request.getSession();
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <script src="js/jquery-3.3.1.min.js" type="text/javascript"></script>
-        <script src="js/validarUsuario.js" type="text/javascript"></script>
+        <script src="js/validarUsuario2.js" type="text/javascript"></script>
         <title>JSP Page</title>       
     </head>        
     <body>
@@ -32,15 +32,14 @@ HttpSession sesion = request.getSession();
             </div>                
             <h1>Ingresar Usuarios</h1>
             <hr>
-            <form name="frmInsertarUsuario" method="POST" action="SERVUsuario" onsubmit="return validacion()" >
+            <form name="frmInsertarUsuario" method="POST" action="SERVUsuario" >
             <div class="container">
                 
                 <div class="col-md-6">
                     
                     <div class="form-group"> <!-- Nombre -->
                         <label for="nom_id" class="control-label">NOMBRE</label>
-                        <input type="text" class="form-control" id="nom_id" name="txtNombre" placeholder="luis" onkeypress="return soloLetras(event)" onblur="limpia()" onKeyUp="minus(this)">
-                        <span id="comprobar_mensaje"></span>
+                        <input type="text" class="form-control" id="nom_id" name="txtNombre" placeholder="luis">
                     </div> 
 
                     <div class="form-group"> <!-- Contraseña -->
@@ -50,7 +49,7 @@ HttpSession sesion = request.getSession();
                     
                     <div class="form-group"> <!-- Email -->
                         <label for="email_id" class="control-label">EMAIL</label>
-                        <input type="text" class="form-control" id="email_id" name="txtEmail" onkeyup="minus(this);" placeholder="1510647@utp.edu.pe">
+                        <input type="text" class="form-control" id="email_id" name="txtEmail" placeholder="1510647@utp.edu.pe">
                     </div>                      
                 </div>                                              
                 
@@ -58,8 +57,8 @@ HttpSession sesion = request.getSession();
                     <div>
                         <label for="listarNivel" class="control-label">NIVEL</label>
                         <br>
-                        <select name="txtNivel" id="listarNivel" class="form-control" onchange="nivelSeleccionado()">
-                            <option value="">--Seleccionar--</option>
+                        <select name="txtNivel" id="listarNivel" class="form-control">
+                            <option value="" selected="">Seleccione nivel...</option>
                             <c:forEach var="tu" items="${usuario}" >
                                 <option value="${tu.id}">
                                     ${tu.nom}
@@ -69,14 +68,14 @@ HttpSession sesion = request.getSession();
                         <br>                        
                         <div class="form-group">
                             <label for="nivel_id" class="control-label">NIVEL SELECCIONADO</label>
-                            <input type="text"  class="form-control" id="nivel_id"  readonly="">                                                      
+                            <input type="text"  class="form-control" id="nivel_id" readonly="">
                         </div>                           
                     </div>                   
                 </div>
                 <br>
                 <div class="col-md-12">
                     <div class="form-group"> <!-- Submit Insertar -->
-                        <input type="submit" name="btnInsertar" value="Insertar" class="btn btn-success btn-lg" >
+                        <input type="submit" name="btnInsertar" value="Insertar" id="insertar" class="btn btn-success btn-lg" >
                         <a href="SERVUsuario?action=refresh"  class="btn btn-danger btn-lg" onclick="return confirm('¿Desea salir del registro?')">Regresar</a>
                         <input type="reset" name="btnLimpiar" value="Limpiar" class="btn btn-warning btn-lg" onclick="return confirm('¿Desea limpiar los datos a registrar?')">
                     </div>                    

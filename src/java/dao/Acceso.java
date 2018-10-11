@@ -23,7 +23,7 @@ public class Acceso extends Conexion{
             st = (PreparedStatement) conexion.prepareStatement(sql);
             rs = st.executeQuery();
             while(rs.next()){
-                nivel =rs.getInt(1);
+                nivel =rs.getInt("id_nivel");
             }
             this.cerrar();
             rs.close();

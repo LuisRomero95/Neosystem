@@ -7,23 +7,25 @@ public class Vehiculo {
     private String placa;
     private String conductor;
     private String ayudante;
-    private String marca;
     private String año;
+    private String marca;    
     private String modelo;
+    private String serie;    
     private int capmax;
     private int pasmax;
 
     public Vehiculo() {
     }
 
-    public Vehiculo(int id, String placa, String conductor, String ayudante, String marca, String año, String modelo, int capmax, int pasmax) {
+    public Vehiculo(int id, String placa, String conductor, String ayudante, String año, String marca, String modelo, String serie, int capmax, int pasmax) {
         this.id = id;
         this.placa = placa;
         this.conductor = conductor;
         this.ayudante = ayudante;
-        this.marca = marca;
         this.año = año;
+        this.marca = marca;
         this.modelo = modelo;
+        this.serie = serie;
         this.capmax = capmax;
         this.pasmax = pasmax;
     }
@@ -60,14 +62,6 @@ public class Vehiculo {
         this.ayudante = ayudante;
     }
 
-    public String getMarca() {
-        return marca;
-    }
-
-    public void setMarca(String marca) {
-        this.marca = marca;
-    }
-
     public String getAño() {
         return año;
     }
@@ -76,12 +70,28 @@ public class Vehiculo {
         this.año = año;
     }
 
+    public String getMarca() {
+        return marca;
+    }
+
+    public void setMarca(String marca) {
+        this.marca = marca;
+    }
+
     public String getModelo() {
         return modelo;
     }
 
     public void setModelo(String modelo) {
         this.modelo = modelo;
+    }
+
+    public String getSerie() {
+        return serie;
+    }
+
+    public void setSerie(String serie) {
+        this.serie = serie;
     }
 
     public int getCapmax() {
@@ -99,6 +109,7 @@ public class Vehiculo {
     public void setPasmax(int pasmax) {
         this.pasmax = pasmax;
     }
-    
+
+   
 }
 

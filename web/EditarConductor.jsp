@@ -82,7 +82,7 @@ HttpSession sesion = request.getSession();
                         <label for="listarNivel" class="control-label">TIPO</label>
                         <br>
                         <select name="txtTipo" id="listarNivel" class="form-control" onchange="nivelSeleccionado()">
-                            <option value="">--Seleccionar--</option>
+                            <option value="">Seleccione nivel...</option>
                             <c:forEach var="tc" items="${tipoconductor}" >
                                 <option value="${tc.id}">
                                     ${tc.nom}

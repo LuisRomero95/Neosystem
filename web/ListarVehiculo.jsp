@@ -34,11 +34,12 @@ HttpSession sesion = request.getSession();
                             <th class="text-center">PLACA</th>                                    
                             <th class="text-center">CONDUCTOR</th>      
                             <th class="text-center">AYUDANTE</th>      
+                            <th class="text-center">AÑO</th>                            
                             <th class="text-center">MARCA</th>      
-                            <th class="text-center">AÑO</th>
                             <th class="text-center">MODELO</th>
-                            <th class="text-center">CAPACIDAD MAX</th>
-                            <th class="text-center">PASAJEROS MAX</th>
+                            <th class="text-center">SERIE</th>                            
+                            <th class="text-center">CAPACIDAD</th>
+                            <th class="text-center">PASAJEROS</th>
                             <th class="text-center">ACCIONES</th>
                         </tr>                        
                     </thead>
@@ -58,14 +59,17 @@ HttpSession sesion = request.getSession();
                                      <c:out value="${vehiculo.ayudante}"/>
                                  </td>
                                  <td>
-                                     <c:out value="${vehiculo.marca}"/>
-                                 </td>
-                                 <td>
                                      <c:out value="${vehiculo.año}"/>
+                                 </td>                                 
+                                 <td>
+                                     <c:out value="${vehiculo.marca}"/>
                                  </td>
                                  <td>
                                      <c:out value="${vehiculo.modelo}"/>
                                  </td>
+                                 <td>
+                                     <c:out value="${vehiculo.serie}"/>
+                                 </td>                                 
                                  <td>
                                      <c:out value="${vehiculo.capmax}"/>
                                  </td>

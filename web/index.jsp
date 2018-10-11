@@ -51,7 +51,7 @@
         int nivel = 0;
         if(request.getAttribute("nivel")!=null){
             nivel = (Integer)request.getAttribute("nivel");
-            if(nivel == 1){
+            if(!(nivel == 0)){
                 sesion.setAttribute("nombre", request.getAttribute("nombre"));
                 sesion.setAttribute("nivel", nivel);
                 response.sendRedirect("navbar.jsp");

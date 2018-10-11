@@ -32,9 +32,9 @@ HttpSession sesion = request.getSession();
                             <th class="text-center">NOMBRES</th>
                             <th class="text-center">APELLIDOS</th>
                             <th class="text-center">DNI</th>
-                            <th class="text-center">DIRECCIÓN</th>
-                            <th class="text-center">TELÉFONO</th>
                             <th class="text-center">EMAIL</th>
+                            <th class="text-center">TELÉFONO</th>
+                            <th class="text-center">DIRECCIÓN</th>
                             <th class="text-center">ACCIONES</th>
                         </tr>                        
                     </thead>
@@ -54,13 +54,13 @@ HttpSession sesion = request.getSession();
                                         <c:out value="${ayudante.dni}"/>
                                 </td>                                
                                 <td>
-                                        <c:out value="${ayudante.direc}"/>
+                                        <c:out value="${ayudante.email}"/>
                                 </td>                                     
                                 <td>
                                         <c:out value="${ayudante.tel}"/>
                                 </td>                                                         
                                 <td>
-                                        <c:out value="${ayudante.email}"/>
+                                        <c:out value="${ayudante.direc}"/>
                                 </td>                                                               
                                 <td class="text-center">
                                     <a href="SERVAyudante?action=edit&id=<c:out value="${ayudante.id}"/>"   class="btn btn-warning btn-sm">Editar</a>   

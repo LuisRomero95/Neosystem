@@ -33,7 +33,8 @@ function()
         $('#modeloSelecionado').val($('#car-models').val());
     }); 
 
-    $('#car-model-trims').change(function (){
-        $('#serieSelecionada').val($('#car-model-trims').val());
+    $('#car-model-trims').change(function (){        
+        var serie = $('#car-model-trims option:selected').text();
+        $('#serieSelecionada').val(serie);
     }); 
 });

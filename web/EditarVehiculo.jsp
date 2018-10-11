@@ -9,240 +9,157 @@ HttpSession sesion = request.getSession();
     }
     else{
         String nivel = sesion.getAttribute("nivel").toString();
-        if(!nivel.equals("1")){
-            response.sendRedirect("index.jsp");
+        if(!(nivel.equals("1") || nivel.equals("2"))){
+            response.sendRedirect("navbar.jsp");
         }
     }
-
 %>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <script src="js/jquery-3.3.1.min.js" type="text/javascript"></script>
+        <script src="js/ConsumirWebServiceAuto.js" type="text/javascript"></script>      
+        <script src="js/bootstrap.min.js" type="text/javascript"></script>
         <script src="js/validarVehiculo.js" type="text/javascript"></script>
-        <link href="css/bootstrap.css" rel="stylesheet" type="text/css"/>
-
-        <title>JSP Page</title>        
+        <script type="text/javascript" src="http://www.carqueryapi.com/js/jquery.min.js"></script>
+        <script type="text/javascript" src="http://www.carqueryapi.com/js/carquery.0.3.4.js"></script>               
+        <title>JSP Page</title>
     </head>
-    <body>       
-        <div class="container" >
+    <body>
+        <div class="container">
             <div align="right">
                 <br>                
                 Bienvenido : <%= sesion.getAttribute("nombre") %>
                 <a href="index.jsp?cerrar=true">Cerrar Sesion</a>
             </div>
-            <h1>Editar Vehiculo</h1>
-            <hr>            
-            <form name="frmInsertarVehiculo" method="POST" action="SERVVehiculo" onsubmit="return validacion()" >
-                <div class="container">                     
+            <h1>Insertar Vehiculo</h1>
+            <hr>                 
+            <form name="frmInsertarVehiculo" method="POST" action="SERVVehiculo"  onsubmit="return validacion()">
+                <div class="container">
+                    
                     <div class="row">
                         
                         <div class="col-md-6">
                             <div class="form-group"> <!-- Identificación-->
                                 <label for="vehiculo_id" class="control-label">ID</label>
                                 <input type="text" class="form-control" id="vehiculo_id" readonly  name="txtId"  value=<c:out value="${vehiculo.id}" /> >
-                            </div>      
+                            </div>                              
                             
                             <div class="form-group"> 
                                 <label for="placa_id" class="control-label">PLACA</label>
-                                <input type="text" class="form-control" id="placa_id" name="txtPlaca" placeholder="PE1324"  value=<c:out value="${vehiculo.placa}" /> >
-                            </div>    
-                            
-                            <div>
+                                <input type="text" class="form-control" id="placa_id" name="txtPlaca" value=<c:out value="${vehiculo.placa}" /> >
+                                <span class="help-block"></span>
+                            </div>   
+                                
+                            <div class="form-group">
                                 <label for="con_id" class="control-label">CONDUCTOR</label>
                                 <br>
                                 <select name="txtCon" id="con_id" class="form-control">
-                                    <option value="">--Seleccione Conductor--</option>
+                                    <option value="" selected>Seleccione Conductor...</option>
                                     <c:forEach var="con" items="${conductor}" >
                                         <option value="${con.id}">
                                             ${con.nom}
                                         </option>
                                     </c:forEach>
-                                </select>
-                                <br>
+                                </select>                                
                             </div>
-                            
-                            <div>
+                                        
+                            <div class="form-group">
+                                <label for="con_nom" class="control-label">CONDUCTOR SELECCIONADO</label>
+                                <input type="text"  class="form-control" id="con_nom" readonly="" value=<c:out value="${vehiculo.conductor}" /> >                                                      
+                            </div>                               
+                                                            
+                            <div class="form-group">
                                 <label for="ayu_id" class="control-label">AYUDANTE</label>
                                 <br>
                                 <select name="txtAyu" id="ayu_id" class="form-control">
-                                    <option value="">--Seleccione Ayudante--</option>
+                                    <option value="" selected>Seleccione Ayudante...</option>
                                     <c:forEach var="ayu" items="${ayudante}" >
                                         <option value="${ayu.id}">
                                             ${ayu.nom}
                                         </option>
                                     </c:forEach>
                                 </select>
-                                <br>
                             </div>   
                             
-                            <div class="form-group">                                
-                                <label for="listarMarca" class="control-label">MARCA</label>       
-                                <select id="listarMarca" onchange="seleccionarMarca()" class="form-control">
-                                    <option>  Cargando marca...</option>
-                                </select>
-                                <br>                                                             
-                                    <div>
-                                        <label for="marca_id" class="control-label">MARCA SELECCIONADA</label>
-                                        <input type="text"  class="form-control" id="marca_id" readonly="" name="txtMarca" value=<c:out value="${vehiculo.marca}" /> >                        
-                                    </div>                                                                                            
-                            </div>                            
-                        </div>
-                                    
-                        <div class="col-md-6">     
-                            <div class="form-group"> 
-                                   <label for="listarAño" class="control-label">AÑO</label>       
-                                   <select id="listarAño" onchange="seleccionarAño()" class="form-control">
-                                       <option>--Seleccione un año--</option>
-                                       <option>2000</option>
-                                       <option>2001</option>
-                                       <option>2002</option>
-                                       <option>2003</option>
-                                       <option>2004</option>
-                                       <option>2005</option>
-                                       <option>2006</option>
-                                       <option>2007</option>
-                                       <option>2008</option>                                       
-                                       <option>2009</option>                                       
-                                       <option>2010</option>
-                                       <option>2011</option>
-                                       <option>2012</option>
-                                       <option>2013</option>
-                                       <option>2014</option>
-                                       <option>2015</option>
-                                       <option>2016</option>
-                                       <option>2017</option>
-                                       <option>2018</option>
-                                   </select>
-                                <br>          
-                                <div>
-                                    <label for="año_id" class="control-label">AÑO SELECCIONADO</label>       
-                                    <input type="text" class="form-control" id="año_id" readonly="" name="txtAño" value=<c:out value="${vehiculo.año}" /> >
-                                </div>                                                                
-                            </div> 
-                                
-                            <div class="form-group">                                                                
-                                <label for="listarModelo" class="control-label">MODELO</label> 
-                                <select id="listarModelo" onchange="modeloSeleccionada()"  class="form-control">
-                                </select>
+                            <div class="form-group">
+                                <label for="ayu_nom" class="control-label">CONDUCTOR SELECCIONADO</label>
+                                <input type="text"  class="form-control" id="ayu_nom" readonly="" value=<c:out value="${vehiculo.ayudante}" /> >                                                      
+                            </div>                               
+                                        
+                            <div class="form-group">
+                                <label for="car-years" class="control-label">AÑO</label> 
+                                <select name="Año" id="car-years" class="form-control"></select>
                                 <br>
-                                <div>
-                                    <label for="modelo_año" class="control-label">MODELO SELECCIONADO</label>        
-                                    <input type="text" class="form-control" id="modelo_año" readonly="" name="txtModelo" value=<c:out value="${vehiculo.modelo}" /> >                                    
-                                </div>                                                                                                
-                            </div>       
+                                <div>                                    
+                                    <label for="añoSelecionado" class="control-label">AÑO SELECCIONADO</label>       
+                                    <input type="text" id="añoSelecionado" name="txtAño" readonly="" class="form-control"  value=<c:out value="${vehiculo.año}" /> >
+                                </div>
+                            </div>                                                                                                          
+                           
+                        </div>                        
+                                                
+                        <div class="col-md-6">
+                            
+                            <div class="form-group">
+                                <label for="car-makes" class="control-label">MARCA</label> 
+                                <select name="Marca" id="car-makes" class="form-control"></select>
+                                <br>
+                                <div>                                    
+                                    <label for="marcaSelecionado" class="control-label">MARCA SELECCIONADA</label>       
+                                    <input type="text" id="marcaSelecionado" name="txtMarca" readonly="" class="form-control"  value=<c:out value="${vehiculo.marca}" /> >                                                                    
+                                </div>
+                            </div>   
                                 
+                            <div class="form-group">
+                                <label for="car-models" class="control-label">MODELO</label> 
+                                <select name="Modelo" id="car-models" class="form-control"></select>
+                                <br>
+                                <div>                                    
+                                    <label for="modeloSelecionado" class="control-label">MODELO SELECCIONADA</label>       
+                                    <input type="text" id="modeloSelecionado" name="txtModelo" readonly="" class="form-control"  value=<c:out value="${vehiculo.modelo}" /> >                                                               
+                                </div>
+                            </div>  
+                            
+                            <div class="form-group">
+                                <label for="car-model-trims" class="control-label">SERIE</label> 
+                                <select name="Modelo" id="car-model-trims" class="form-control"></select>
+                                <br>
+                                <div>                                    
+                                    <label for="serieSelecionada" class="control-label">SERIE SELECCIONADA</label>       
+                                    <input type="text" id="serieSelecionada" name="txtSerie" readonly="" class="form-control"  value=<c:out value="${vehiculo.serie}" /> >
+                                </div>
+                            </div>    
+                            
                             <div class="form-group"> 
                                 <label for="cap_id" class="control-label">CAPACIDAD MAX</label>
-                                <input type="text" class="form-control" id="cap_id" name="txtCapmax" placeholder="5"  value=<c:out value="${vehiculo.capmax}" /> >
-                            </div> 
+                                <input type="text" class="form-control" id="cap_id" name="txtCapmax"  value=<c:out value="${vehiculo.capmax}" /> >
+                            </div>  
                             
                             <div class="form-group">
                                 <label for="pas_id" class="control-label">PASAJEROS MAX</label>
-                                <input type="text" class="form-control" id="pas_id" name="txtPasmax" placeholder="2"  value=<c:out value="${vehiculo.pasmax}" /> >
-                            </div>  
+                                <input type="text" class="form-control" id="pas_id" name="txtPasmax" value=<c:out value="${vehiculo.pasmax}" /> >
+                            </div>                              
                             
-                        </div>                        
+                        </div>
+                        
                     </div>
-                            
+                    
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group"> <!-- Submit Insertar -->
-                                <input type="submit" name="btnInsertar" value="Actualizar" class="btn btn-success btn-lg">
-                                <a href="SERVVehiculo?action=refresh"  class="btn btn-danger btn-lg" onclick="return confirm('¿Desea salir de la edición?')">Regresar</a>
+                                <input type="submit" id="insertar" name="btnInsertar" value="Actualizar" class="btn btn-success btn-lg">
+                                <a href="SERVVehiculo?action=refresh"  class="btn btn-danger btn-lg" onclick="return confirm('¿Desea salir del registro?')">Regresar</a>
+                                <input type="reset" name="btnLimpiar" value="Limpiar" class="btn btn-warning btn-lg" onclick="return confirm('¿Desea limpiar los datos a registrar?')">
                             </div>                             
-                        </div>                    
-                    </div>                        
+                        </div>                          
+                    </div>
+                    
                 </div>
-            </form>           
+            </form>
         </div>
-        <script type="text/javascript">            
-            function llamarMarca() {
-                if(window.XMLHttpRequest){
-                    xmlhttp = new XMLHttpRequest();
-                }else{
-                    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-                }
-                
-                xmlhttp.onreadystatechange = function (){
-                    if(xmlhttp.readyState === 4 && xmlhttp.status === 200){
-                        if(xmlhttp.responseXML !== null){
-                            ejecutarMarca(this);
-                        }
-                    }
-                };
-                xmlhttp.open("GET","https://vpic.nhtsa.dot.gov/api/vehicles/getallmakes?format=XML", true);
-                xmlhttp.send();
-            }
-            function ejecutarMarca(xmlhttp){
-                var resultado = document.getElementById("listarMarca");
-                var xmlDoc = xmlhttp.responseXML;
-                var marcas = "";
-                var vehiculo = xmlDoc.getElementsByTagName("AllVehicleMakes");
 
-                for(var i = 0; i < vehiculo.length; i++){                   
-                    marcas += "<option>" +
-                            vehiculo[i].getElementsByTagName("Make_Name")[0].childNodes[0].nodeValue +
-                            "</option>";                    
-                }
-                resultado.innerHTML = marcas;
-            }
-            
-            llamarMarca();
-            function seleccionarMarca(){
-                var e = document.getElementById("listarMarca");
-                var marca = e.options[e.selectedIndex].text;                               
-                document.getElementById("marca_id").value = marca;                
-            } 
-            
-            document.getElementById("listarMarca").addEventListener("click", seleccionarAño);
-            function seleccionarAño(){
-                var e = document.getElementById("listarAño");
-                var year = e.options[e.selectedIndex].text;                               
-                document.getElementById("año_id").value = year;                 
-            }           
-                
-            document.getElementById("listarAño").addEventListener("click", llamarModelo);
-            function llamarModelo() {
-                var marca = document.getElementById("marca_id").value;
-                var año = document.getElementById("año_id").value;
-                if(window.XMLHttpRequest){
-                    xmlhttp = new XMLHttpRequest();
-                }else{
-                    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-                }
-                
-                xmlhttp.onreadystatechange = function (){
-                    if(xmlhttp.readyState === 4 && xmlhttp.status === 200){
-                        if(xmlhttp.responseXML !== null){
-                            ejecutarModelo(this);
-                        }
-                    }
-                };
-                xmlhttp.open("GET","https://vpic.nhtsa.dot.gov/api/vehicles/getmodelsformakeyear/make/"+marca+"/modelyear/"+año+"?format=xml", true);
-                xmlhttp.send();
-            }
-            function ejecutarModelo(xmlhttp){
-                var resultado = document.getElementById("listarModelo");
-                var xmlDoc = xmlhttp.responseXML;
-                var marcas = "<option>--Seleccione Modelo</option>";
-                var vehiculo = xmlDoc.getElementsByTagName("MakeModels");
-
-                for(var i = 0; i < vehiculo.length; i++){                   
-                    marcas += "<option>" +
-                            vehiculo[i].getElementsByTagName("Model_Name")[0].childNodes[0].nodeValue +
-                            "</option>";                    
-                }
-                resultado.innerHTML = marcas;
-            }
-            
-            llamarModelo();
-            function modeloSeleccionada(){
-                var e = document.getElementById("listarModelo");
-                var modelo = e.options[e.selectedIndex].text;
-                document.getElementById("modelo_año").value = modelo;
-            }            
-            
-        </script>    
     </body>
 </html>

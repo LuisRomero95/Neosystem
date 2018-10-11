@@ -117,8 +117,8 @@ public class SERVUsuario extends HttpServlet {
                      }
                 } else {                    
                     try {
-                        u.setId(Integer.parseInt(id));
-                        usuariodao.modificar(u);
+                            u.setId(Integer.parseInt(id));
+                            usuariodao.modificar(u);                  
                     } catch (Exception ex) {
                         Logger.getLogger(SERVUsuario.class.getName()).log(Level.SEVERE, null, ex);                        
                     }

@@ -14,18 +14,19 @@ public class VehiculoDAO extends Conexion implements DAO{
     public void insertar(Object obj) throws Exception{
         Vehiculo veh = (Vehiculo) obj;
         PreparedStatement pst;
-        String sql="INSERT INTO vehiculos (placa, id_con, id_ayu, marca, año, modelo, cap_max, pas_max) VALUES(?,?,?,?,?,?,?,?)";
+        String sql="INSERT INTO vehiculos (placa, id_con, id_ayu, año, marca, modelo, serie, cap_max, pas_max) VALUES(?,?,?,?,?,?,?,?,?)";
         try {
             this.conectar();           
             pst = conexion.prepareStatement(sql);
             pst.setString(1, veh.getPlaca());
             pst.setString(2, veh.getConductor());
             pst.setString(3, veh.getAyudante());
-            pst.setString(4, veh.getMarca());
-            pst.setString(5, veh.getAño());
+            pst.setString(4, veh.getAño());
+            pst.setString(5, veh.getMarca());            
             pst.setString(6, veh.getModelo());
-            pst.setInt(7, veh.getCapmax());
-            pst.setInt(8, veh.getPasmax());
+            pst.setString(7, veh.getSerie());
+            pst.setInt(8, veh.getCapmax());
+            pst.setInt(9, veh.getPasmax());
             pst.executeUpdate();            
                                
         } catch ( SQLException e) {
@@ -58,19 +59,20 @@ public class VehiculoDAO extends Conexion implements DAO{
     public void modificar(Object obj) throws Exception{
         Vehiculo veh = (Vehiculo) obj;
         PreparedStatement pst;
-        String sql="UPDATE vehiculos SET placa=?, id_con=?, id_ayu=?, marca=?, año=?, modelo=?, cap_max=?, pas_max=? WHERE id=?";
+        String sql="UPDATE vehiculos SET placa=?, id_con=?, id_ayu=?, año=?, marca=?, modelo=?, serie=?, cap_max=?, pas_max=? WHERE id=?";
         try {
             this.conectar();
             pst = conexion.prepareStatement(sql);
             pst.setString(1, veh.getPlaca());
             pst.setString(2, veh.getConductor());
             pst.setString(3, veh.getAyudante());
-            pst.setString(4, veh.getMarca());
-            pst.setString(5, veh.getAño());
+            pst.setString(4, veh.getAño());
+            pst.setString(5, veh.getMarca());            
             pst.setString(6, veh.getModelo());
-            pst.setInt(7, veh.getCapmax());
-            pst.setInt(8, veh.getPasmax());
-            pst.setInt(9, veh.getId());
+            pst.setString(7, veh.getSerie());
+            pst.setInt(8, veh.getCapmax());
+            pst.setInt(9, veh.getPasmax());
+            pst.setInt(10, veh.getId());
             pst.executeUpdate(); 
             
         } catch ( SQLException e) {
@@ -85,7 +87,7 @@ public class VehiculoDAO extends Conexion implements DAO{
           Vehiculo c = new Vehiculo();
            PreparedStatement pst;
            ResultSet res;           
-           String sql = "SELECT * FROM vehiculos WHERE id =?";
+           String sql = "SELECT v.id, v.placa, c.nom, a.nom, v.año, v.marca, v.modelo, v.serie, v.cap_max, v.pas_max FROM vehiculos v, conductores c, ayudantes a WHERE v.id_con = c.id && v.id_ayu =a.id AND v.id=? AND v.estado = 1";
            try {
                this.conectar();
                pst = conexion.prepareStatement(sql);
@@ -93,15 +95,16 @@ public class VehiculoDAO extends Conexion implements DAO{
                
                res = pst.executeQuery();                                    
                 if (res.next()) {
-                    c.setPlaca(res.getString("placa"));
-                    c.setConductor(res.getString("id_con"));            
-                    c.setAyudante(res.getString("id_ayu"));
-                    c.setMarca(res.getString("marca"));
-                    c.setAño(res.getString("año"));
-                    c.setModelo(res.getString("modelo"));                    
-                    c.setCapmax(res.getInt("cap_max"));
-                    c.setPasmax(res.getInt("pas_max"));
-                    c.setId(res.getInt("id"));
+                    c.setPlaca(res.getString("v.placa"));
+                    c.setConductor(res.getString("c.nom"));            
+                    c.setAyudante(res.getString("a.nom"));
+                    c.setAño(res.getString("v.año"));
+                    c.setMarca(res.getString("v.marca"));                    
+                    c.setModelo(res.getString("v.modelo"));                    
+                    c.setSerie(res.getString("v.serie"));
+                    c.setCapmax(res.getInt("v.cap_max"));
+                    c.setPasmax(res.getInt("v.pas_max"));
+                    c.setId(res.getInt("v.id"));
                 }                   
      
                 } catch ( SQLException e) {
@@ -117,7 +120,7 @@ public class VehiculoDAO extends Conexion implements DAO{
         List<Vehiculo> datos = new ArrayList<>();
         PreparedStatement pst;
         ResultSet rs;
-        String sql = "SELECT v.id, v.placa, c.nom, a.nom, v.marca, v.año, v.modelo, v.cap_max, v.pas_max FROM vehiculos v, conductores c, ayudantes a WHERE v.id_con = c.id && v.id_ayu =a.id AND v.estado = 1";
+        String sql = "SELECT v.id, v.placa, c.nom, a.nom, v.año, v.marca, v.modelo, v.serie, v.cap_max, v.pas_max FROM vehiculos v, conductores c, ayudantes a WHERE v.id_con = c.id && v.id_ayu =a.id AND v.estado = 1";
         //String sql = "SELECT * FROM vehiculos WHERE estado = 1";
         try {
             this.conectar();
@@ -129,9 +132,10 @@ public class VehiculoDAO extends Conexion implements DAO{
                         rs.getString("v.placa"),
                         rs.getString("c.nom"),
                         rs.getString("a.nom"),
-                        rs.getString("v.marca"),
                         rs.getString("v.año"),
+                        rs.getString("v.marca"),                        
                         rs.getString("v.modelo"),
+                        rs.getString("v.serie"),
                         rs.getInt("v.cap_max"),
                         rs.getInt("v.pas_max"))
                 );
