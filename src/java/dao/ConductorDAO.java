@@ -160,6 +160,20 @@ public class ConductorDAO extends Conexion implements DAO{
          return res.next();
     }       
 
+    public boolean ConsultarLicencia(String licencia) throws SQLException{
+        PreparedStatement pst;
+        ResultSet res = null;
+        String sql = "SELECT * FROM conductores WHERE lic='"+licencia+"'";
+
+        try {
+            this.conectar();
+            pst = conexion.prepareStatement(sql);
+            res = pst.executeQuery();
+        } catch (Exception e) {
+        }
+         return res.next();
+    }           
+    
     public boolean ConsultarEmail(String email) throws SQLException{
         PreparedStatement pst;
         ResultSet res = null;

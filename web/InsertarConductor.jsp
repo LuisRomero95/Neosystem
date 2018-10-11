@@ -68,7 +68,7 @@ HttpSession sesion = request.getSession();
 
                     <div class="form-group"> <!-- Telefono Corporativo-->
                         <label for="tel_id" class="control-label">TELÉFONO CELULAR</label>
-                        <input type="text" class="form-control" id="tel_id" name="txtTel" placeholder="3257618" >
+                        <input type="text" class="form-control" id="tel_id" name="txtTel" placeholder="979427701" >
                     </div>
 
                     <div class="form-group"> <!-- Dirección-->

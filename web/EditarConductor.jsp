@@ -1,5 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page session="true"%>
 
 <%
@@ -20,6 +20,7 @@ HttpSession sesion = request.getSession();
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <script src="js/jquery-3.3.1.min.js" type="text/javascript"></script>
         <script src="js/validarConductor.js" type="text/javascript"></script>
         <title>JSP Page</title>
     </head>
@@ -82,7 +83,7 @@ HttpSession sesion = request.getSession();
                         <label for="listarNivel" class="control-label">TIPO</label>
                         <br>
                         <select name="txtTipo" id="listarNivel" class="form-control" onchange="nivelSeleccionado()">
-                            <option value="">Seleccione nivel...</option>
+                            <option value="" selected="">Seleccione nivel...</option>
                             <c:forEach var="tc" items="${tipoconductor}" >
                                 <option value="${tc.id}">
                                     ${tc.nom}
@@ -99,7 +100,7 @@ HttpSession sesion = request.getSession();
                 
                 <div class="col-md-12">
                     <div class="form-group"> <!-- Submit Insertar -->
-                        <input type="submit" name="btnInsertar" value="Actualizar" class="btn btn-success btn-lg">
+                        <input type="submit" name="btnInsertar" value="Actualizar" id="editar" class="btn btn-success btn-lg">
                         <a href="SERVConductor?action=refresh"  class="btn btn-danger btn-lg" onclick="return confirm('¿Desea salir de la edición?')">Regresar</a>
                     </div>                      
                 </div>                       

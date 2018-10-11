@@ -109,8 +109,11 @@ public class SERVConductor extends HttpServlet {
                 con.setTipo(tipo);  
                 
                 if (id == null || id.isEmpty()) {
-                     if(conductordao.ConsultarRUCDNI(dni) || conductordao.ConsultarEmail(email)){    
-
+                     if(conductordao.ConsultarRUCDNI(dni) || 
+                        conductordao.ConsultarLicencia(lic)||
+                        conductordao.ConsultarEmail(email)
+                        ){
+                         
                     }else {
                          try {
                              conductordao.insertar(con);

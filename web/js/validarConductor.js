@@ -44,20 +44,27 @@
                         
         //limpiar n
         $( "#tel_id, #dni_id" ).blur(function() {
-            var val = $('#nom_id').val();
+            var val = $('#tel_id').val();
             var tam = val.length;
+            var val2 = $('#dni_id').val();
+            var tam2 = val2.length;
             for(i = 0; i < tam; i++) {
-                if(!isNaN(val[i]))
-                    document.getElementById("nom_id").value = '';
+                if(isNaN(val[i]))
+                    document.getElementById("tel_id").value = '';                
+            }
+            for(i = 0; i < tam2; i++) {
+                if(isNaN(val2[i]))
+                    document.getElementById("dni_id").value = '';                
             }
         });
+        
         
         $("#email_id").keyup(function() {
            $(this).val($(this).val().toLowerCase());
         });
             
         
-        $('#insertar, #insertar_editar_usuario').click(function (){
+        $('#insertar, #editar').click(function (){
             var dni = $('#dni_id').val();
             var licencia = $('#lic_id').val();
             var nombre = $('#nom_id').val();       

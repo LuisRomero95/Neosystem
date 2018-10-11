@@ -8,30 +8,31 @@
         var celular = document.getElementById("tel_id").value;                     
         var direcion = document.getElementById("direc_id").value;
         
-        if( dni == null || dni.length == 0 || /^\s+$/.test(dni) ) {
+        
+        if (nombre == null || nombre.length == 0 || /^\s+$/.test(nombre) ) {
+            alert('[ERROR] El nombre no puede quedar vacio');
+            return false;
+            }
+        else if (!isNaN(nombre) || /^\s+$/.test(nombre) ) {
+            alert('[ERROR] El nombre no puede tener números');
+            return false;
+            }        
+        else if (ape == null || ape.length == 0 || /^\s+$/.test(ape) ) {
+            alert('[ERROR] El apellido no puede quedar vacio');
+            return false;
+        }
+        else if (!isNaN(ape) || /^\s+$/.test(ape) ) {
+            alert('[ERROR] El apellido no puede tener números');
+            return false;
+        }                  
+        else if( dni == null || dni.length == 0 || /^\s+$/.test(dni) ) {
             alert('[ERROR] El dni no puede quedar vacio.');
             return false;
         }
         else if(  !(dni.length == 8) || /^\s+$/.test(dni) ) {
             alert('[ERROR] El dni debe tener un valor máximo de 8 dígitos.');
             return false;
-        }                       
-        else if (nombre == null || nombre.length == 0 || /^\s+$/.test(nombre) ) {
-        alert('[ERROR] El nombre no puede quedar vacio');
-        return false;
-        }
-        else if (!isNaN(nombre) || /^\s+$/.test(nombre) ) {
-        alert('[ERROR] El nombre no puede tener números');
-        return false;
-        }
-        else if (ape == null || ape.length == 0 || /^\s+$/.test(ape) ) {
-        alert('[ERROR] El apellido no puede quedar vacio');
-        return false;
-        }
-        else if (!isNaN(ape) || /^\s+$/.test(ape) ) {
-        alert('[ERROR] El apellido no puede tener números');
-        return false;
-        }       
+        }                                       
         else if (email ==  null || email.length ==  0 || /^\s+$/.test(email) ) {
           // Si no se cumple la condicion...
           alert('[ERROR] El email no puede quedar vacío');

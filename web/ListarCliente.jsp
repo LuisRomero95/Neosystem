@@ -29,8 +29,8 @@ HttpSession sesion = request.getSession();
                     <thead>
                         <tr>
                            <th class="text-center">ID</th>                
-                           <th class="text-center">RUC_DNI</th>                                    
-                           <th class="text-center">NOMBRES</th>      
+                           <th class="text-center">NOMBRES</th>                                    
+                           <th class="text-center">RUC_DNI</th>      
                            <th class="text-center">EMAIL</th>      
                            <th class="text-center">FIJO</th>      
                            <th class="text-center">CELULAR</th>      
