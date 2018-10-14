@@ -163,4 +163,29 @@ public class UsuarioDAO extends Conexion implements DAO{
          return res.next();
     }      
     
+    public List<Usuario> consultarMenosAcList(String nom, String email) throws Exception  {
+            List<Usuario> datos = new ArrayList<>();
+            PreparedStatement pst;
+            ResultSet rs;
+            String sql = "SELECT nom, email FROM usuarios WHERE nom <> '"+nom+"'AND email <> '"+email+"' AND estado = 1";
+            try {
+                this.conectar();
+                pst = conexion.prepareStatement(sql);
+                rs = pst.executeQuery();       
+                while(rs.next()){
+                    datos.add(new Usuario(
+                            rs.getString("nom"),
+                            rs.getString("email")
+                        )                    
+                    );
+                }
+            } catch (SQLException e ) {
+                throw e;
+            }
+            finally{
+                this.cerrar();
+            }
+            return datos;
+        }        
+    
 }

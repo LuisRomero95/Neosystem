@@ -1,4 +1,4 @@
-  
+
 $(document).ready(function (){
     
     $('#nom_id').keypress(function (e) {
@@ -34,18 +34,9 @@ $(document).ready(function (){
        $(this).val($(this).val().toLowerCase());
     });    
     
-    $("#nom_id").keyup(function(){
-            $nombre = document.getElementById("nom_id").value;
-            $.post("SERVTipoUsuario", {nnombre:$nombre}, function(data) {               
-                    $("#ReportarNombre").html(data);
-            });
-    });      
-    
-    $('#insertar').click(function (){
+    $('#editar').click(function (){
         var nombre = $('#nom_id').val();
         var listanombre = $('#listaNombre').val();
-        var respuestaNombre = $('#ReportarNombre').text().trim();
-        var condicion = 'Ya existe';             
         
         if( nombre === null || nombre.length === 0 || /^\s+$/.test(nombre) ) {
               alert('[ERROR] El tipo de usuario no puede quedar vacío.');
@@ -58,11 +49,7 @@ $(document).ready(function (){
         else if(nombre === listanombre){
             alert('[ERROR] El nuevo nombre no esta disponible');
             return false;
-        }    
-        else if(respuestaNombre === condicion){
-            alert('[ERROR] Ingrese un nombre que no este registrado');
-            return false;
-        }            
+        }              
         
           // Si el script ha llegado a este punto, todas las condiciones
           // se han cumplido, por lo que se devuelve el valor true
@@ -72,4 +59,3 @@ $(document).ready(function (){
     });
     
 });
-    

@@ -4,7 +4,9 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">        
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">        
+        <script src="js/jquery-3.3.1.min.js" type="text/javascript"></script>
+        <script src="js/validarLogin.js" type="text/javascript"></script>
         <title>JSP Page</title>
     </head>
     <body>
@@ -17,7 +19,7 @@
                     </div>
                 </div> 
                 <div class="main-login main-center col-md-6 col-md-offset-3" align="">
-                    <form class="form-horizontal" method="POST" action="SERVLogin">
+                    <form class="form-horizontal" method="POST" action="SERVLogin" autocomplete="off">
                         <div class="form-group">
                             <label for="username" class="cols-sm-2 control-label">Nombre de Usuario</label>
                             <div class="cols-sm-10">

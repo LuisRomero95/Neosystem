@@ -20,7 +20,7 @@ HttpSession sesion = request.getSession();
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">        
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/> 
         <script src="js/jquery-3.3.1.min.js" type="text/javascript"></script>        
-        <script src="js/validarUsuario2.js" type="text/javascript"></script>
+        <script src="js/validarEditarUsuario.js" type="text/javascript"></script>
         <title>JSP Page</title>
     </head>  
     <body>
@@ -32,9 +32,11 @@ HttpSession sesion = request.getSession();
             </div>                
             <h1>Editar Usuario</h1>
             <hr>     
-            <form  method="POST" action="SERVUsuario" name="frmEditarUsuario" >
+            <form  method="POST" action="SERVUsuario" name="frmEditarUsuario" autocomplete="off" >
             <div class="container">
+                
                 <div class="col-md-6">
+                    
                     <div class="form-group"> <!-- Identificación-->
                         <label for="usuario_id" class="control-label">ID</label>
                         <input type="text" class="form-control" id="usuario_id" readonly  name="txtId"  value=<c:out value="${usuario.id}" /> >
@@ -43,6 +45,9 @@ HttpSession sesion = request.getSession();
                     <div class="form-group"> <!-- Nombre -->
                         <label for="nom_id" class="control-label">NOMBRE</label>
                         <input type="text" class="form-control" id="nom_id" name="txtNombre" value="<c:out value="${usuario.nom}" />"  >
+                        <c:forEach items="${lista}" var="lista">
+                            <input type="hidden" class="form-control" id="listaNombre" readonly value="<c:out value="${lista.nom}" />"  >
+                        </c:forEach>
                     </div>
 
                     <div class="form-group"> <!-- Contraseña-->
@@ -50,11 +55,17 @@ HttpSession sesion = request.getSession();
                         <input type="text" class="form-control" id="contra_id" name="txtContra" value="<c:out value="${usuario.password}" />" >
                     </div>                    
                 </div>
+                    
                 <div class="col-md-6">
+                    
                     <div class="form-group"> <!-- Email -->
                         <label for="email_id" class="control-label">EMAIL</label>
                         <input type="text" class="form-control" id="email_id" name="txtEmail" value="<c:out value="${usuario.email}" />">
+                        <c:forEach items="${lista}" var="lista">
+                            <input type="hidden" class="form-control" id="listaEmail" readonly value="<c:out value="${lista.email}" />"  >
+                        </c:forEach>                        
                     </div>
+                        
                     <div>
                         <label for="listarNivel" class="control-label">NIVEL</label>
                         <br>
@@ -77,7 +88,7 @@ HttpSession sesion = request.getSession();
                 <br>
                 <div class="col-md-12">
                     <div class="form-group"> <!-- Submit Insertar -->
-                        <input type="submit" name="btnInsertar" value="Actualizar" id="insertar" class="btn btn-success btn-lg" style="margin-right: 10px">                        	
+                        <input type="submit" name="btnInsertar" value="Actualizar" id="editar" class="btn btn-success btn-lg" style="margin-right: 10px">
                         <a href="SERVUsuario?action=refresh"  class="btn btn-danger btn-lg" onclick="return confirm('¿Desea salir de la edición?')">Regresar</a>
                     </div>                       
                 </div>

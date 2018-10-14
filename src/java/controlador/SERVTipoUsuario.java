@@ -3,7 +3,9 @@ package controlador;
 
 import dao.TipoUsuarioDAO;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -46,8 +48,11 @@ private static String insert= "/InsertarTipoUsuario.jsp";
             try {
                 forward = edit;
                 int id = Integer.parseInt(request.getParameter("id"));
+                String nom = request.getParameter("nom");
+                List  lista = tudao.consultarMenosAcList(nom);
                 TipoUsuario tu = tudao.BuscarPorId(id);             
                 request.setAttribute("tu", tu);
+                request.setAttribute("lista", lista);                
             } catch (Exception ex) {
             }
         }            
@@ -73,9 +78,21 @@ private static String insert= "/InsertarTipoUsuario.jsp";
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
        
-        request.setCharacterEncoding("UTF-8");                       
+        request.setCharacterEncoding("UTF-8");
+        PrintWriter out = response.getWriter();
+        
+        if(request.getParameter("nnombre")!=null){
+            String nnombre = request.getParameter("nnombre");
+            String report = VerificarNombre(nnombre);
+
+            response.setContentType("text/plain");
+            out.println("" + report + "");
+                            
+            out.flush();
+            out.close();
+
+        } 
         
         String nombre = request.getParameter("txtNombre");                                                            
         String id =request.getParameter("txtId");
@@ -117,4 +134,24 @@ private static String insert= "/InsertarTipoUsuario.jsp";
         return "Short description";
     }// </editor-fold>
     
+    private String VerificarNombre(String nnombre) {
+        try {
+            String report = null;
+            if(nnombre.equals("")){
+                report = "";
+            }
+            else if(tudao.ConsultarNombre(nnombre)){
+                report = "Ya existe";
+            }
+            else {
+                report = "Libre";
+            }            
+            
+            return report;
+        } catch (SQLException ex) {
+            Logger.getLogger(SERVUsuario.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+	}
+       
 }

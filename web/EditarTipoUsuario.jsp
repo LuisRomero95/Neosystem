@@ -21,7 +21,8 @@ HttpSession sesion = request.getSession();
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-        <script src="js/validarTipoUsuario.js" type="text/javascript"></script>
+        <script src="js/jquery-3.3.1.min.js" type="text/javascript"></script>
+        <script src="js/validarEditarTipoUsuario.js" type="text/javascript"></script>
         <title>JSP Page</title>
 
     </head>
@@ -35,7 +36,7 @@ HttpSession sesion = request.getSession();
             </div>                
             <h1>Editar Tipo de Conductor</h1>
             <hr>     
-            <form  method="POST" action="SERVTipoUsuario" name="frmEditarTipoUsuario" onsubmit="return validacion()">
+            <form  method="POST" action="SERVTipoUsuario" name="frmEditarTipoUsuario" autocomplete="off" >
             <div class="container">
                 <div class="col-md-6">
                     <div class="form-group"> <!-- Identificación-->
@@ -45,12 +46,15 @@ HttpSession sesion = request.getSession();
 
                     <div class="form-group"> <!-- Tipo de nivel del usuario -->
                         <label for="nom_id" class="control-label">TIPO</label>
-                        <input type="text" class="form-control" id="nom_id" name="txtNombre" value="<c:out value="${tu.nom}" />" onkeypress="return soloLetras(event)" onblur="limpia()" >
+                        <input type="text" class="form-control" id="nom_id" name="txtNombre" value="<c:out value="${tu.nom}" />" >
+                        <c:forEach items="${lista}" var="lista">
+                            <input type="text" class="form-control" id="listaNombre" readonly value="<c:out value="${lista.nom}" />"  >
+                        </c:forEach>                        
                     </div>                      
                 </div> 
                 <div class="col-md-12">
                     <div class="form-group"> <!-- Submit Insertar -->
-                        <input type="submit" name="btnInsertar" value="Actualizar" class="btn btn-success btn-lg">
+                        <input type="submit" name="btnInsertar" value="Actualizar" id="editar" class="btn btn-success btn-lg">
                         <a href="SERVTipoUsuario?action=refresh"  class="btn btn-danger btn-lg" onclick="return confirm('¿Desea salir de la edición?')">Regresar</a>                        
                     </div>                      
                 </div>                    

@@ -3,7 +3,7 @@
 <%@page session="true"%>
 
 <%
-HttpSession sesion = request.getSession();
+    HttpSession sesion = request.getSession();
     if(sesion.getAttribute("nivel")==null){
         response.sendRedirect("index.jsp");
     }
@@ -12,7 +12,7 @@ HttpSession sesion = request.getSession();
         if(!nivel.equals("1")){
             response.sendRedirect("navbar.jsp");
         }
-    }
+    }    
 %>
 <!DOCTYPE html>
 <html>
@@ -20,7 +20,7 @@ HttpSession sesion = request.getSession();
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <script src="js/jquery-3.3.1.min.js" type="text/javascript"></script>
-        <script src="js/validarUsuario2.js" type="text/javascript"></script>
+        <script src="js/validarUsuario.js" type="text/javascript"></script>
         <title>JSP Page</title>       
     </head>        
     <body>
@@ -32,7 +32,7 @@ HttpSession sesion = request.getSession();
             </div>                
             <h1>Ingresar Usuarios</h1>
             <hr>
-            <form name="frmInsertarUsuario" method="POST" action="SERVUsuario" >
+            <form name="frmInsertarUsuario" method="POST" action="SERVUsuario" autocomplete="off" >
             <div class="container">
                 
                 <div class="col-md-6">
@@ -40,6 +40,7 @@ HttpSession sesion = request.getSession();
                     <div class="form-group"> <!-- Nombre -->
                         <label for="nom_id" class="control-label">NOMBRE</label>
                         <input type="text" class="form-control" id="nom_id" name="txtNombre" placeholder="luis">
+                        <div id="ReportarNombre" class="outputTextArea"></div> 
                     </div> 
 
                     <div class="form-group"> <!-- Contraseña -->
@@ -50,6 +51,7 @@ HttpSession sesion = request.getSession();
                     <div class="form-group"> <!-- Email -->
                         <label for="email_id" class="control-label">EMAIL</label>
                         <input type="text" class="form-control" id="email_id" name="txtEmail" placeholder="1510647@utp.edu.pe">
+                         <div id="ReportarEmail" class="outputTextArea"></div> 
                     </div>                      
                 </div>                                              
                 

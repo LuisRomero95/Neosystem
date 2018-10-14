@@ -11,7 +11,7 @@ $(document).ready(function (){
     $('#nom_id').keypress(function (e) {
        key = e.keyCode || e.which;
        tecla = String.fromCharCode(key).toLowerCase();
-       letras = " áéíóúabcdefghijklmnñopqrstuvwxyz";
+       letras = "áéíóúabcdefghijklmnñopqrstuvwxyz";
        especiales = "8-37-39-46";
 
        tecla_especial = false;
@@ -41,19 +41,25 @@ $(document).ready(function (){
     $("#nom_id, #email_id").keyup(function() {
        $(this).val($(this).val().toLowerCase());
     });
-    
-    $('#insertar').click(function (){
+        
+    $('#editar').click(function (){
         var nombre = $('#nom_id').val();
         var contra = $('#contra_id').val();
         var email = $('#email_id').val(); 
+        var indice = $('#listarNivel').val().trim();
+        var listanombre = $('#listaNombre').val();
+        var listaemail = $('#listaEmail').val();
         
         if( nombre === null || nombre.length === 0 || /^\s+$/.test(nombre) ) {
               alert('[ERROR] El campo nombre no puede quedar vacío');
               return false;              
         }else if(!(nombre.length <=25) || /^\s+$/.test(nombre)){
             alert('[ERROR] El nombre no puede exceder los 25 dígitos');
+            return false; 
+        }else if(nombre === listanombre){
+            alert('[ERROR] El nuevo nombre no esta disponible');
             return false;
-        }
+        }      
         else if (contra ===  null || contra.length ===  0 || /^\s+$/.test(contra) ) {
           // Si no se cumple la condicion...
           alert('[ERROR] La contraseña no puede quedar vacío');
@@ -74,8 +80,15 @@ $(document).ready(function (){
         }        
         else if (!(/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test(email))) {
           alert('[ERROR] Ingrese un email con formato adecuado');
+          return false;         
+        }else if(email === listaemail){
+            alert('[ERROR] El nuevo email no esta disponible');
+            return false;
+        }          
+        else if ( indice === '' ){
+          alert('[ERROR] Confirme el nivel');
           return false;
-        }           
+        }          
         return true;
                         
     });

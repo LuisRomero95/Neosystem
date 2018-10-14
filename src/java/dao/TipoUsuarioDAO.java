@@ -127,6 +127,30 @@ public class TipoUsuarioDAO extends Conexion implements DAO{
         } catch (Exception e) {
         }
          return res.next();
-    }         
+    }
+    
+    public List<TipoUsuario> consultarMenosAcList(String nom) throws Exception  {
+            List<TipoUsuario> datos = new ArrayList<>();
+            PreparedStatement pst;
+            ResultSet rs;
+            String sql = "SELECT nom FROM tiposusuarios WHERE nom <> '"+nom+"' AND estado = 1";
+            try {
+                this.conectar();
+                pst = conexion.prepareStatement(sql);
+                rs = pst.executeQuery();       
+                while(rs.next()){
+                    datos.add(new TipoUsuario(
+                            rs.getString("nom")
+                        )                    
+                    );
+                }
+            } catch (SQLException e ) {
+                throw e;
+            }
+            finally{
+                this.cerrar();
+            }
+            return datos;
+        }     
     
 }

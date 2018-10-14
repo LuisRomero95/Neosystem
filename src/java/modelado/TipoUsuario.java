@@ -13,6 +13,10 @@ public class TipoUsuario {
         this.id = id;
         this.nom = nom;
     }
+    
+    public TipoUsuario(String nom) {
+        this.nom = nom;
+    }    
 
     public int getId() {
         return id;

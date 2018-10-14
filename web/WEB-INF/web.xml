@@ -35,6 +35,10 @@
         <servlet-name>SERVTipoUsuario</servlet-name>
         <servlet-class>controlador.SERVTipoUsuario</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>NewServlet</servlet-name>
+        <servlet-class>controlador.NewServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SERVUsuario</servlet-name>
         <url-pattern>/SERVUsuario</url-pattern>
@@ -66,6 +70,10 @@
     <servlet-mapping>
         <servlet-name>SERVTipoUsuario</servlet-name>
         <url-pattern>/SERVTipoUsuario</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>NewServlet</servlet-name>
+        <url-pattern>/NewServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
