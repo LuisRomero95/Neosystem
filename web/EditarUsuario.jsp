@@ -45,9 +45,8 @@ HttpSession sesion = request.getSession();
                     <div class="form-group"> <!-- Nombre -->
                         <label for="nom_id" class="control-label">NOMBRE</label>
                         <input type="text" class="form-control" id="nom_id" name="txtNombre" value="<c:out value="${usuario.nom}" />"  >
-                        <c:forEach items="${lista}" var="lista">
-                            <input type="hidden" class="form-control" id="listaNombre" readonly value="<c:out value="${lista.nom}" />"  >
-                        </c:forEach>
+                        <div id="ReportarNombre" class="outputTextArea"></div> 
+                        <input type="hidden" class="form-control" id="contenedorNombre" value="<c:out value="${usuario.nom}" />"  >                          
                     </div>
 
                     <div class="form-group"> <!-- Contraseña-->
@@ -60,10 +59,9 @@ HttpSession sesion = request.getSession();
                     
                     <div class="form-group"> <!-- Email -->
                         <label for="email_id" class="control-label">EMAIL</label>
-                        <input type="text" class="form-control" id="email_id" name="txtEmail" value="<c:out value="${usuario.email}" />">
-                        <c:forEach items="${lista}" var="lista">
-                            <input type="hidden" class="form-control" id="listaEmail" readonly value="<c:out value="${lista.email}" />"  >
-                        </c:forEach>                        
+                        <input type="text" class="form-control" id="email_id" name="txtEmail" value="<c:out value="${usuario.email}" />">                       
+                        <div id="ReportarEmail" class="outputTextArea"></div> 
+                        <input type="hidden" class="form-control" id="contenedorEmail" value="<c:out value="${usuario.email}" />"  >
                     </div>
                         
                     <div>

@@ -61,7 +61,7 @@ HttpSession sesion = request.getSession();
                                         <c:out value="${usuario.nivel}"/>
                                 </td>                                                     
                                 <td class="text-center">
-                                    <a href="SERVUsuario?action=edit&id=<c:out value="${usuario.id}"/>&nom=<c:out value="${usuario.nom}"/>&email=<c:out value="${usuario.email}"/>  "  class="btn btn-warning btn-sm">Editar</a>   
+                                    <a href="SERVUsuario?action=edit&id=<c:out value="${usuario.id}"/>"  class="btn btn-warning btn-sm">Editar</a>   
                                     <a href="SERVUsuario?action=delete&id=<c:out value="${usuario.id}"/>" onclick="return confirm('¿Está seguro que desea eliminar el registro?')" class="btn btn-danger btn-sm">Eliminar</a>
                                 </td>
                             </tr>

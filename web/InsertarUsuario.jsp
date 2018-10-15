@@ -51,7 +51,7 @@
                     <div class="form-group"> <!-- Email -->
                         <label for="email_id" class="control-label">EMAIL</label>
                         <input type="text" class="form-control" id="email_id" name="txtEmail" placeholder="1510647@utp.edu.pe">
-                         <div id="ReportarEmail" class="outputTextArea"></div> 
+                        <div id="ReportarEmail" class="outputTextArea"></div> 
                     </div>                      
                 </div>                                              
                 

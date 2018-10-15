@@ -17,20 +17,21 @@ import modelado.TipoUsuario;
 
 public class SERVTipoUsuario extends HttpServlet {
 
-private static String insert= "/InsertarTipoUsuario.jsp";
+    private static String insert= "/InsertarTipoUsuario.jsp";
     private static String edit = "/EditarTipoUsuario.jsp";
     private static String list_tipo_usuario = "/ListarTipoUsuario.jsp";
     private TipoUsuarioDAO tudao;
     TipoUsuario tu = new TipoUsuario();
             
-        public SERVTipoUsuario() {
-           tudao = new TipoUsuarioDAO(){};
-       }              
+    public SERVTipoUsuario() {
+       tudao = new TipoUsuarioDAO(){};
+    }              
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-                String forward = "";   
+        
+        String forward = "";   
         String action = request.getParameter("action");
 
         //ELIMINAR TIPO DE USUARIO
@@ -48,11 +49,8 @@ private static String insert= "/InsertarTipoUsuario.jsp";
             try {
                 forward = edit;
                 int id = Integer.parseInt(request.getParameter("id"));
-                String nom = request.getParameter("nom");
-                List  lista = tudao.consultarMenosAcList(nom);
                 TipoUsuario tu = tudao.BuscarPorId(id);             
-                request.setAttribute("tu", tu);
-                request.setAttribute("lista", lista);                
+                request.setAttribute("tu", tu);       
             } catch (Exception ex) {
             }
         }            
@@ -152,6 +150,6 @@ private static String insert= "/InsertarTipoUsuario.jsp";
             Logger.getLogger(SERVUsuario.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
-	}
+    }
        
 }

@@ -41,25 +41,49 @@ $(document).ready(function (){
     $("#nom_id, #email_id").keyup(function() {
        $(this).val($(this).val().toLowerCase());
     });
+    
+     $("#nom_id").keyup(function(){
+            $nombre = $('#nom_id').val(); 
+            $.post("SERVUsuario", {
+                nnombre: $nombre
+            }, function(data) {               
+                    $("#ReportarNombre").html(data);
+            });
+    });  
+    
+    $("#email_id").keyup(function(){
+            $email = document.getElementById("email_id").value;
+            $.post("SERVUsuario", {
+                eemail:$email
+            }, function(data) {               
+                    $("#ReportarEmail").html(data);
+            });
+    });       
+           
         
     $('#editar').click(function (){
-        var nombre = $('#nom_id').val();
+        var nombre = $('#nom_id').val();        
         var contra = $('#contra_id').val();
         var email = $('#email_id').val(); 
-        var indice = $('#listarNivel').val().trim();
-        var listanombre = $('#listaNombre').val();
-        var listaemail = $('#listaEmail').val();
+        var indice = $('#listarNivel').val();       
+        var respuestaNombre = $('#ReportarNombre').text().trim();
+        var respuestaEmail = $('#ReportarEmail').text().trim();               
+        var contenedorNombre = $('#contenedorNombre').val();
+        var contenedorEmail = $('#contenedorEmail').val();
+        var condicion = 'Libre';
         
         if( nombre === null || nombre.length === 0 || /^\s+$/.test(nombre) ) {
               alert('[ERROR] El campo nombre no puede quedar vacío');
               return false;              
-        }else if(!(nombre.length <=25) || /^\s+$/.test(nombre)){
+        }
+        else if(!(nombre.length <=25) || /^\s+$/.test(nombre)){
             alert('[ERROR] El nombre no puede exceder los 25 dígitos');
             return false; 
-        }else if(nombre === listanombre){
-            alert('[ERROR] El nuevo nombre no esta disponible');
+        }
+        else if((nombre !== contenedorNombre) && (respuestaNombre !== condicion)){            
+            alert('[ERROR] El nuevo nombre a registrar ya lo tiene otro usuario');
             return false;
-        }      
+        }            
         else if (contra ===  null || contra.length ===  0 || /^\s+$/.test(contra) ) {
           // Si no se cumple la condicion...
           alert('[ERROR] La contraseña no puede quedar vacío');
@@ -81,10 +105,11 @@ $(document).ready(function (){
         else if (!(/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test(email))) {
           alert('[ERROR] Ingrese un email con formato adecuado');
           return false;         
-        }else if(email === listaemail){
-            alert('[ERROR] El nuevo email no esta disponible');
+        }
+        else if((email !== contenedorEmail) && (respuestaEmail !== condicion)){            
+            alert('[ERROR] El nuevo email a registrar ya lo tiene otro usuario');
             return false;
-        }          
+        }           
         else if ( indice === '' ){
           alert('[ERROR] Confirme el nivel');
           return false;

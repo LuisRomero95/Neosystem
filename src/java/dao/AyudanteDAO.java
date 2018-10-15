@@ -134,7 +134,7 @@ public class AyudanteDAO extends Conexion implements DAO{
     public boolean ConsultarNombre(String nom) throws SQLException{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }    
-    public boolean ConsultarRUCDNI(String nombre) throws SQLException{
+    public boolean ConsultarDNI(String nombre) throws SQLException{
         PreparedStatement pst;
         ResultSet res = null;
         String sql = "SELECT * FROM ayudantes WHERE dni='"+nombre+"'";

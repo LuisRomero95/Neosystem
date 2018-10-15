@@ -149,7 +149,7 @@ public class VehiculoDAO extends Conexion implements DAO{
     }
 
     @Override
-    public boolean ConsultarNombre(String nom) throws Exception {
+    public boolean ConsultarNombre(String nom) throws SQLException {
         PreparedStatement pst;
         ResultSet res = null;
         String sql = "SELECT * FROM vehiculos WHERE placa='"+nom+"'";

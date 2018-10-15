@@ -72,7 +72,7 @@ $(document).ready(function (){
             });
     });      
     
-    $('#insertar').click(function (){                             
+    $('#editar').click(function (){                             
         var dni = $('#dni_id').val(); 
         var nombre = $('#nom_id').val(); 
         var ape = $('#ape_id').val();
@@ -81,7 +81,9 @@ $(document).ready(function (){
         var direcion = $('#direc_id').val();
         var respuestaDni = $('#ReportarDni').text().trim();
         var respuestaEmail = $('#ReportarEmail').text().trim();        
-        var condicion = 'Ya existe';  
+        var contenedorDni = $('#contenedorDni').val();
+        var contenedorEmail = $('#contenedorEmail').val();
+        var condicion = 'Libre';   
                     
        if (nombre === null || nombre.length === 0 || /^\s+$/.test(nombre) ) {
             alert('[ERROR] El nombre no puede quedar vacio');
@@ -107,8 +109,8 @@ $(document).ready(function (){
             alert('[ERROR] El dni debe tener un valor máximo de 8 dígitos.');
             return false;
         }
-        else if(respuestaDni === condicion){
-            alert('[ERROR] Ingrese un dni que no este registrado');
+        else if((dni !== contenedorDni) && (respuestaDni !== condicion)){            
+            alert('[ERROR] El nuevo dni a registrar ya lo tiene otro ayudante');
             return false;
         }           
         else if (email ===  null || email.length ===  0 || /^\s+$/.test(email) ) {
@@ -119,10 +121,10 @@ $(document).ready(function (){
             alert('[ERROR] Ingrese un email con formato adecuado');
             return false;
         }
-        else if(respuestaEmail === condicion){
-            alert('[ERROR] Ingrese un email que no este registrado');
+        else if((email !== contenedorEmail) && (respuestaEmail !== condicion)){            
+            alert('[ERROR] El nuevo email a registrar ya lo tiene otro ayudante');
             return false;
-        }        
+        }         
         else if (!(/^\d{9}$/.test(celular)) ) {
             alert('[ERROR] El celular debe tener 9 digitos');
             return false;

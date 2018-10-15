@@ -13,7 +13,6 @@ HttpSession sesion = request.getSession();
             response.sendRedirect("navbar.jsp");
         }
     }
-
 %>
 <!DOCTYPE html>
 <html>
@@ -33,7 +32,7 @@ HttpSession sesion = request.getSession();
             </div>
             <h1>Insertar Conductor</h1>
             <hr>            
-            <form name="frmInsertarConductor" method="POST" action="SERVConductor" >
+            <form name="frmInsertarConductor" method="POST" action="SERVConductor" autocomplete="off">
             <div class="container">
                 
                 <div class="col-md-6">
@@ -51,16 +50,19 @@ HttpSession sesion = request.getSession();
                     <div class="form-group"> <!-- DNI -->
                         <label for="dni_id" class="control-label">DNI</label>
                         <input type="text" class="form-control" id="dni_id" name="txtDni" placeholder="73095001" >
+                        <div id="ReportarDni" class="outputTextArea"></div> 
                     </div>
 
                     <div class="form-group"> <!-- Licencia -->
                         <label for="lic_id" class="control-label">LICENCIA</label>
                         <input type="text" class="form-control" id="lic_id" name="txtLic" placeholder="X41527500" >
+                        <div id="ReportarLicencia" class="outputTextArea"></div> 
                     </div>    
                     
                     <div class="form-group"> <!-- Email-->
                         <label for="email_id" class="control-label">EMAIL</label>
                         <input type="text" class="form-control" id="email_id" name="txtEmail" placeholder="larcroco@gmail.com" >
+                        <div id="ReportarEmail" class="outputTextArea"></div> 
                     </div>                       
                 </div>
 

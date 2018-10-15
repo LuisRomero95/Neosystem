@@ -78,7 +78,7 @@ $(document).ready(function (){
             });
     });      
     
-    $('#insertar').click(function (){
+    $('#editar').click(function (){
         var opciones = document.getElementsByName("optradio"); 
         var ruc_dni = $('#ruc_dni_id').val();
         var nombre = $('#nom_id').val();
@@ -88,7 +88,9 @@ $(document).ready(function (){
         var direcion = $('#direc_id').val(); 
         var respuestaRucDni = $('#ReportarRucDni').text().trim();
         var respuestaEmail = $('#ReportarEmail').text().trim();
-        var condicion = 'Ya existe';   
+        var contenedorRucDni = $('#contenedorRucDni').val();
+        var contenedorEmail = $('#contenedorEmail').val();
+        var condicion = 'Libre';
                         
         var seleccionado = false;
         for(var i=0; i<opciones.length; i++) {    
@@ -108,7 +110,7 @@ $(document).ready(function (){
                 if( opciones[x].value === '1' ){
                     if(  ruc_dni === null || ruc_dni.length === 0 || /^\s+$/.test(ruc_dni)  ){
                         alert('[ERROR] El RUC no puede quedar vacío ');
-                                return false;
+                        return false;
                     }             
                     else if(  !(ruc_dni.length === 11)|| /^\s+$/.test(ruc_dni) ){
                         alert('[ERROR] El RUC debe tener 11 digitos');
@@ -122,14 +124,14 @@ $(document).ready(function (){
                     }             
                     else if(  !(ruc_dni.length === 8)|| /^\s+$/.test(ruc_dni) ){
                         alert('[ERROR] El DNI debe tener 8 digitos');   
-                                return false;
+                        return false;
                     }  
                 }                
             } 
         }           
         
-        if(respuestaRucDni === condicion){
-            alert('[ERROR] Ingrese un Ruc o DNI que no este registrado');
+        if((ruc_dni !== contenedorRucDni) && (respuestaRucDni !== condicion)){            
+            alert('[ERROR] El nuevo ruc o dni a registrar ya lo tiene otro cliente');
             return false;
         }      
         else if (nombre === null || nombre.length === 0 || /^\s+$/.test(nombre) ) {
@@ -156,10 +158,10 @@ $(document).ready(function (){
             alert('[ERROR] El email no puede exceder los 50 caracteres');
             return false;
         }
-        else if(respuestaEmail === condicion){
-            alert('[ERROR] Ingrese un email que no este registrado');
+        else if((email !== contenedorEmail) && (respuestaEmail !== condicion)){            
+            alert('[ERROR] El nuevo email a registrar ya lo tiene otro cliente');
             return false;
-        }        
+        }       
         else if (fijo ===  null || fijo.length ===  0 || /^\s+$/.test(fijo) ) {
             alert('[ERROR] El teléfono fijo no puede quedar vacío');
             return false;

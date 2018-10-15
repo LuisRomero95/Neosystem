@@ -45,8 +45,8 @@ $(document).ready(function (){
     //limpiar n
     $( "#tel_id, #dni_id" ).blur(function() {
         var val = $('#tel_id').val();
-        var val2 = $('#dni_id').val();
         var tam = val.length;
+        var val2 = $('#dni_id').val();
         var tam2 = val2.length;
         for(i = 0; i < tam; i++) {
             if(isNaN(val[i]))
@@ -85,7 +85,7 @@ $(document).ready(function (){
             });
     });      
     
-    $('#insertar').click(function (){
+    $('#editar').click(function (){
         var dni = $('#dni_id').val();
         var licencia = $('#lic_id').val();
         var nombre = $('#nom_id').val();       
@@ -97,7 +97,10 @@ $(document).ready(function (){
         var respuestaDni = $('#ReportarDni').text().trim();
         var respuestaLicencia = $('#ReportarLicencia').text().trim();
         var respuestaEmail = $('#ReportarEmail').text().trim();
-        var condicion = 'Ya existe';   
+        var contenedorDni = $('#contenedorDni').val();
+        var contenedorLicencia = $('#contenedorLicencia').val();
+        var contenedorEmail = $('#contenedorEmail').val();
+        var condicion = 'Libre';      
 
         if( nombre === null || nombre.length === 0 || /^\s+$/.test(nombre) ) {
             alert('[ERROR] El nombre no puede quedar vacío.');
@@ -131,16 +134,16 @@ $(document).ready(function (){
             alert('[ERROR] El dni debe tener un valor máximo de 8 dígitos.');
             return false;
         }   
-        else if(respuestaDni === condicion){
-            alert('[ERROR] Ingrese un dni que no este registrado');
+        else if((dni !== contenedorDni) && (respuestaDni !== condicion)){            
+            alert('[ERROR] El nuevo dni a registrar ya lo tiene otro conductor');
             return false;
-        }          
+        }         
         else if( licencia === null || licencia.length === 0 || /^\s+$/.test(licencia) ) {
             alert('[ERROR] La licencia no puede quedar vacío.');
             return false;              
         }
-        else if(respuestaLicencia === condicion){
-            alert('[ERROR] Ingrese una licencia que no este registrada');
+        else if((licencia !== contenedorLicencia) && (respuestaLicencia !== condicion)){            
+            alert('[ERROR] La nueva licencia a registrar ya lo tiene otro conductor');
             return false;
         }          
         else if (email === null || email.length === 0 || /^\s+$/.test(email) ) {
@@ -151,10 +154,10 @@ $(document).ready(function (){
             alert('[ERROR] Ingrese un email con formato adecuado');
             return false;
         }
-        else if(respuestaEmail === condicion){
-            alert('[ERROR] Ingrese un email que no este registrado');
+        else if((email !== contenedorEmail) && (respuestaEmail !== condicion)){            
+            alert('[ERROR] El nuevo email a registrar ya lo tiene otro conductor');
             return false;
-        }        
+        }         
         else if (telefono === null || telefono.length === 0 || /^\s+$/.test(telefono) ) {
             alert('[ERROR] El telefono no puede quedar vacio.');
             return false;

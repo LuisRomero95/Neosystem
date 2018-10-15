@@ -146,7 +146,7 @@ public class ConductorDAO extends Conexion implements DAO{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
-    public boolean ConsultarRUCDNI(String nombre) throws SQLException{
+    public boolean ConsultarDNI(String nombre) throws SQLException{
         PreparedStatement pst;
         ResultSet res = null;
         String sql = "SELECT * FROM conductores WHERE dni='"+nombre+"'";

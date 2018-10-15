@@ -34,7 +34,7 @@ function()
     }); 
 
     $('#car-model-trims').change(function (){        
-        var serie = $('#car-model-trims option:selected').text();
+        var serie = $('#car-model-trims option:selected').val();
         $('#serieSelecionada').val(serie);
     }); 
 });

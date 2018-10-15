@@ -22,12 +22,7 @@ public class Usuario {
         this.email = email;
         this.nivel = nivel;
     }
-    public Usuario(String nom, String email) {
-        this.nom = nom;
-        this.email = email;
-    }
-
-
+    
     //Para obtener o establecer los valores de los campos
 
     public int getId() {

@@ -43,7 +43,6 @@ $(document).ready(function (){
     
     $('#insertar').click(function (){
         var nombre = $('#nom_id').val();
-        var listanombre = $('#listaNombre').val();
         var respuestaNombre = $('#ReportarNombre').text().trim();
         var condicion = 'Ya existe';             
         
@@ -51,14 +50,10 @@ $(document).ready(function (){
               alert('[ERROR] El tipo de usuario no puede quedar vacío.');
               return false;
         }
-        else if( !(nombre.length <=50) || /^\s+$/.test(nombre) ) {
+        else if( !(nombre.length <=25) || /^\s+$/.test(nombre) ) {
               alert('[ERROR] El tipo de usuario debe tener máximo 6 dígitos.');
               return false;
         }
-        else if(nombre === listanombre){
-            alert('[ERROR] El nuevo nombre no esta disponible');
-            return false;
-        }    
         else if(respuestaNombre === condicion){
             alert('[ERROR] Ingrese un nombre que no este registrado');
             return false;

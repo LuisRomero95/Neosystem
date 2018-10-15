@@ -78,7 +78,6 @@ $(document).ready(function (){
             return false;
         }        
         else if (contra ===  null || contra.length ===  0 || /^\s+$/.test(contra) ) {
-          // Si no se cumple la condicion...
           alert('[ERROR] La contraseña no puede quedar vacío');
           return false;
         }
@@ -87,7 +86,6 @@ $(document).ready(function (){
           return false;
         }
         else if (email ===  null || email.length ===  0 || /^\s+$/.test(email) ) {
-          // Si no se cumple la condicion...
           alert('[ERROR] El email no puede quedar vacío');
           return false;
         }        

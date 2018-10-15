@@ -11,6 +11,9 @@ public class TipoConductor {
         this.id = id;
         this.nom = nom;
     }
+    public TipoConductor(String nom) {
+        this.nom = nom;
+    }    
 
     public String getNom() {
         return nom;

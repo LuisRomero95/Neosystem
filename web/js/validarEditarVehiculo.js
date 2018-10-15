@@ -12,7 +12,7 @@ $(document).ready(function (){
             });
     });               
     
-    $('#insertar').click(function (){      
+    $('#editar').click(function (){      
         
         var placa = $('#placa_id').val();
         var conductor = $('#con_id').val().trim();
@@ -23,30 +23,24 @@ $(document).ready(function (){
         var serie = $('#serieSelecionada').val().trim();
         var capacidad = $('#cap_id').val();
         var pasajeros = $('#pas_id').val();
-        var reportarPlaca = $('#ReportarPlaca').text().trim();
-        var condicion = 'Ya existe'; 
-        cadena = "^[A-DF-Z]{1}[A-Z0-9]{2}[0-9]{3}"; 
-        re = new RegExp(cadena);
-
+        var respuestaPlaca = $('#ReportarPlaca').text().trim();
+        var contenedorPlaca = $('#contenedorPlaca').val();
+        var condicion = 'Libre';
         
         if( placa === null || placa.length === 0 || /^\s+$/.test(placa) ) {
             alert('[ERROR] La placa del vehículo no puede quedar vacia.');
             return false;
         }  
-        else if (!(placa.match(re)) || /\s+$/.test(placa)){
-            alert('[ERROR] Ingrese una placa con formato adecuado');
+        else if((placa !== contenedorPlaca) && (respuestaPlaca !== condicion)){            
+            alert('[ERROR] La nueva placa a registrar ya lo tiene otro vehículo');
             return false;
-        }         
-        else if(reportarPlaca === condicion){
-            alert('[ERROR] Ingrese una placa que no este registrada');
-            return false;
-        }           
+        }            
         else if ( conductor === '' ){
-          alert('[ERROR] Seleccione un conductor');
+          alert('[ERROR] Confirme el conductor');
           return false;
         }     
         else if ( ayudante === '' ){
-          alert('[ERROR] Seleccione un ayudante');
+          alert('[ERROR] Confirme el ayudante');
           return false;
         }        
          else if ( año === null || año.length === 0 || /^\s+$/.test(año)){
@@ -75,4 +69,4 @@ $(document).ready(function (){
         }          
         return true;            
      });
-});      
+}); 

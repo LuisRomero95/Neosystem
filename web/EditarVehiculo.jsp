@@ -22,7 +22,7 @@ HttpSession sesion = request.getSession();
         <script src="js/jquery-3.3.1.min.js" type="text/javascript"></script>
         <script src="js/ConsumirWebServiceAuto.js" type="text/javascript"></script>      
         <script src="js/bootstrap.min.js" type="text/javascript"></script>
-        <script src="js/validarVehiculo.js" type="text/javascript"></script>
+        <script src="js/validarEditarVehiculo.js" type="text/javascript"></script>
         <script type="text/javascript" src="http://www.carqueryapi.com/js/jquery.min.js"></script>
         <script type="text/javascript" src="http://www.carqueryapi.com/js/carquery.0.3.4.js"></script>               
         <title>JSP Page</title>
@@ -36,7 +36,7 @@ HttpSession sesion = request.getSession();
             </div>
             <h1>Insertar Vehiculo</h1>
             <hr>                 
-            <form name="frmInsertarVehiculo" method="POST" action="SERVVehiculo"  onsubmit="return validacion()">
+            <form name="frmInsertarVehiculo" method="POST" action="SERVVehiculo"  autocomplete="off">
                 <div class="container">
                     
                     <div class="row">
@@ -50,7 +50,8 @@ HttpSession sesion = request.getSession();
                             <div class="form-group"> 
                                 <label for="placa_id" class="control-label">PLACA</label>
                                 <input type="text" class="form-control" id="placa_id" name="txtPlaca" value=<c:out value="${vehiculo.placa}" /> >
-                                <span class="help-block"></span>
+                                <div id="ReportarPlaca" class="outputTextArea"></div> 
+                                <input type="hidden" class="form-control" id="contenedorPlaca" value="<c:out value="${vehiculo.placa}" />"  >                                                  
                             </div>   
                                 
                             <div class="form-group">
@@ -150,7 +151,7 @@ HttpSession sesion = request.getSession();
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group"> <!-- Submit Insertar -->
-                                <input type="submit" id="insertar" name="btnInsertar" value="Actualizar" class="btn btn-success btn-lg">
+                                <input type="submit" name="btnInsertar" value="Actualizar" id="editar" class="btn btn-success btn-lg">
                                 <a href="SERVVehiculo?action=refresh"  class="btn btn-danger btn-lg" onclick="return confirm('¿Desea salir del registro?')">Regresar</a>
                                 <input type="reset" name="btnLimpiar" value="Limpiar" class="btn btn-warning btn-lg" onclick="return confirm('¿Desea limpiar los datos a registrar?')">
                             </div>                             

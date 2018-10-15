@@ -55,15 +55,10 @@ public class SERVUsuario extends HttpServlet {
                 try {
                     forward = edit;
                     int id = Integer.parseInt(request.getParameter("id"));
-                    String nom = request.getParameter("nom");
-                    String email = request.getParameter("email");
                     Usuario usuario = usuariodao.BuscarPorId(id);
-                    List  tipousuario = tudao.consultar();
-                    List  lista = usuariodao.consultarMenosAcList(nom, email);
-                    
+                    List  tipousuario = tudao.consultar();                    
                     request.setAttribute("usuario", usuario);
                     request.setAttribute("tipousuario", tipousuario);                      
-                    request.setAttribute("lista", lista);
                 } catch (Exception ex) {
                 }
             }            
@@ -94,7 +89,8 @@ public class SERVUsuario extends HttpServlet {
     
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {                              
+            throws ServletException, IOException { 
+        
         request.setCharacterEncoding("UTF-8");
         PrintWriter out = response.getWriter();
         
@@ -156,7 +152,7 @@ public class SERVUsuario extends HttpServlet {
         return "Short description";
     }
 
-    	private String VerificarNombre(String nnombre) {
+    private String VerificarNombre(String nnombre) {
         try {
             String report = null;
             if(nnombre.equals("")){
@@ -168,15 +164,15 @@ public class SERVUsuario extends HttpServlet {
             else {
                 report = "Libre";
             }            
-            
+
             return report;
-        } catch (SQLException ex) {
+        }catch (SQLException ex) {
             Logger.getLogger(SERVUsuario.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return null;
-	}    
-        
-        private String VerificarEmail(String eemail) {
+            return null;
+    }    
+
+    private String VerificarEmail(String eemail) {
         try {
             String report2 = null;
             if(eemail.equals("")){
@@ -188,12 +184,12 @@ public class SERVUsuario extends HttpServlet {
             else {
                 report2 = "Libre";
             }            
-            
+
             return report2;
-        } catch (SQLException ex) {
+        }catch (SQLException ex) {
             Logger.getLogger(SERVUsuario.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return null;
-	}     
+            return null;
+    }     
     
 }

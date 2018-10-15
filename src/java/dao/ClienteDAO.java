@@ -144,7 +144,7 @@ public class ClienteDAO extends Conexion implements DAO{
     public boolean ConsultarRUCDNI(String nombre) throws SQLException{
         PreparedStatement pst;
         ResultSet res = null;
-        String sql = "SELECT * FROM clientes WHERE nom='"+nombre+"'";
+        String sql = "SELECT * FROM clientes WHERE ruc_dni='"+nombre+"'";
 
         try {
             this.conectar();

@@ -36,7 +36,7 @@ HttpSession sesion = request.getSession();
             </div>
             <h1>Insertar Vehiculo</h1>
             <hr>                 
-            <form name="frmInsertarVehiculo" method="POST" action="SERVVehiculo"  onsubmit="return validacion()">
+            <form name="frmInsertarVehiculo" method="POST" action="SERVVehiculo"  autocomplete="off">
                 <div class="container">
                     
                     <div class="row">
@@ -46,7 +46,7 @@ HttpSession sesion = request.getSession();
                             <div class="form-group"> 
                                 <label for="placa_id" class="control-label">PLACA</label>
                                 <input type="text" class="form-control" id="placa_id" name="txtPlaca" placeholder="PE1324" >
-                                <span class="help-block"></span>
+                                <div id="ReportarPlaca" class="outputTextArea"></div> 
                             </div>      
                             
                             <div class="form-group">
@@ -111,7 +111,9 @@ HttpSession sesion = request.getSession();
                             
                             <div class="form-group">
                                 <label for="car-model-trims" class="control-label">SERIE</label> 
-                                <select name="Modelo" id="car-model-trims" class="form-control"></select>
+                                <select name="Modelo" id="car-model-trims" class="form-control">
+                                    <option selected>Seleccione serie...</option>
+                                </select>
                                 <br>
                                 <div>                                    
                                     <label for="serieSelecionada" class="control-label">SERIE SELECCIONADA</label>       
@@ -136,7 +138,7 @@ HttpSession sesion = request.getSession();
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group"> <!-- Submit Insertar -->
-                                <input type="submit" id="insertar" name="btnInsertar" value="Insertar" class="btn btn-success btn-lg">
+                                <input type="submit" id="insertar" name="btnInsertar" value="Insertar" id="insertar" class="btn btn-success btn-lg">
                                 <a href="SERVVehiculo?action=refresh"  class="btn btn-danger btn-lg" onclick="return confirm('¿Desea salir del registro?')">Regresar</a>
                                 <input type="reset" name="btnLimpiar" value="Limpiar" class="btn btn-warning btn-lg" onclick="return confirm('¿Desea limpiar los datos a registrar?')">
                             </div>                             

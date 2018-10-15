@@ -8,7 +8,6 @@ HttpSession sesion = request.getSession();
         response.sendRedirect("index.jsp");
     }
 %>
-
 <!DOCTYPE html>
 <html>
     <head>

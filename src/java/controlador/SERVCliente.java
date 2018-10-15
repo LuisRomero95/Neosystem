@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.ClienteDAO;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -74,9 +75,29 @@ public class SERVCliente extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-                   
-            
+                               
         request.setCharacterEncoding("UTF-8");
+        PrintWriter out = response.getWriter();
+        
+        if(request.getParameter("ddni")!=null){
+            String ddni = request.getParameter("ddni");
+            String report = VerificarRucDni(ddni);
+
+            response.setContentType("text/plain");
+            out.println("" + report + "");
+                            
+            out.flush();
+            out.close();
+        }         
+        if(request.getParameter("eemail")!=null){
+            String eemail = request.getParameter("eemail");
+            String report = VerificarEmail(eemail);
+
+            response.setContentType("text/plain");
+            out.println("" + report + "");
+            out.flush();
+            out.close();
+        }               
 
         String identificador = request.getParameter("txtRuc_Dni");
         String nombre = request.getParameter("txtNombre");
@@ -125,5 +146,45 @@ public class SERVCliente extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }
+    
+ private String VerificarRucDni(String ddni) {
+    try {
+        String report = null;
+        if(ddni.equals("")){
+            report = "";
+        }
+        else if(clientedao.ConsultarRUCDNI(ddni)){
+            report = "Ya existe";
+        }
+        else {
+            report = "Libre";
+        }            
+
+        return report;
+    }catch (SQLException ex) {
+        Logger.getLogger(SERVUsuario.class.getName()).log(Level.SEVERE, null, ex);
+    }
+        return null;
+    }                
+
+    private String VerificarEmail(String eemail) {
+    try {
+        String report2 = null;
+        if(eemail.equals("")){
+            report2 = "";
+        }
+        else if(clientedao.ConsultarEmail(eemail)){
+            report2 = "Ya existe";
+        }
+        else {
+            report2 = "Libre";
+        }            
+
+        return report2;
+    }catch (SQLException ex) {
+        Logger.getLogger(SERVUsuario.class.getName()).log(Level.SEVERE, null, ex);
+    }
+        return null;
+    }     
 
 }
