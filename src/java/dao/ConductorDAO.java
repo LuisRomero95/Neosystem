@@ -39,7 +39,7 @@ public class ConductorDAO extends Conexion implements DAO{
     public void eliminar(Object obj) throws Exception{
         Conductor c = (Conductor) obj;
         PreparedStatement pst;
-        String sql="UPDATE conductores set estado = 0 WHERE id = ?";
+        String sql="UPDATE conductores SET estado = 0 WHERE id = ?";
         try {
             this.conectar();
             pst = conexion.prepareStatement(sql);

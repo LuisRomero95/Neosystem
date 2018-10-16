@@ -108,30 +108,30 @@ public class UsuarioDAO extends Conexion implements DAO{
     
     @Override
     public Usuario BuscarPorId(int id) throws Exception  {        
-           Usuario usuario = new Usuario();
-           PreparedStatement pst;
-           ResultSet res;
-           String sql = "SELECT u.id, u.nom, u.pass, u.email, tp.nom FROM usuarios u, tiposusuarios tp WHERE u.id_nivel = tp.id AND u.id=? AND u.estado = 1";
-           try {
-               this.conectar();
-               pst = conexion.prepareStatement(sql);
-               pst.setInt(1,id);  
-               
-               res = pst.executeQuery();                                    
-                if (res.next()) {
-                    usuario.setNom(res.getString("u.nom"));
-                    usuario.setPassword(res.getString("u.pass"));
-                    usuario.setEmail(res.getString("u.email"));
-                    usuario.setNivel(res.getString("tp.nom"));
-                    usuario.setId(res.getInt("u.id"));
-                }                       
+        Usuario usuario = new Usuario();
+        PreparedStatement pst;
+        ResultSet res;
+        String sql = "SELECT u.id, u.nom, u.pass, u.email, tp.nom FROM usuarios u, tiposusuarios tp WHERE u.id_nivel = tp.id AND u.id=? AND u.estado = 1";
+        try {
+           this.conectar();
+           pst = conexion.prepareStatement(sql);
+           pst.setInt(1,id);  
 
-           } catch ( SQLException e ) {
-           }
-           finally{
-               this.cerrar();
-           }
-           return usuario;
+           res = pst.executeQuery();                                    
+            if (res.next()) {
+                usuario.setNom(res.getString("u.nom"));
+                usuario.setPassword(res.getString("u.pass"));
+                usuario.setEmail(res.getString("u.email"));
+                usuario.setNivel(res.getString("tp.nom"));
+                usuario.setId(res.getInt("u.id"));
+            }                       
+
+        } catch ( SQLException e ) {
+        }
+        finally{
+           this.cerrar();
+        }
+        return usuario;
     }     
     
     public boolean ConsultarEmail(String email) throws SQLException{

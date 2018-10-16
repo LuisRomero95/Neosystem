@@ -51,7 +51,7 @@ $(document).ready(function (){
               return false;
         }
         else if( !(nombre.length <=25) || /^\s+$/.test(nombre) ) {
-              alert('[ERROR] El tipo de usuario debe tener máximo 6 dígitos.');
+              alert('[ERROR] El tipo de usuario debe tener máximo 25 dígitos.');
               return false;
         }
         else if(respuestaNombre === condicion){

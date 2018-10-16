@@ -6,15 +6,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import modelado.TipoConductor;
+import modelado.TipoPrecio;
 
-public class TipoConductorDAO extends Conexion implements DAO{
-    
+public class TipoPrecioDAO extends Conexion implements DAO{
+
     @Override
-    public void insertar(Object obj) throws Exception{
-        TipoConductor tp = (TipoConductor) obj;
+    public void insertar(Object obj) throws Exception {
+        TipoPrecio tp = (TipoPrecio) obj;
         PreparedStatement pst;
-        String sql="INSERT INTO tiposconductores (nom) VALUES(?)";
+        String sql="INSERT INTO tiposprecios (nom) VALUES(?)";
         try {
             this.conectar();
             pst = conexion.prepareStatement(sql);
@@ -29,10 +29,10 @@ public class TipoConductorDAO extends Conexion implements DAO{
     }
 
     @Override
-    public void eliminar(Object obj) throws Exception{
-        TipoConductor tp = (TipoConductor) obj;
+    public void eliminar(Object obj) throws Exception {
+        TipoPrecio tp = (TipoPrecio) obj;
         PreparedStatement pst;
-        String sql="UPDATE tiposconductores SET estado = 0 WHERE id = ?";
+        String sql="UPDATE tiposprecios SET estado = 0 WHERE id = ?";
         try {
             this.conectar();
             pst = conexion.prepareStatement(sql);
@@ -43,14 +43,14 @@ public class TipoConductorDAO extends Conexion implements DAO{
         }
         finally{
             this.cerrar();
-        }   
+        }         
     }
 
     @Override
-    public void modificar(Object obj) throws Exception{
-        TipoConductor tp = (TipoConductor) obj;
+    public void modificar(Object obj) throws SQLException {
+        TipoPrecio tp = (TipoPrecio) obj;
         PreparedStatement pst;
-        String sql="UPDATE tiposconductores SET nom=? WHERE id=?";
+        String sql="UPDATE tiposprecios SET nom=? WHERE id=?";
         try {
             this.conectar();
             pst = conexion.prepareStatement(sql);
@@ -58,50 +58,26 @@ public class TipoConductorDAO extends Conexion implements DAO{
             pst.setInt(2, tp.getId());
             pst.executeUpdate();            
 
-        } catch (SQLException e) {
+        } catch (Exception e) {
         }
         finally{
             this.cerrar();
-        }   
+        }           
     }
 
     @Override
-    public TipoConductor BuscarPorId(int id) throws Exception{
-           TipoConductor tp = new TipoConductor();
-           PreparedStatement pst;
-           ResultSet res;
-           String sql = "SELECT * FROM tiposconductores WHERE id =?";
-           try {
-            this.conectar();
-            pst = conexion.prepareStatement(sql);
-               pst.setInt(1,id);  
-               res = pst.executeQuery();                                    
-                if (res.next()) {
-                    tp.setNom(res.getString("nom"));
-                    tp.setId(res.getInt("id"));
-                }                   
-     
-        } catch (SQLException e) {
-        }
-        finally{
-            this.cerrar();
-        }   
-           return tp;
-    }
-
-    @Override
-    public List consultar() throws Exception{
-        List<TipoConductor> datos = new ArrayList<>();
+    public List consultar() throws Exception {
+        List<TipoPrecio> datos = new ArrayList<>();
         PreparedStatement pst;
         ResultSet rs;
-        String sql = "SELECT * FROM tiposconductores WHERE estado = 1";
+        String sql = "SELECT * FROM tiposprecios WHERE estado = 1";
         try {
             this.conectar();
             pst = conexion.prepareStatement(sql);
             //ejecutar mi consulta y recuperar los resultados en rs
             rs = pst.executeQuery();
             while(rs.next()){
-                datos.add(new TipoConductor(
+                datos.add(new TipoPrecio(
                         rs.getInt("id"),
                         rs.getString("nom")
                     )
@@ -112,14 +88,37 @@ public class TipoConductorDAO extends Conexion implements DAO{
         finally{
             this.cerrar();
         }   
-        return datos;
+        return datos;        
     }
 
-    @Override   
-    public boolean ConsultarNombre(String nom) throws SQLException{
+    @Override
+    public TipoPrecio BuscarPorId(int id) throws Exception {
+        TipoPrecio tu = new TipoPrecio();
+        PreparedStatement pst;
+        ResultSet res;
+           String sql = "SELECT * FROM tiposprecios WHERE id =?";
+           try {
+            this.conectar();
+               pst = conexion.prepareStatement(sql);
+               pst.setInt(1,id);  
+               res = pst.executeQuery();                                    
+                if (res.next()) {
+                    tu.setNom(res.getString("nom"));
+                    tu.setId(res.getInt("id"));
+                }                        
+            } catch (SQLException e) {
+            }
+            finally{
+                this.cerrar();
+            }
+           return tu;       
+    }
+
+    @Override
+    public boolean ConsultarNombre(String nom) throws SQLException {
         PreparedStatement pst;
         ResultSet res = null;
-        String sql = "SELECT * FROM tiposconductores WHERE nom='"+nom+"'";
+        String sql = "SELECT * FROM tiposprecios WHERE nom='"+nom+"'";
 
         try {
             this.conectar();
@@ -127,7 +126,7 @@ public class TipoConductorDAO extends Conexion implements DAO{
             res = pst.executeQuery();
         } catch (Exception e) {
         }
-         return res.next();
-    }           
+         return res.next();        
+    }
     
 }
